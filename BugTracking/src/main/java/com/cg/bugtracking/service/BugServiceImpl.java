@@ -37,7 +37,7 @@ public class BugServiceImpl implements BugService{
 			Optional<Bug> buglist =bRepo.findById(id);
 			if(buglist.isPresent())
 				return buglist.get();
-			else throw new NoSuchBugFoundException();
+			else throw new NoSuchBugFoundException("No Such Bug");
 	}
 
 	@Override
