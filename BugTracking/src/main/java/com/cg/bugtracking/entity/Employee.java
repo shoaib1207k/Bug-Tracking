@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Employee {
 	
 	@Id
-	private int empId;
+	private long empId;
 	private String empName;
 	private String email;
 	private String contact;
@@ -18,7 +18,7 @@ public class Employee {
 	
 	public Employee() {}
 	
-	public Employee(int empId, String empName, String email, String contact, List<Project> projectList) {
+	public Employee(long empId, String empName, String email, String contact, List<Project> projectList) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
@@ -28,7 +28,7 @@ public class Employee {
 	}
 	
 	
-	public int getEmpId() {
+	public long getEmpId() {
 		return empId;
 	}
 	public void setEmpId(int empId) {
