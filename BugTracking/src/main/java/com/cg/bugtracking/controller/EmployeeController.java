@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.bugtracking.dto.EmployeeDTO;
+import com.cg.bugtracking.entity.Employee;
 import com.cg.bugtracking.service.EmployeeService;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 public class EmployeeController {
@@ -30,6 +34,16 @@ public class EmployeeController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@PostMapping("/employee")
+	public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody Employee emp){
+		try {
+			return new ResponseEntity<>(empService.createEmployee(emp), HttpStatus.CREATED);
+		}catch(Exception E){
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	
 	
 }
