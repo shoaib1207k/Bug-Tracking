@@ -1,5 +1,58 @@
 package com.cg.bugtracking.dto;
 
+import java.util.List;
+
+import com.cg.bugtracking.entity.Project;
+
 public class EmployeeDTO {
+	
+	private long empId;
+	private String empName;
+	private String email;
+	private String contact;
+	private List<Project> projectList;
+	
+	public EmployeeDTO(long empId, String empName, String email, String contact, List<Project> projectList) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
+		this.email = email;
+		this.contact = contact;
+		this.projectList = projectList;
+	}
+	
+	
+	public EmployeeDTO() {}
+
+	public long getEmpId() {
+		return empId;
+	}
+	public void setEmpId(long empId) {
+		this.empId = empId;
+	}
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+	public List<Project> getProjectList() {
+		return projectList;
+	}
+	public void setProjectList(List<Project> projectList) {
+		this.projectList = projectList;
+	}
 
 }

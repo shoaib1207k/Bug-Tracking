@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -14,6 +15,8 @@ public class Employee {
 	private String empName;
 	private String email;
 	private String contact;
+	
+	@OneToMany
 	private List<Project> projectList;
 	
 	public Employee() {}
@@ -64,9 +67,5 @@ public class Employee {
 		return "Employee [empId=" + empId + ", empName=" + empName + ", email=" + email + ", contact=" + contact
 				+ ", projectList=" + projectList + "]";
 	}
-	
-	
-	
-	
 	
 }
