@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -26,6 +27,7 @@ public class Project {
 	@Size(max = 25, min = 5, message = "atleast 5 characters")
 	private String projName;
 	
+	@ManyToOne
 	@Column(name = "project_manager", nullable = false, unique = true)
 	@NotBlank(message = "Manager is required")
 	@Size(max = 15, min = 5, message = "atleast 5 characters")
