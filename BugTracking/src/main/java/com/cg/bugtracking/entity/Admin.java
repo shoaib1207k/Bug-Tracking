@@ -2,8 +2,6 @@ package com.cg.bugtracking.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -11,11 +9,10 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "admins")
-public class Admin {
+public class Admin extends User {
 
 	@Id
 	@Column(name = "admin_id", updatable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long adminId;
 
 	@Column(name = "admin_name", nullable = false)
@@ -32,9 +29,9 @@ public class Admin {
 		super();
 	}
 
-	public Admin(long adminId, String adminName, String adminContact) {
+	public Admin(String adminName, String adminContact) {
 		super();
-		this.adminId = adminId;
+		this.adminId = super.getUserId();
 		this.adminName = adminName;
 		this.adminContact = adminContact;
 	}
