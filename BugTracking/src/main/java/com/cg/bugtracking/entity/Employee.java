@@ -34,7 +34,7 @@ public class Employee {
 	public long getEmpId() {
 		return empId;
 	}
-	public void setEmpId(int empId) {
+	public void setEmpId(long empId) {
 		this.empId = empId;
 	}
 	public String getEmpName() {
