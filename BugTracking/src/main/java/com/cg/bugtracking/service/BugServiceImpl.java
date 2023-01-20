@@ -1,5 +1,65 @@
 package com.cg.bugtracking.service;
 
-public class BugServiceImpl implements BugService{
+import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cg.bugtracking.dao.BugRepository;
+import com.cg.bugtracking.entity.Bug;
+import com.cg.bugtracking.exception.NoSuchBugFoundException;
+
+@Service
+public class BugServiceImpl implements BugService{
+	
+	
+	@Autowired
+	private BugRepository bRepo;
+
+	@Override
+	@Transactional
+	public Bug createBug(Bug bug) {
+		
+		return bRepo.save(bug);
+	}
+
+	@Override
+	public Bug updateBug(Bug bug ,long id) throws NoSuchBugFoundException {
+		Bug findbug = getBug(id);
+		findbug.setEmpName(bug.getEmpName());
+		return null;
+		
+	}
+	@Override
+	public Bug getBug(long id) throws NoSuchBugFoundException {
+			Optional<Bug> buglist =bRepo.findById(id);
+			if(buglist.isPresent())
+				return buglist.get();
+			else throw new NoSuchBugFoundException();
+	}
+
+	@Override
+	public List<Bug> getAllBug() {
+		return bRepo.findAll();
+	}
+
+	@Override
+	public List <Bug> getAllBugsByStatus(String status) throws NoSuchBugFoundException {
+		List<Bug> bfind=bRepo.getAllBugsByStatus(status);
+		return bfind;
+	}
+
+	@Override
+	public boolean DeleteBug(long id) throws NoSuchBugFoundException {
+		bRepo.deleteById( id);
+		Optional<Bug> bug=bRepo.findById(id);
+		if(bug.isPresent()) {
+		return false;
+		}
+		else return true;
+	}
+
+	
 }
