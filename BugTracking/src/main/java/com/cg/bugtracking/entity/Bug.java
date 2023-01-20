@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,10 +17,14 @@ public class Bug {
     private String type;
 	private String priority;
 	private int progress;
+	
+	@ManyToOne
 	private Employee empName; 
 	private String status;
 	private Date startDate;
 	private Date endDate;
+	
+	@ManyToOne
 	private Project project;
 	
 	
