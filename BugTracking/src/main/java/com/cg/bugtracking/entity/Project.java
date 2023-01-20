@@ -27,10 +27,9 @@ public class Project {
 	@Size(max = 25, min = 5, message = "atleast 5 characters")
 	private String projName;
 	
+	
+	
 	@ManyToOne
-	@Column(name = "project_manager", nullable = false, unique = true)
-	@NotBlank(message = "Manager is required")
-	@Size(max = 15, min = 5, message = "atleast 5 characters")
 	private Employee projManager;
 	
 	@Column(name = "project_status", nullable = false, unique = true)

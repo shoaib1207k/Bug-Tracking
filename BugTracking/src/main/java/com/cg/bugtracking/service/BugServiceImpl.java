@@ -45,11 +45,11 @@ public class BugServiceImpl implements BugService{
 		return bRepo.findAll();
 	}
 
-	@Override
-	public List <Bug> getAllBugsByStatus(String status) throws NoSuchBugFoundException {
-		List<Bug> bfind=bRepo.getAllBugsByStatus(status);
-		return bfind;
-	}
+//	@Override
+//	public List <Bug> getAllBugsByStatus(String status) throws NoSuchBugFoundException {
+//		List<Bug> bfind=bRepo.getAllBugsByStatus(status);
+//		return bfind;
+//	}
 
 	@Override
 	public boolean DeleteBug(long id) throws NoSuchBugFoundException {
