@@ -1,5 +1,6 @@
 package com.cg.bugtracking.service;
 
+import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	public void createRoles() {
+		User user = new User(0, "user");
+		User admin = new User(1, "admin");
+		uRepo.saveAll(List.of(user, admin));
+	}
+
+	@Override
+	@Transactional
 	public User createUser(User user) {
+		User roleUser = uRepo.findByName(user.getRole());
+		user.setRole(roleUser.getRole());
 		return uRepo.save(user);
 	}
 
+	@Override
+	public User findByName(String name) {
+		return uRepo.findByName(name);
+	}
 }
