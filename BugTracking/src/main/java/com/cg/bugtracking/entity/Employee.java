@@ -2,15 +2,22 @@ package com.cg.bugtracking.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name="employees")
 public class Employee {
 	
 	@Id
+	@Column(updatable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long empId;
 	private String empName;
 	private String email;
