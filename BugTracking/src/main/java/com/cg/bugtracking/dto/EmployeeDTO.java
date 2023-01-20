@@ -1,34 +1,18 @@
-package com.cg.bugtracking.entity;
+package com.cg.bugtracking.dto;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.cg.bugtracking.entity.Project;
 
-
-@Entity
-@Table(name="employees")
-public class Employee {
+public class EmployeeDTO {
 	
-	@Id
-	@Column(updatable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long empId;
 	private String empName;
 	private String email;
 	private String contact;
-	
-	@OneToMany
 	private List<Project> projectList;
 	
-	public Employee() {}
-	
-	public Employee(long empId, String empName, String email, String contact, List<Project> projectList) {
+	public EmployeeDTO(long empId, String empName, String email, String contact, List<Project> projectList) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
@@ -38,6 +22,8 @@ public class Employee {
 	}
 	
 	
+	public EmployeeDTO() {}
+
 	public long getEmpId() {
 		return empId;
 	}
@@ -69,10 +55,4 @@ public class Employee {
 		this.projectList = projectList;
 	}
 
-	@Override
-	public String toString() {
-		return "Employee [empId=" + empId + ", empName=" + empName + ", email=" + email + ", contact=" + contact
-				+ ", projectList=" + projectList + "]";
-	}
-	
 }
