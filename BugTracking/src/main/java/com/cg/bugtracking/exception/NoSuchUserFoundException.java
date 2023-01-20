@@ -1,5 +1,9 @@
 package com.cg.bugtracking.exception;
 
-public class NoSuchUserFoundException {
+@SuppressWarnings("serial")
+public class NoSuchUserFoundException extends Exception {
 
+	NoSuchUserFoundException(String message) {
+		super(message);
+	}
 }
