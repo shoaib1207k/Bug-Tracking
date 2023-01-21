@@ -2,17 +2,17 @@ package com.cg.bugtracking.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.bugtracking.dao.EmployeeRepository;
-import com.cg.bugtracking.dto.EmployeeDTO;
+import com.cg.bugtracking.dao.UserRepository;
 import com.cg.bugtracking.entity.Employee;
+import com.cg.bugtracking.entity.User;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
+import com.cg.bugtracking.exception.NoSuchUserFoundException;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -21,14 +21,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeRepository empRepo;
 	
 	@Autowired
+	private UserRepository userRepo;
+	
+	@Autowired
 	private ProjectService prjService;
 
 	@Override
-	public Employee createEmployee(Employee emp) {
-		
-		
-		
-		return empRepo.save(emp);
+	public Employee createEmployee(Employee emp) throws NoSuchUserFoundException{
+		Optional<User> find = userRepo.findById(emp.getEmpId());
+		if (find.isPresent()) {
+			return empRepo.save(emp);
+		} else {
+			throw new NoSuchUserFoundException("User ID not found.");
+		}
 	}
 
 	@Override

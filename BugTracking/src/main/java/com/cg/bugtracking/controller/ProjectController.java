@@ -19,8 +19,8 @@ import com.cg.bugtracking.dto.ProjectDTO;
 import com.cg.bugtracking.entity.Project;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.service.ProjectService;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 public class ProjectController {

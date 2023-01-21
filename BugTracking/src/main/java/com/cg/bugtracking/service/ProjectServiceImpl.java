@@ -23,7 +23,9 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public Project createProject(Project prj) {
-	
+		long projId = prj.getProjId();
+		prj.getProjManager().setProjId(projId);
+		System.out.println(prj);
 		return pRepo.save(prj);
 	}
 	
