@@ -19,7 +19,7 @@ public class User {
 
 	@Column(name = "user_role", nullable = false)
 	@NotBlank(message = "Role is required")
-	private String role;	
+	private String role;
 	
 	public User() {
 	}
