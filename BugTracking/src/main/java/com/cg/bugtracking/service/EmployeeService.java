@@ -9,10 +9,10 @@ import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 
 public interface EmployeeService {
 	
-	EmployeeDTO createEmployee(Employee emp);
+	EmployeeDTO createEmployee(EmployeeDTO empDTO);
 	EmployeeDTO getEmployeeById(long empId) throws NoSuchEmployeeFoundException;
 	List<EmployeeDTO> getAllEmployees();
-	EmployeeDTO updateEmployee(long id, Employee e) throws NoSuchEmployeeFoundException;
+	EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO) throws NoSuchEmployeeFoundException;
 	EmployeeDTO deleteEmployee(long id) throws NoSuchEmployeeFoundException;
 	
 }

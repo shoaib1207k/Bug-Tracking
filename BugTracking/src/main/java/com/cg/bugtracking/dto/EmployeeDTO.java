@@ -6,30 +6,42 @@ import com.cg.bugtracking.entity.Project;
 
 public class EmployeeDTO {
 	
-	private long empId;
+//	private long empId;
 	private String empName;
 	private String email;
 	private String contact;
-	private List<Project> projectList;
+	private long projId;
+//	private List<Project> projectList;
 	
-	public EmployeeDTO(long empId, String empName, String email, String contact, List<Project> projectList) {
+	public EmployeeDTO(String empName, String email, String contact,long projId ) {
 		super();
-		this.empId = empId;
+//		this.empId = empId;
 		this.empName = empName;
 		this.email = email;
 		this.contact = contact;
-		this.projectList = projectList;
+//		this.projectList = projectList;
+		this.projId = projId; 
 	}
 	
 	
+	public long getProjId() {
+		return projId;
+	}
+
+
+	public void setProjId(long projId) {
+		this.projId = projId;
+	}
+
+
 	public EmployeeDTO() {}
 
-	public long getEmpId() {
-		return empId;
-	}
-	public void setEmpId(long empId) {
-		this.empId = empId;
-	}
+//	public long getEmpId() {
+//		return empId;
+//	}
+//	public void setEmpId(long empId) {
+//		this.empId = empId;
+//	}
 	public String getEmpName() {
 		return empName;
 	}
@@ -48,11 +60,11 @@ public class EmployeeDTO {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-	public List<Project> getProjectList() {
-		return projectList;
-	}
-	public void setProjectList(List<Project> projectList) {
-		this.projectList = projectList;
-	}
+//	public List<Project> getProjectList() {
+//		return projectList;
+//	}
+//	public void setProjectList(List<Project> projectList) {
+//		this.projectList = projectList;
+//	}
 
 }
