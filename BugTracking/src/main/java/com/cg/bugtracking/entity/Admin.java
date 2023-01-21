@@ -2,6 +2,8 @@ package com.cg.bugtracking.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +15,7 @@ public class Admin {
 
 	@Id
 	@Column(name = "admin_id", updatable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long adminId;
 
 	@Column(name = "admin_name", nullable = false)
@@ -25,8 +28,6 @@ public class Admin {
 	@Size(max = 15, min = 10, message = "atleast 10 numbers")
 	private String adminContact;
 
-	private boolean isAdmin = true;
-
 	public Admin() {
 	}
 
@@ -34,14 +35,6 @@ public class Admin {
 		this.adminId = adminId;
 		this.adminName = adminName;
 		this.adminContact = adminContact;
-	}
-
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
 	}
 
 	public long getAdminId() {
