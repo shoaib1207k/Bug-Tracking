@@ -25,8 +25,8 @@ public class EmployeeController {
 	private EmployeeService empService;
 	
 	@PostMapping("/employee")
-	public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody Employee emp){
-		return new ResponseEntity<>(empService.createEmployee(emp), HttpStatus.CREATED);
+	public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO empDTO){
+		return new ResponseEntity<>(empService.createEmployee(empDTO), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/employees")
@@ -40,8 +40,8 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/update-employee/{id}")
-	public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id")long id, @RequestBody Employee emp) throws NoSuchEmployeeFoundException{
-		return new ResponseEntity<>(empService.updateEmployee(id, emp), HttpStatus.OK);
+	public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id")long id, @RequestBody EmployeeDTO empDTO) throws NoSuchEmployeeFoundException{
+		return new ResponseEntity<>(empService.updateEmployee(id, empDTO), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete-employee/{id}")

@@ -19,7 +19,7 @@ public class Swagger2Config implements WebMvcConfigurer {
 	@Bean
 	Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.cg.controller")).paths(PathSelectors.any()).build()
+				.apis(RequestHandlerSelectors.basePackage("com.cg.bugtracking.controller")).paths(PathSelectors.any()).build()
 				.apiInfo(apiInfoMetaData());
 	}
 
