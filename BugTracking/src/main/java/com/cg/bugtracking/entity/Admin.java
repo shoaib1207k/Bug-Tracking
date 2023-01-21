@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "admins")
-public class Admin extends User {
+public class Admin {
 
 	@Id
 	@Column(name = "admin_id", updatable = false)
@@ -25,15 +25,23 @@ public class Admin extends User {
 	@Size(max = 15, min = 10, message = "atleast 10 numbers")
 	private String adminContact;
 
+	private boolean isAdmin = true;
+
 	public Admin() {
-		super();
 	}
 
-	public Admin(String adminName, String adminContact) {
-		super();
-		this.adminId = super.getUserId();
+	public Admin(long adminId, String adminName, String adminContact) {
+		this.adminId = adminId;
 		this.adminName = adminName;
 		this.adminContact = adminContact;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public long getAdminId() {
