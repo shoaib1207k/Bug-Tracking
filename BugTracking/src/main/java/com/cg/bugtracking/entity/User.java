@@ -20,7 +20,17 @@ public class User {
 	@Column(name = "user_role", nullable = false)
 	@NotBlank(message = "Role is required")
 	private String role;
+
+	// if admin, returns true
+	public boolean checkAdmin() {
+		return (getRole().equals("admin"));
+	}
 	
+	// if employee, returns true
+	public boolean checkEmployee() {
+		return (getRole().equals("employee"));
+	}
+
 	public User() {
 	}
 
