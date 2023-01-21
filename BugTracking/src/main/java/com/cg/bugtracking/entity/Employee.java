@@ -23,21 +23,31 @@ public class Employee {
 	private String email;
 	private String contact;
 	
-	@OneToMany
-	private List<Project> projectList;
+	private long projId;
+//	@OneToMany
+//	private List<Project> projectList;
 	
 	public Employee() {}
 	
-	public Employee(long empId, String empName, String email, String contact, List<Project> projectList) {
+	public Employee(long empId, String empName, String email, String contact, long projId) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
 		this.email = email;
 		this.contact = contact;
-		this.projectList = projectList;
+		this.projId	= projId;
+//		this.projectList = projectList;
 	}
 	
 	
+	public long getProjId() {
+		return projId;
+	}
+
+	public void setProjId(long projId) {
+		this.projId = projId;
+	}
+
 	public long getEmpId() {
 		return empId;
 	}
@@ -62,17 +72,17 @@ public class Employee {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-	public List<Project> getProjectList() {
-		return projectList;
-	}
-	public void setProjectList(List<Project> projectList) {
-		this.projectList = projectList;
-	}
+//	public List<Project> getProjectList() {
+//		return projectList;
+//	}
+//	public void setProjectList(List<Project> projectList) {
+//		this.projectList = projectList;
+//	}
 
 	@Override
 	public String toString() {
 		return "Employee [empId=" + empId + ", empName=" + empName + ", email=" + email + ", contact=" + contact
-				+ ", projectList=" + projectList + "]";
+				+ "]";
 	}
 	
 }
