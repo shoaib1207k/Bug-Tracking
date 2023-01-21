@@ -27,8 +27,6 @@ public class Project {
 	@Size(max = 25, min = 5, message = "atleast 5 characters")
 	private String projName;
 	
-	
-	
 	@ManyToOne
 	private Employee projManager;
 	
