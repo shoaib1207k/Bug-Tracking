@@ -23,8 +23,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public EmployeeDTO createEmployee(Employee emp) {
-		return modelMapper.map(empRepo.save(emp),EmployeeDTO.class);
+	public EmployeeDTO createEmployee(EmployeeDTO empDTO) {
+		Employee emp = modelMapper.map(empDTO, Employee.class);
+		empRepo.save(emp);
+		return empDTO;
 	}
 
 	@Override
@@ -44,15 +46,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public EmployeeDTO updateEmployee(long id, Employee emp) throws NoSuchEmployeeFoundException{
-		Employee empToUpdate = empRepo.findById(id).get();
-		
-		empToUpdate.setEmpId(emp.getEmpId());
-		empToUpdate.setEmpName(emp.getEmpName());
-		empToUpdate.setEmail(emp.getEmail());
-		empToUpdate.setContact(emp.getContact());
-		empToUpdate.setProjectList(emp.getProjectList());
-		return modelMapper.map(empRepo.save(empToUpdate), EmployeeDTO.class);
+	public EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO) throws NoSuchEmployeeFoundException{
+		Optional<Employee> empToUpdate = empRepo.findById(id);
+		Employee emp = modelMapper.map(empDTO, Employee.class);
+
+		if(empToUpdate.isPresent()) {
+			
+			empToUpdate.get().setEmpName(emp.getEmpName());
+			empToUpdate.get().setEmail(emp.getEmail());
+			empToUpdate.get().setContact(emp.getContact());
+			empToUpdate.get().setProjId(emp.getProjId());
+//		empToUpdate.setProjectList(emp.getProjectList());
+			empRepo.save(empToUpdate.get());
+			return empDTO;
+		}else {
+			throw new NoSuchEmployeeFoundException("No employee with this id");
+		}
 	}
 
 	@Override

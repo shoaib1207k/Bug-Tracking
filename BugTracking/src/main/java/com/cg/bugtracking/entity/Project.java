@@ -1,6 +1,6 @@
 package com.cg.bugtracking.entity;
 
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -27,8 +27,6 @@ public class Project {
 	@Size(max = 25, min = 5, message = "atleast 5 characters")
 	private String projName;
 	
-	
-	
 	@ManyToOne
 	private Employee projManager;
 	
@@ -37,29 +35,29 @@ public class Project {
 	@Size(max = 15, min = 2, message = "atleast 2 characters")
 	private String projStatus;
 	
-	@OneToMany
-	private List<Bug> bugList;
+//	@OneToMany
+//	private List<Bug> bugList;
 	
 	
 
 	public Project() {}
 
-	public Project(long projId, String projName, Employee projManager, String projStatus ,List<Bug> bugList) {
+	public Project(long projId, String projName, Employee projManager, String projStatus) {
 		super();
 		this.projId = projId;
 		this.projName = projName;
 		this.projManager = projManager;
 		this.projStatus = projStatus;
-		this.bugList = bugList;
+//		this.bugList = bugList;
 	}
 
-	public List<Bug> getBugList() {
-		return bugList;
-	}
-
-	public void setBugList(List<Bug> bugList) {
-		this.bugList = bugList;
-	}
+//	public List<Bug> getBugList() {
+//		return bugList;
+//	}
+//
+//	public void setBugList(List<Bug> bugList) {
+//		this.bugList = bugList;
+//	}
 
 	public long getProjId() {
 		return projId;

@@ -1,8 +1,8 @@
 package com.cg.bugtracking.dto;
 
-import java.util.List;
-
-import com.cg.bugtracking.entity.Bug;
+//import java.util.List;
+//
+//import com.cg.bugtracking.entity.Bug;
 import com.cg.bugtracking.entity.Employee;
 
 public class ProjectDTO {
@@ -12,7 +12,7 @@ public class ProjectDTO {
 	private Employee projManager;
 	private String projStatus;
 	
-	private List<Bug> bugList;
+//	private List<Bug> bugList;
 	
 	public ProjectDTO() {}
 
@@ -48,13 +48,13 @@ public class ProjectDTO {
 		this.projStatus = projStatus;
 	}
 
-	public List<Bug> getBugList() {
-		return bugList;
-	}
-
-	public void setBugList(List<Bug> bugList) {
-		this.bugList = bugList;
-	}
+//	public List<Bug> getBugList() {
+//		return bugList;
+//	}
+//
+//	public void setBugList(List<Bug> bugList) {
+//		this.bugList = bugList;
+//	}
 
 	
 }
