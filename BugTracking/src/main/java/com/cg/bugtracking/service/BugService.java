@@ -17,7 +17,7 @@ public interface BugService {
 	
 	List <Bug> getAllBug();
 	
-	public List <Bug> getAllBugsByStatus(String status) throws NoSuchBugFoundException;
+//	public List <Bug> getAllBugsByStatus(String status) throws NoSuchBugFoundException;
 	
 	public boolean DeleteBug(long id) throws NoSuchBugFoundException;
 
