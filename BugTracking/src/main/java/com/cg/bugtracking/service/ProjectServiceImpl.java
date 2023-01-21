@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.cg.bugtracking.dao.ProjectRepository;
 import com.cg.bugtracking.dto.ProjectDTO;
+
 import com.cg.bugtracking.entity.Project;
+
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 
 @Service
@@ -23,8 +25,10 @@ public class ProjectServiceImpl implements ProjectService {
 	private ModelMapper modelMapper;
 	
 	@Override
-	public ProjectDTO createProject(Project prj) {
-		return modelMapper.map(pRepo.save(prj), ProjectDTO.class);
+	public ProjectDTO createProject(ProjectDTO prjDTO) {
+		Project prj = modelMapper.map(prjDTO, Project.class);
+		pRepo.save(prj);
+		return prjDTO;
 	}
 
 	@Override
@@ -41,18 +45,24 @@ public class ProjectServiceImpl implements ProjectService {
 				.collect(Collectors.toList());
 
 	}
-
 	@Override
-	public ProjectDTO updateProject(long id, Project p) throws NoSuchProjectFoundException {
-		Project prjToUpdate = pRepo.findById(id).get();
+	public ProjectDTO updateProject(long id, ProjectDTO pDTO) throws NoSuchProjectFoundException {
 		
-		prjToUpdate.setProjId(p.getProjId());
-		prjToUpdate.setProjName(p.getProjName());
-		prjToUpdate.setProjManager(p.getProjManager());
-		prjToUpdate.setProjStatus(p.getProjStatus());
-		prjToUpdate.setBugList(p.getBugList());
-		return modelMapper.map(pRepo.save(prjToUpdate), ProjectDTO.class);
+		Optional<Project> prjToUpdate = pRepo.findById(id);
+		Project prj = modelMapper.map(pDTO, Project.class);
+
+		if(prjToUpdate.isPresent()) {
+			prjToUpdate.get().setProjId(prj.getProjId());
+			prjToUpdate.get().setProjName(prj.getProjName());
+			prjToUpdate.get().setProjManager(prj.getProjManager());
+			prjToUpdate.get().setProjStatus(prj.getProjStatus());		
+			pRepo.save(prjToUpdate.get());
+			return pDTO;
+		}else {
+			throw new NoSuchProjectFoundException("No project with this id");
+		}
 	}
+	
 
 	@Override
 	public ProjectDTO deleteProject(long id) throws NoSuchProjectFoundException {
@@ -65,4 +75,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	
-}
+	}
+
+	
+
