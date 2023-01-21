@@ -35,7 +35,7 @@ public class AdminController {
 
 	@PostMapping("/admin")
 	public ResponseEntity<AdminDTO> createAdmin(@Valid @RequestBody AdminDTO adminDto)
-			throws NoSuchUserFoundException, NoAdminRoleFoundException {
+			throws NoAdminRoleFoundException, NoSuchUserFoundException {
 		Admin admin = modelMapper.map(adminDto, Admin.class);
 		return new ResponseEntity<>(modelMapper.map(aService.createAdmin(admin), AdminDTO.class), HttpStatus.CREATED);
 	}
