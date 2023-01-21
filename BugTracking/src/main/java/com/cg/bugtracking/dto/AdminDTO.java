@@ -7,7 +7,7 @@ public class AdminDTO {
 	private String adminContact;
 
 	public AdminDTO() {
-		// no args constructor
+		
 	}
 
 	public long getAdminId() {
