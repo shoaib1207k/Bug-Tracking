@@ -35,6 +35,17 @@ public class GlobalExceptionHandler {
 		return new ErrorInformation(url, msg, ldt);
 	}
 
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	@ResponseBody
+	@ExceptionHandler(value = { NoSuchEmployeeFoundException.class })
+	public ErrorInformation empHandleNotFound(Exception ex, HttpServletRequest req) {
+		String msg = ex.getMessage();
+		String url = req.getRequestURI();
+		LocalDateTime ldt = LocalDateTime.now();
+		return new ErrorInformation(url, msg, ldt);
+	}
+	
+	
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	@ExceptionHandler(value = { MethodArgumentNotValidException.class })

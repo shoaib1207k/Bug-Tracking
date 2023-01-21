@@ -29,11 +29,9 @@ public class Admin {
 	private String adminContact;
 
 	public Admin() {
-		super();
 	}
 
 	public Admin(long adminId, String adminName, String adminContact) {
-		super();
 		this.adminId = adminId;
 		this.adminName = adminName;
 		this.adminContact = adminContact;
