@@ -22,7 +22,7 @@ public class Employee {
 	private String empName;
 	private String email;
 	private String contact;
-	
+    @Column ( nullable = true )
 	private long projId;
 //	@OneToMany
 //	private List<Project> projectList;
