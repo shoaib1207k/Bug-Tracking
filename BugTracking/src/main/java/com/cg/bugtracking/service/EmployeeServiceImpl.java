@@ -21,13 +21,14 @@ import com.cg.bugtracking.exception.NoSuchUserFoundException;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-	private static final String NO_USER_FOUND = "User ID not found.";
-	private static final String NO_ADMIN_ROLE = "No admin role found";
-	
-	
+	private static final String NO_USER_FOUND = "User ID not found.";	
 	private static final String ADMIN_ROLE_REQUIRED = "Admin role is required.";
+<<<<<<< HEAD
 	private static final String NO_USER_FOUND = "User ID not found.";
 
+=======
+	
+>>>>>>> branch 'Lokesh-Project-Module' of https://github.com/shoaib12k/Bug-Tracking.git
 	@Autowired
 	private EmployeeRepository empRepo;
 
