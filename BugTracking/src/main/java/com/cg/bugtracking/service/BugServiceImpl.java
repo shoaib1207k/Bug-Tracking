@@ -74,7 +74,7 @@ public class BugServiceImpl implements BugService{
 //	}
 
 	@Override
-	public BugDTO DeleteBug(long id) throws NoSuchBugFoundException{
+	public BugDTO deleteBug(long id) throws NoSuchBugFoundException{
 			Optional<Bug> bugDel = bRepo.findById(id);
 			if(bugDel.isPresent()) 
 				bRepo.delete(bugDel.get());	
