@@ -23,6 +23,7 @@ import com.cg.bugtracking.exception.NoSuchUserFoundException;
 public class AdminServiceImpl implements AdminService {
 
 	private static final String NO_ADMIN_FOUND = "Admin ID not found.";
+	private static final String NO_USER_FOUND = "User ID not found.";
 
 	@Autowired
 	private AdminRepository aRepo;
@@ -46,7 +47,7 @@ public class AdminServiceImpl implements AdminService {
 				throw new NoAdminRoleFoundException("Admin role is required.");
 			}
 		} else {
-			throw new NoSuchUserFoundException(NO_ADMIN_FOUND);
+			throw new NoSuchUserFoundException(NO_USER_FOUND);
 		}
 	}
 

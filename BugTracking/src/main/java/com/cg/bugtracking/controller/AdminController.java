@@ -37,18 +37,18 @@ public class AdminController {
 		return new ResponseEntity<>(aService.findAllAdmins(), HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/admin/{id}")
 	public ResponseEntity<AdminDTO> getById(@PathVariable long id) throws NoSuchAdminFoundException {
 		return new ResponseEntity<>(aService.findAdminById(id), HttpStatus.FOUND);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/admin/{id}")
 	public ResponseEntity<AdminDTO> updateAdmin(@Valid @RequestBody AdminDTO adminDto, @PathVariable long id)
 			throws NoSuchAdminFoundException, NoAdminRoleFoundException {
 		return new ResponseEntity<>(aService.updateAdmin(id, adminDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/admin/{id}")
 	public ResponseEntity<AdminDTO> deleteAdmin(@PathVariable long id) throws NoSuchAdminFoundException {
 		return new ResponseEntity<>(aService.deleteAdmin(id), HttpStatus.OK);
 	}
