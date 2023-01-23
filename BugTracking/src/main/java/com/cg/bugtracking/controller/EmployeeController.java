@@ -1,11 +1,7 @@
 package com.cg.bugtracking.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.bugtracking.dto.EmployeeDTO;
-import com.cg.bugtracking.entity.Employee;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
-import com.cg.bugtracking.exception.NoSuchProjectFoundException;
-import com.cg.bugtracking.exception.NoSuchUserFoundException;
 import com.cg.bugtracking.service.EmployeeService;
+
 
 
 @RestController
@@ -30,44 +24,28 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService empService;
 	
-	@Autowired
-	private ModelMapper modelMapper;
-	
 	@PostMapping("/employee")
-	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO) throws NoSuchUserFoundException{
-		Employee emp = modelMapper.map(empDTO, Employee.class);
-//		Employee empDB = ;
-		return new ResponseEntity<>(modelMapper.map(empService.createEmployee(emp), EmployeeDTO.class), HttpStatus.CREATED);
+	public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO empDTO){
+		return new ResponseEntity<>(empService.createEmployee(empDTO), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/employees")
 	public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
-		List<Employee> empList = empService.getAllEmployees();
-		List<EmployeeDTO> empDTOList = empList.stream()
-										.map(emp->modelMapper.map(emp, EmployeeDTO.class))
-										.collect(Collectors.toList());
-		
-		return new ResponseEntity<>(empDTOList, HttpStatus.OK);
+		return new ResponseEntity<>(empService.getAllEmployees(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/employee/{id}")
 	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") long id) throws NoSuchEmployeeFoundException{
-		Employee emp = empService.getEmployeeById(id);
-		EmployeeDTO empDTO = modelMapper.map(emp, EmployeeDTO.class);
-		return new ResponseEntity<>(empDTO, HttpStatus.FOUND);
+		return new ResponseEntity<>(empService.getEmployeeById(id), HttpStatus.FOUND);
 	}
 	
 	@PostMapping("/update-employee/{id}")
-	public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id")long id, @RequestBody EmployeeDTO empDTO) throws NoSuchEmployeeFoundException, NoSuchProjectFoundException{
-		Employee empToUpdate = modelMapper.map(empDTO, Employee.class);
-		empService.updateEmployee(id, empToUpdate);
-		return new ResponseEntity<>(empDTO, HttpStatus.OK);
+	public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id")long id, @RequestBody EmployeeDTO empDTO) throws NoSuchEmployeeFoundException{
+		return new ResponseEntity<>(empService.updateEmployee(id, empDTO), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete-employee/{id}")
 	public ResponseEntity<EmployeeDTO> deleteEmployee(@PathVariable("id")long id) throws NoSuchEmployeeFoundException{
-		Employee emp = empService.deleteEmployee(id);
-		EmployeeDTO empDTO = modelMapper.map(emp, EmployeeDTO.class);
-		return new ResponseEntity<>(empDTO, HttpStatus.OK);
+		return new ResponseEntity<>(empService.deleteEmployee(id), HttpStatus.OK);
 	}
 }

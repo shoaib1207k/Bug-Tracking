@@ -9,17 +9,7 @@ public class EmployeeDTO {
 	private String email;
 	private String contact;
 	private long projId;
-//	private List<Project> projectList;
-	
-//	public EmployeeDTO(String empName, String email, String contact,long projId ) {
-//		super();
-////		this.empId = empId;
-//		this.empName = empName;
-//		this.email = email;
-//		this.contact = contact;
-////		this.projectList = projectList;
-//		this.projId = projId; 
-//	}
+
 	
 	
 	public long getProjId() {
@@ -32,7 +22,10 @@ public class EmployeeDTO {
 	}
 
 
-	public EmployeeDTO() {}
+	public EmployeeDTO() {
+//		Hibernate creates an instance of entities using reflection it uses the Class.newInstance()
+
+	}
 
 	public long getEmpId() {
 		return empId;
@@ -58,11 +51,6 @@ public class EmployeeDTO {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-//	public List<Project> getProjectList() {
-//		return projectList;
-//	}
-//	public void setProjectList(List<Project> projectList) {
-//		this.projectList = projectList;
-//	}
+
 
 }
