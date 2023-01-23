@@ -27,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	private static final String ADMIN_ROLE_REQUIRED = "Admin role is required.";
 	private static final String NO_USER_FOUND = "User ID not found.";
-	
+
 	@Autowired
 	private EmployeeRepository empRepo;
 
@@ -53,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
         } 
      }else {
-        throw new NoSuchUserFoundException(NO_USER_FOUND);
+        throw new NoSuchUserFoundException(NO_USER_FOUND1);
     }
         
 	}
