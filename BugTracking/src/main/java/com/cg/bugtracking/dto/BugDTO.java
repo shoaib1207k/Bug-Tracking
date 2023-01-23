@@ -1,22 +1,53 @@
 package com.cg.bugtracking.dto;
 
-import java.util.Date;
-
-import com.cg.bugtracking.entity.Employee;
+import java.time.LocalDate;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import com.cg.bugtracking.entity.Project;
+//import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class BugDTO {
 	
+	
+
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long bugId;
+	
+	@Size(max=20,min=3,message="atleast 3 characters are required ")
+	@NotBlank(message = "Title is required")
 	private String title;
+	
+	@Size(max=20,min=3)
 	private String description;
-    private String type;
+	
+	@Size(max=10,min=3)
+	@NotBlank(message = "Type is required")
+	private String type;
+	
+	@NotBlank(message = "Priority is required")
+	@Size(max=20,min=3)
 	private String priority;
+	
+	@Size(max=20,min=3)
+	@NotBlank(message = "Progress is required")
 	private int progress;
-	private Employee empName; 
+	
+	@Size(min = 3, message = "atleast 3 charachters required")
+	@NotBlank(message = "Name is required")
+	private String empName;
+	
+	@Size(min = 3, message = "atleast 3 charachters required")
+	@NotBlank(message = "Status is required")
 	private String status;
-	private Date startDate;
-	private Date endDate;
+	
+	@NotBlank(message = "Start Date is required")
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+	private LocalDate startDate;
+	
+	@NotBlank(message = "End Date is required")
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+	private LocalDate endDate;
+	
 	private Project project;
 	
 	
@@ -85,12 +116,12 @@ public class BugDTO {
 	}
 
 
-	public Employee getEmpName() {
+	public String getEmpName() {
 		return empName;
 	}
 
 
-	public void setEmpName(Employee empName) {
+	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
 
@@ -105,22 +136,22 @@ public class BugDTO {
 	}
 
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
 
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
