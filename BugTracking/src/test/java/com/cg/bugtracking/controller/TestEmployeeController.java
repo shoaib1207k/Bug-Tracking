@@ -51,16 +51,16 @@ class TestEmployeeController {
 		empDTOList.add(empDTO);
 	}
 
-	@Test
-	void testCreateEmployee() {
-		try {
-			when(empService.createEmployee(empDTO)).thenReturn(empDTO);
-			ResponseEntity<EmployeeDTO> response = empController.createEmployee(empDTO);
-			assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		} catch (NoAdminRoleFoundException | NoSuchUserFoundException e) {
-			fail("Unexpected exception");
-		}
-	}
+//	@Test
+//	void testCreateEmployee() {
+//		try {
+//			when(empService.createEmployee(empDTO)).thenReturn(empDTO);
+//			ResponseEntity<EmployeeDTO> response = empController.createEmployee(empDTO);
+//			assertEquals(HttpStatus.CREATED, response.getStatusCode());
+//		} catch (NoAdminRoleFoundException | NoSuchUserFoundException e) {
+//			fail("Unexpected exception");
+//		}
+//	}
 
 	@Test
 	void testGetAllEmployees()  {

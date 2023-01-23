@@ -1,4 +1,4 @@
-package com.cg.bugtracking.serviceimpl;
+package com.cg.bugtracking.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +14,6 @@ import com.cg.bugtracking.dto.UserDTO;
 import com.cg.bugtracking.entity.User;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
-import com.cg.bugtracking.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
