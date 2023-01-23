@@ -17,12 +17,12 @@ public class Employee {
 	
 	@Id
 	@Column(updatable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long empId;
 	private String empName;
 	private String email;
 	private String contact;
-    @Column ( nullable = true )
+//    @Column
 	private long projId;
 //	@OneToMany
 //	private List<Project> projectList;
@@ -82,7 +82,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [empId=" + empId + ", empName=" + empName + ", email=" + email + ", contact=" + contact
-				+ "]";
+				+ ", projId=" + projId + "]";
 	}
 	
 }
