@@ -2,6 +2,7 @@ package com.cg.bugtracking.service;
 
 import java.util.List;
 
+
 import com.cg.bugtracking.entity.Bug;
 import com.cg.bugtracking.exception.NoSuchBugFoundException;
 
@@ -17,8 +18,6 @@ public interface BugService {
 	
 	List <Bug> getAllBug();
 	
-//	public List <Bug> getAllBugsByStatus(String status) throws NoSuchBugFoundException;
-	
-	public boolean DeleteBug(long id) throws NoSuchBugFoundException;
+	public boolean  DeleteBug(long id) throws NoSuchBugFoundException;
 
 }

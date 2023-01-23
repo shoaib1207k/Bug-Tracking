@@ -2,78 +2,76 @@ package com.cg.bugtracking.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.bugtracking.dao.EmployeeRepository;
-import com.cg.bugtracking.dao.UserRepository;
+import com.cg.bugtracking.dto.EmployeeDTO;
 import com.cg.bugtracking.entity.Employee;
-import com.cg.bugtracking.entity.User;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
-import com.cg.bugtracking.exception.NoSuchProjectFoundException;
-import com.cg.bugtracking.exception.NoSuchUserFoundException;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
 	private EmployeeRepository empRepo;
-	
+
 	@Autowired
-	private UserRepository userRepo;
-	
-	@Autowired
-	private ProjectService prjService;
+	private ModelMapper modelMapper;
 
 	@Override
-	public Employee createEmployee(Employee emp) throws NoSuchUserFoundException{
-		Optional<User> find = userRepo.findById(emp.getEmpId());
-		if (find.isPresent()) {
-			return empRepo.save(emp);
-		} else {
-			throw new NoSuchUserFoundException("User ID not found.");
-		}
+	public EmployeeDTO createEmployee(EmployeeDTO empDTO) {
+		Employee emp = modelMapper.map(empDTO, Employee.class);
+		empRepo.save(emp);
+		return empDTO;
 	}
 
 	@Override
-	public Employee getEmployeeById(long empId) throws NoSuchEmployeeFoundException {
+	public EmployeeDTO getEmployeeById(long empId) throws NoSuchEmployeeFoundException {
 		Optional<Employee> emp = empRepo.findById(empId);
 		if(emp.isPresent())
-			return emp.get();
+			return modelMapper.map(emp.get(),EmployeeDTO.class);
 		throw new NoSuchEmployeeFoundException("No Such employee found");
 	}
 
 	@Override
-	public List<Employee> getAllEmployees() { 
-		return empRepo.findAll();
+	public List<EmployeeDTO> getAllEmployees() { 
+		return empRepo.findAll()
+				.stream().map(emp->modelMapper.map(emp, EmployeeDTO.class))
+				.collect(Collectors.toList());
 
 	}
 
 	@Override
-	public Employee updateEmployee(long id, Employee emp) throws NoSuchEmployeeFoundException, NoSuchProjectFoundException{
+	public EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO) throws NoSuchEmployeeFoundException{
 		Optional<Employee> empToUpdate = empRepo.findById(id);
-		
-		if(empToUpdate.isPresent() && prjService.getProjectById(emp.getProjId())!=null) {
+		Employee emp = modelMapper.map(empDTO, Employee.class);
+
+		if(empToUpdate.isPresent()) {
 			
 			empToUpdate.get().setEmpName(emp.getEmpName());
 			empToUpdate.get().setEmail(emp.getEmail());
 			empToUpdate.get().setContact(emp.getContact());
 			empToUpdate.get().setProjId(emp.getProjId());
-			return empRepo.save(empToUpdate.get());
+//		empToUpdate.setProjectList(emp.getProjectList());
+			empRepo.save(empToUpdate.get());
+			return empDTO;
 		}else {
 			throw new NoSuchEmployeeFoundException("No employee with this id");
 		}
 	}
 
 	@Override
-	public Employee deleteEmployee(long id) throws NoSuchEmployeeFoundException{
+	public EmployeeDTO deleteEmployee(long id) throws NoSuchEmployeeFoundException{
 		Optional<Employee> empToDel = empRepo.findById(id);
 		if(empToDel.isPresent()) 
 			empRepo.delete(empToDel.get());	
 		else
 			throw new NoSuchEmployeeFoundException("No employee with this id");
-		return empToDel.get();
+		return modelMapper.map(empToDel.get(), EmployeeDTO.class);
 	}
 	
 
