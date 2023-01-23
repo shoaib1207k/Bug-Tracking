@@ -15,11 +15,11 @@ public class BugTrackingApplication {
 		return new ModelMapper();
 	}
 
-	static Logger log = LogManager.getLogger(BugTrackingApplication.class);
+	private static final Logger LOG = LogManager.getLogger(BugTrackingApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(BugTrackingApplication.class, args);
-		log.info("-- Bug Tracking Application started --");
+		LOG.info("-- Bug Tracking Application started --");
 	}
 
 }
