@@ -8,7 +8,7 @@ public class AdminDTO {
 	private boolean isAdmin = true;
 
 	public AdminDTO() {
-		// no args constructor
+		
 	}
 
 	public boolean isAdmin() {

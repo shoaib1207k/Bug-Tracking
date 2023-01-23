@@ -17,9 +17,7 @@ public class Bug {
     private String type;
 	private String priority;
 	private int progress;
-	
-	@ManyToOne
-	private Employee empName; 
+	private String empName; 
 	private String status;
 	private Date startDate;
 	private Date endDate;
@@ -36,7 +34,7 @@ public class Bug {
 
 
 	public Bug(long bugId, String title, String description, String type, String priority, int progress,
-			Employee empName, String status, Date startDate, Date endDate, Project project) {
+			String empName, String status, Date startDate, Date endDate, Project project) {
 		super();
 		this.bugId = bugId;
 		this.title = title;
@@ -125,13 +123,13 @@ public class Bug {
 
 
 
-	public Employee getEmpName() {
+	public String getEmpName() {
 		return empName;
 	}
 
 
 
-	public void setEmpName(Employee empName) {
+	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
 

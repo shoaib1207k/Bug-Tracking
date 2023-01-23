@@ -1,5 +1,7 @@
 package com.cg.bugtracking.entity;
 
+import javax.persistence.CascadeType;
+
 //import java.util.List;
 
 import javax.persistence.Column;
@@ -8,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 //import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -18,8 +22,8 @@ import javax.validation.constraints.Size;
 public class Project {
 
 	@Id
-	@Column(name = "project_id" , updatable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "project_id")
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long projId;
 	
 	@Column(name="project_name", nullable = false)
@@ -27,10 +31,10 @@ public class Project {
 	@Size(max = 25, min = 5, message = "atleast 5 characters")
 	private String projName;
 	
-	@ManyToOne
+	@OneToOne
 	private Employee projManager;
 	
-	@Column(name = "project_status", nullable = false, unique = true)
+	@Column(name = "project_status", nullable = false)
 	@NotBlank(message = "Status is required")
 	@Size(max = 15, min = 2, message = "atleast 2 characters")
 	private String projStatus;
@@ -81,6 +85,7 @@ public class Project {
 
 	public void setProjManager(Employee projManager) {
 		this.projManager = projManager;
+//		this.projManager.setProjId(this.projId);
 	}
 
 	public String getProjStatus() {
