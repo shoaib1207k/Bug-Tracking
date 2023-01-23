@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
 
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
-	@ExceptionHandler(value = { Exception.class })
+	@ExceptionHandler(value = { Exception.class, IdAlreadyExistsException.class })
 	public ErrorInformation handleInternalServerError(Exception ex, HttpServletRequest req) {
 		String msg = ex.getMessage();
 		String url = req.getRequestURI();
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
 	@ResponseBody
 	@ExceptionHandler(value = { NoSuchUserFoundException.class, NoSuchEmployeeFoundException.class,
 			NoAdminRoleFoundException.class, NoSuchAdminFoundException.class, NoSuchBugFoundException.class,
-			NoSuchProjectFoundException.class,  })
+			NoSuchProjectFoundException.class })
 	public ErrorInformation handleNotFound(Exception ex, HttpServletRequest req) {
 		String msg = ex.getMessage();
 		String url = req.getRequestURI();
