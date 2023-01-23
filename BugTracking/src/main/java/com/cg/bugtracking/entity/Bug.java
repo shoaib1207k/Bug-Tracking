@@ -2,7 +2,7 @@ package com.cg.bugtracking.entity;
 
 import java.time.LocalDate;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -12,7 +12,10 @@ import javax.persistence.Table;
 @Table(name = "bugs")
 public class Bug {
 	@Id
+	@Column(name="Bug_id")
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long bugId;
+	
 	private String title;
 	private String description;
 	private String type;
