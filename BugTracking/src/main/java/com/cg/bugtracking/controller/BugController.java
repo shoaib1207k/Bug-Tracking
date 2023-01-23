@@ -40,7 +40,7 @@ public class BugController {
 	}
 	
 	
-	@PostMapping("/updateBug/{id}")
+	@PostMapping("/bug/{id}")
 	public ResponseEntity<BugDTO> updateBug(@PathVariable("id")long id, @RequestBody BugDTO bugDTO) throws NoSuchBugFoundException{
 	 
 	return new  ResponseEntity<>(bugService.updateBug(bugDTO, id),HttpStatus.OK);
@@ -57,8 +57,8 @@ public class BugController {
 		return new ResponseEntity<>(bugService.getAllBug(), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/deletebug/{id}")
+	@DeleteMapping("/bug/{id}")
 	public ResponseEntity<BugDTO> deleteEmployee(@PathVariable("id")long id) throws NoSuchBugFoundException{
-		return new ResponseEntity<>(bugService.DeleteBug(id), HttpStatus.OK);
+		return new ResponseEntity<>(bugService.deleteBug(id), HttpStatus.OK);
 	}
 }
