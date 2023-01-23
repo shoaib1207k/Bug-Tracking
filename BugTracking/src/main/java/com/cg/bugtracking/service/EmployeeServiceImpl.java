@@ -21,7 +21,8 @@ import com.cg.bugtracking.exception.NoSuchUserFoundException;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-	private static final String NO_USER_FOUND = "User ID not found.";	
+	private static final String NO_USER_FOUND = "User ID not found.";
+	
 	private static final String ADMIN_ROLE_REQUIRED = "Admin role is required.";
 	
 	@Autowired
