@@ -1,21 +1,15 @@
 package com.cg.bugtracking.entity;
 
-import javax.persistence.CascadeType;
+
 
 //import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-//import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name= "projects")
@@ -27,16 +21,12 @@ public class Project {
 	private long projId;
 	
 	@Column(name="project_name", nullable = false)
-	@NotBlank(message = "Name is required")
-	@Size(max = 25, min = 5, message = "atleast 5 characters")
 	private String projName;
 	
 	@OneToOne
 	private Employee projManager;
 	
 	@Column(name = "project_status", nullable = false)
-	@NotBlank(message = "Status is required")
-	@Size(max = 15, min = 2, message = "atleast 2 characters")
 	private String projStatus;
 	
 //	@OneToMany
