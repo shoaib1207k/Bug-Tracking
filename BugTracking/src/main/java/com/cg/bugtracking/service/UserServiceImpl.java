@@ -10,11 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.bugtracking.dao.BugRepository;
 import com.cg.bugtracking.dao.UserRepository;
-import com.cg.bugtracking.dto.BugDTO;
 import com.cg.bugtracking.dto.UserDTO;
-import com.cg.bugtracking.entity.Bug;
 import com.cg.bugtracking.entity.User;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
@@ -27,9 +24,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository uRepo;
-
-	@Autowired
-	private BugRepository bRepo;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -49,15 +43,6 @@ public class UserServiceImpl implements UserService {
 			return userDto;
 		}
 	}
-
-	@Override
-	public BugDTO createBug(BugDTO bugDTO) {
-		Bug bug = modelMapper.map(bugDTO, Bug.class);
-		bRepo.save(bug);
-		return bugDTO;
-	}
-
-	// user CRUD
 
 	@Override
 	public List<UserDTO> findAllUsers() {

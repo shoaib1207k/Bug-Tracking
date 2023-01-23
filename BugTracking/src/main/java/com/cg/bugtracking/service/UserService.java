@@ -2,20 +2,13 @@ package com.cg.bugtracking.service;
 
 import java.util.List;
 
-import com.cg.bugtracking.dto.BugDTO;
 import com.cg.bugtracking.dto.UserDTO;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
 
 public interface UserService {
 
-	// create (user, bug)
-
 	UserDTO createUser(UserDTO userDto) throws IdAlreadyExistsException;
-
-	public BugDTO createBug(BugDTO bugDTO);
-
-	// user CRUD
 
 	UserDTO findById(long id) throws NoSuchUserFoundException;
 
