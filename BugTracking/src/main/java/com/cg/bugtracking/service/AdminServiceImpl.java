@@ -24,6 +24,7 @@ public class AdminServiceImpl implements AdminService {
 	private static final Logger LOG = LogManager.getLogger(AdminServiceImpl.class);
 	private static final String NO_ADMIN_FOUND = "Admin ID not found.";
 	private static final String NO_USER_FOUND = "User ID not found.";
+	private static final String ADMIN_ROLE_REQD = "Admin role is required.";
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -45,7 +46,7 @@ public class AdminServiceImpl implements AdminService {
 				LOG.info("Saved. Returning admin");
 				return adminDto;
 			} else {
-				throw new NoAdminRoleFoundException("Admin role is required.");
+				throw new NoAdminRoleFoundException(ADMIN_ROLE_REQD);
 			}
 		} else {
 			throw new NoSuchUserFoundException(NO_USER_FOUND);
