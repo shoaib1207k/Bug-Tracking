@@ -1,4 +1,4 @@
-package com.cg.bugtracking.service;
+package com.cg.bugtracking.serviceimpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +18,7 @@ import com.cg.bugtracking.entity.User;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
+import com.cg.bugtracking.service.AdminService;
 
 @Service
 public class AdminServiceImpl implements AdminService {

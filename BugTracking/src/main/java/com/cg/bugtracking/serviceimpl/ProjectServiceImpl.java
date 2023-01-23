@@ -1,4 +1,4 @@
-package com.cg.bugtracking.service;
+package com.cg.bugtracking.serviceimpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +14,7 @@ import com.cg.bugtracking.dto.ProjectDTO;
 import com.cg.bugtracking.entity.Project;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
+import com.cg.bugtracking.service.ProjectService;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {

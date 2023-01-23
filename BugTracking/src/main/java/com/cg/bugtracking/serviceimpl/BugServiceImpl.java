@@ -1,4 +1,4 @@
-package com.cg.bugtracking.service;
+package com.cg.bugtracking.serviceimpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +13,7 @@ import com.cg.bugtracking.dao.BugRepository;
 import com.cg.bugtracking.dto.BugDTO;
 import com.cg.bugtracking.entity.Bug;
 import com.cg.bugtracking.exception.NoSuchBugFoundException;
+import com.cg.bugtracking.service.BugService;
 
 
 @Service

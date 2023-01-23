@@ -14,7 +14,7 @@ public class ProjectDTO {
 	
 //	private List<Bug> bugList;
 	
-	public ProjectDTO() {}
+//	public ProjectDTO() {}
 
 	public long getProjId() {
 		return projId;

@@ -1,4 +1,4 @@
-package com.cg.bugtracking.service;
+package com.cg.bugtracking.serviceimpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,15 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.bugtracking.dao.EmployeeRepository;
+import com.cg.bugtracking.dao.UserRepository;
 import com.cg.bugtracking.dto.EmployeeDTO;
 import com.cg.bugtracking.entity.Employee;
+import com.cg.bugtracking.entity.User;
+import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
+import com.cg.bugtracking.exception.NoSuchUserFoundException;
 import com.cg.bugtracking.service.EmployeeService;
 import com.cg.bugtracking.service.ProjectService;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+	
+	
+	private static final String ADMIN_ROLE_REQUIRED = "Admin role is required.";
+	private static final String NO_USER_FOUND = "User ID not found.";
 	
 	@Autowired
 	private EmployeeRepository empRepo;
@@ -27,14 +35,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
 	private ProjectService prjService;
+	
+	@Autowired
+	private UserRepository uRepo;
 
 	@Override
-	public EmployeeDTO createEmployee(EmployeeDTO empDTO) {
+	public EmployeeDTO createEmployee(EmployeeDTO empDTO) throws NoAdminRoleFoundException, NoSuchUserFoundException {
 		
-		
+		Optional<User> find = uRepo.findById(empDTO.getEmpId());
+		if (find.isPresent()) {
+			if (find.get().checkAdmin()) {
+
 		Employee emp = modelMapper.map(empDTO, Employee.class);
 		empRepo.save(emp);
 		return empDTO;
+			}
+			else {
+				throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+			}
+		} else {
+			throw new NoSuchUserFoundException(NO_USER_FOUND);
+		}
 	}
 
 	@Override
