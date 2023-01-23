@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.cg.bugtracking.dao.UserRepository;
 import com.cg.bugtracking.dto.UserDTO;
 import com.cg.bugtracking.entity.User;
-import com.cg.bugtracking.exception.NoAdminRoleFoundException;
+import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
 
 @Service
@@ -28,18 +28,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public UserDTO createUser(UserDTO userDto) throws NoSuchUserFoundException, NoAdminRoleFoundException {
-		Optional<User> find = uRepo.findById(userDto.getUserId());
-		if (find.isPresent()) {
-			if (find.get().checkAdmin()) {
-				User user = modelMapper.map(userDto, User.class);
-				uRepo.save(user);
-				return userDto;
-			} else {
-				throw new NoAdminRoleFoundException("Admin role is required.");
-			}
+	public UserDTO createUser(UserDTO userDto) throws IdAlreadyExistsException {
+		Optional<User> findUser = uRepo.findById(userDto.getUserId());
+		if (findUser.isPresent()) {
+			throw new IdAlreadyExistsException("ID already exists in the database");
 		} else {
-			throw new NoSuchUserFoundException(NO_USER_FOUND);
+			User user = modelMapper.map(userDto, User.class);
+			uRepo.save(user);
+			return userDto;
 		}
 	}
 

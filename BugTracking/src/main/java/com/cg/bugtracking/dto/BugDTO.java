@@ -1,11 +1,10 @@
 package com.cg.bugtracking.dto;
 
 import java.time.LocalDate;
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import com.cg.bugtracking.entity.Project;
-import com.fasterxml.jackson.annotation.JsonFormat;
+//import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class BugDTO {
 	
@@ -42,11 +41,11 @@ public class BugDTO {
 	private String status;
 	
 	@NotBlank(message = "Start Date is required")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
 	private LocalDate startDate;
 	
 	@NotBlank(message = "End Date is required")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
 	private LocalDate endDate;
 	
 	private Project project;
