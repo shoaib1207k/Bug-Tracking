@@ -13,7 +13,7 @@ public class Admin {
 	@Column(name = "admin_id")
 	private long adminId;
 
-	@Column(name = "admin_name")
+	@Column(name = "admin_name", nullable = false)
 	private String adminName;
 
 	@Column(name = "admin_contact", unique = true)

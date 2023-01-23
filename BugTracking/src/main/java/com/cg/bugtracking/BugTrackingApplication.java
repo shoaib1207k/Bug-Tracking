@@ -19,7 +19,7 @@ public class BugTrackingApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BugTrackingApplication.class, args);
-		LOG.info("-- Bug Tracking Application started --");
+		LOG.info("Bug Tracking Application started...");
 	}
 
 }

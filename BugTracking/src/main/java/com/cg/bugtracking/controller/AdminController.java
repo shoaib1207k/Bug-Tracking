@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.bugtracking.dto.AdminDTO;
-import com.cg.bugtracking.dto.BugDTO;
 import com.cg.bugtracking.dto.EmployeeDTO;
 import com.cg.bugtracking.dto.ProjectDTO;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
 import com.cg.bugtracking.service.AdminService;
-import com.cg.bugtracking.service.BugService;
 import com.cg.bugtracking.service.EmployeeService;
 import com.cg.bugtracking.service.ProjectService;
 
 @RestController
+@RequestMapping("/admin")
 public class AdminController {
 
 	@Autowired
@@ -38,55 +38,45 @@ public class AdminController {
 	@Autowired
 	private ProjectService prjService;
 
-	@Autowired
-	private BugService bugService;
+	// create (admin, employee, project)
 
-	@PostMapping("/admin")
+	@PostMapping
 	public ResponseEntity<AdminDTO> createAdmin(@Valid @RequestBody AdminDTO adminDto)
 			throws NoAdminRoleFoundException, NoSuchUserFoundException {
 		return new ResponseEntity<>(aService.createAdmin(adminDto), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/adminlist")
+	@PostMapping("/employee")
+	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO) {
+		return new ResponseEntity<>(empService.createEmployee(empDTO), HttpStatus.CREATED);
+	}
+
+	@PostMapping("/project")
+	public ResponseEntity<ProjectDTO> createProject(@Valid @RequestBody ProjectDTO prjDTO) {
+		return new ResponseEntity<>(prjService.createProject(prjDTO), HttpStatus.CREATED);
+	}
+
+	// admin CRUD
+
+	@GetMapping
 	public ResponseEntity<List<AdminDTO>> getAllAdmins() {
 		return new ResponseEntity<>(aService.findAllAdmins(), HttpStatus.OK);
 	}
 
-	@GetMapping("/admin/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<AdminDTO> getById(@PathVariable long id) throws NoSuchAdminFoundException {
 		return new ResponseEntity<>(aService.findAdminById(id), HttpStatus.FOUND);
 	}
 
-	@PutMapping("/admin/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<AdminDTO> updateAdmin(@Valid @RequestBody AdminDTO adminDto, @PathVariable long id)
 			throws NoSuchAdminFoundException, NoAdminRoleFoundException {
 		return new ResponseEntity<>(aService.updateAdmin(id, adminDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/admin/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<AdminDTO> deleteAdmin(@PathVariable long id) throws NoSuchAdminFoundException {
 		return new ResponseEntity<>(aService.deleteAdmin(id), HttpStatus.OK);
-	}
-
-	// employee
-
-	@PostMapping("admin/employee")
-	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO) {
-		return new ResponseEntity<>(empService.createEmployee(empDTO), HttpStatus.CREATED);
-	}
-
-	// project
-
-	@PostMapping("/admin/project")
-	public ResponseEntity<ProjectDTO> createProject(@RequestBody ProjectDTO prjDTO) {
-		return new ResponseEntity<>(prjService.createProject(prjDTO), HttpStatus.CREATED);
-	}
-
-	// bug
-
-	@PostMapping("admin/bug")
-	public ResponseEntity<BugDTO> createBug(@RequestBody BugDTO bugDTO) {
-		return new ResponseEntity<>(bugService.createBug(bugDTO), HttpStatus.CREATED);
 	}
 
 }
