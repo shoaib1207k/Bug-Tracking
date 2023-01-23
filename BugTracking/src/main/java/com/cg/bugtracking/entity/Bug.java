@@ -8,24 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "bugs")
 public class Bug {
+	
 	@Id
 	@Column(name="Bug_id")
-//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long bugId;
-	
 	private String title;
 	private String description;
-	private String type;
+    private String type;
+    
+    @Column(name = "Bug_priority", nullable = false)
 	private String priority;
 	private int progress;
-	private String empName;
+	private String empName; 
 	private String status;
 	private LocalDate startDate;
 	private LocalDate endDate;
-
+	
 	@ManyToOne
 	private Project project;
 
