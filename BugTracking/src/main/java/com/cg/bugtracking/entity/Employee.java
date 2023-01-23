@@ -16,11 +16,8 @@ public class Employee {
 	@Id
 	@Column(updatable = false)
 	private long empId;
-	@Size(min = 3, message = "atleast 3 charachters required")
 	private String empName;
-    @Email
 	private String email;
-    @Size(min = 10)
 	private String contact;
 	private long projId;
 	
