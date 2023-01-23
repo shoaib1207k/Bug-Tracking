@@ -2,6 +2,8 @@ package com.cg.bugtracking.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ public class ProjectController {
 	private ProjectService prjService;
 	
 	@PostMapping("/project")
-	public ResponseEntity<ProjectDTO> createProject(@RequestBody ProjectDTO prjDTO){
+	public ResponseEntity<ProjectDTO> createProject(@Valid @RequestBody ProjectDTO prjDTO){
 		return new ResponseEntity<>(prjService.createProject(prjDTO), HttpStatus.CREATED);
 	}
 	
@@ -40,7 +42,7 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/update-project/{id}")
-	public ResponseEntity<ProjectDTO> updateProject(@PathVariable("id")long id, @RequestBody ProjectDTO prjDTO) throws NoSuchProjectFoundException{
+	public ResponseEntity<ProjectDTO> updateProject(@Valid @PathVariable("id")long id, @RequestBody ProjectDTO prjDTO) throws NoSuchProjectFoundException{
 		return new ResponseEntity<>(prjService.updateProject(id, prjDTO), HttpStatus.OK);
 	}
 	
