@@ -17,6 +17,6 @@ public interface BugService {
 	
 	List <BugDTO> getAllBug();
 	
-	public  BugDTO DeleteBug(long id) throws NoSuchBugFoundException;
+	public  BugDTO deleteBug(long id) throws NoSuchBugFoundException;
 
 }
