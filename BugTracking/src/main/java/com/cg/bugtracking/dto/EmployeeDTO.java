@@ -1,27 +1,15 @@
 package com.cg.bugtracking.dto;
 
-import java.util.List;
 
-import com.cg.bugtracking.entity.Project;
 
 public class EmployeeDTO {
 	
-//	private long empId;
+	private long empId;
 	private String empName;
 	private String email;
 	private String contact;
 	private long projId;
-//	private List<Project> projectList;
-	
-	public EmployeeDTO(String empName, String email, String contact,long projId ) {
-		super();
-//		this.empId = empId;
-		this.empName = empName;
-		this.email = email;
-		this.contact = contact;
-//		this.projectList = projectList;
-		this.projId = projId; 
-	}
+
 	
 	
 	public long getProjId() {
@@ -34,14 +22,17 @@ public class EmployeeDTO {
 	}
 
 
-	public EmployeeDTO() {}
+	public EmployeeDTO() {
+//		Hibernate creates an instance of entities using reflection it uses the Class.newInstance()
 
-//	public long getEmpId() {
-//		return empId;
-//	}
-//	public void setEmpId(long empId) {
-//		this.empId = empId;
-//	}
+	}
+
+	public long getEmpId() {
+		return empId;
+	}
+	public void setEmpId(long empId) {
+		this.empId = empId;
+	}
 	public String getEmpName() {
 		return empName;
 	}
@@ -60,11 +51,6 @@ public class EmployeeDTO {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-//	public List<Project> getProjectList() {
-//		return projectList;
-//	}
-//	public void setProjectList(List<Project> projectList) {
-//		this.projectList = projectList;
-//	}
+
 
 }

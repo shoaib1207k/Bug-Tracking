@@ -16,5 +16,4 @@ public interface EmployeeService {
 	EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO) throws NoSuchEmployeeFoundException;
 
 	EmployeeDTO deleteEmployee(long id) throws NoSuchEmployeeFoundException;
-
 }

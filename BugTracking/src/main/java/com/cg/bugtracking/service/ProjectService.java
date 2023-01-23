@@ -3,7 +3,7 @@ package com.cg.bugtracking.service;
 import java.util.List;
 
 import com.cg.bugtracking.dto.ProjectDTO;
-import com.cg.bugtracking.entity.Project;
+
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 
 public interface ProjectService {

@@ -1,14 +1,12 @@
 package com.cg.bugtracking.entity;
 
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -17,15 +15,14 @@ public class Employee {
 	
 	@Id
 	@Column(updatable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long empId;
+	@Size(min = 3, message = "atleast 3 charachters required")
 	private String empName;
+    @Email
 	private String email;
+    @Size(min = 10)
 	private String contact;
-	
 	private long projId;
-//	@OneToMany
-//	private List<Project> projectList;
 	
 	public Employee() {}
 	
@@ -36,7 +33,6 @@ public class Employee {
 		this.email = email;
 		this.contact = contact;
 		this.projId	= projId;
-//		this.projectList = projectList;
 	}
 	
 	
@@ -72,17 +68,12 @@ public class Employee {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-//	public List<Project> getProjectList() {
-//		return projectList;
-//	}
-//	public void setProjectList(List<Project> projectList) {
-//		this.projectList = projectList;
-//	}
+
 
 	@Override
 	public String toString() {
 		return "Employee [empId=" + empId + ", empName=" + empName + ", email=" + email + ", contact=" + contact
-				+ "]";
+				+ ", projId=" + projId + "]";
 	}
 	
 }
