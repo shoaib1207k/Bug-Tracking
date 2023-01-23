@@ -3,7 +3,6 @@ package com.cg.bugtracking.service;
 import java.util.List;
 
 import com.cg.bugtracking.dto.EmployeeDTO;
-import com.cg.bugtracking.entity.Employee;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 
 
