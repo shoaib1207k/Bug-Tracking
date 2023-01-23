@@ -50,12 +50,11 @@ public class AdminController {
 	@GetMapping("/search/{id}")
 	public ResponseEntity<AdminDTO> getById(@PathVariable long id) throws NoSuchAdminFoundException {
 		return ResponseEntity.ok(modelMapper.map(aService.findAdminById(id), AdminDTO.class));
-
 	}
 
 	@PutMapping("/modify/{id}")
 	public ResponseEntity<AdminDTO> updateAdmin(@Valid @RequestBody AdminDTO adminDto, @PathVariable int id)
-			throws NoSuchAdminFoundException {
+			throws NoSuchAdminFoundException, NoAdminRoleFoundException {
 		Admin admin = modelMapper.map(adminDto, Admin.class);
 		return ResponseEntity.accepted().body(modelMapper.map(aService.updateAdmin(id, admin), AdminDTO.class));
 	}

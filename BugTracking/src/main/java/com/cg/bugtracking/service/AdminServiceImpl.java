@@ -55,12 +55,21 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public Admin updateAdmin(long id, Admin admin) throws NoSuchAdminFoundException {
-		Admin find = findAdminById(id);
-		find.setAdminId(admin.getAdminId());
-		find.setAdminName(admin.getAdminName());
-		find.setAdminContact(admin.getAdminContact());
-		return aRepo.save(find);
+	public Admin updateAdmin(long id, Admin admin) throws NoSuchAdminFoundException, NoAdminRoleFoundException {
+		Optional<User> findUser = uRepo.findById(admin.getAdminId());
+		if (findUser.isPresent()) {
+			if (findUser.get().checkAdmin()) {
+				Admin find = findAdminById(id);
+				find.setAdminId(admin.getAdminId());
+				find.setAdminName(admin.getAdminName());
+				find.setAdminContact(admin.getAdminContact());
+				return aRepo.save(find);
+			} else {
+				throw new NoAdminRoleFoundException("Admin role is required.");
+			}
+		}else {
+			throw new NoSuchAdminFoundException("Admin ID not found.");
+		}
 	}
 
 	@Override

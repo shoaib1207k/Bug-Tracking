@@ -15,7 +15,7 @@ public interface AdminService {
 	
 	public Admin findAdminById(long id) throws NoSuchAdminFoundException;
 	
-	public Admin updateAdmin(long id, Admin admin) throws NoSuchAdminFoundException;
+	public Admin updateAdmin(long id, Admin admin) throws NoSuchAdminFoundException, NoAdminRoleFoundException;
 	
 	public boolean deleteAdmin(long id);
 }
