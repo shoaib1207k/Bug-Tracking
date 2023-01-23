@@ -26,11 +26,21 @@ public class BugServiceImpl implements BugService{
 	}
 
 	@Override
-	public Bug updateBug(Bug bug ,long id) throws NoSuchBugFoundException {
-		Bug findbug = getBug(id);
-		findbug.setEmpName(bug.getEmpName());
-		return null;
+	public Bug updateBug( Bug bug,long id) throws NoSuchBugFoundException{
+		Optional<Bug> bugUpdate = bRepo.findById(id);
 		
+		if(bugUpdate.isPresent() ) {
+			
+			bugUpdate.get().setBugId(bug.getBugId());
+			bugUpdate.get().setType(bug.getType());
+			bugUpdate.get().setPriority(bug.getPriority());
+			bugUpdate.get().setProgress(bug.getProgress());
+			bugUpdate.get().setEndDate(bug.getEndDate());
+		    bRepo.save(bugUpdate.get());
+		    return bug;
+		}else {
+			throw new NoSuchBugFoundException("No Bug with this id");
+		}
 	}
 	@Override
 	public Bug getBug(long id) throws NoSuchBugFoundException {
