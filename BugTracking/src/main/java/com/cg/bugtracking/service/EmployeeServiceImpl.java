@@ -12,6 +12,7 @@ import com.cg.bugtracking.dao.EmployeeRepository;
 import com.cg.bugtracking.dto.EmployeeDTO;
 import com.cg.bugtracking.entity.Employee;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
+import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -21,9 +22,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	@Autowired
+	private ProjectService prjService;
 
 	@Override
 	public EmployeeDTO createEmployee(EmployeeDTO empDTO) {
+		
+		
 		Employee emp = modelMapper.map(empDTO, Employee.class);
 		empRepo.save(emp);
 		return empDTO;
@@ -46,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO) throws NoSuchEmployeeFoundException{
+	public EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO) throws NoSuchEmployeeFoundException, NoSuchProjectFoundException{
 		Optional<Employee> empToUpdate = empRepo.findById(id);
 		Employee emp = modelMapper.map(empDTO, Employee.class);
 
@@ -55,8 +61,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 			empToUpdate.get().setEmpName(emp.getEmpName());
 			empToUpdate.get().setEmail(emp.getEmail());
 			empToUpdate.get().setContact(emp.getContact());
-			empToUpdate.get().setProjId(emp.getProjId());
-//		empToUpdate.setProjectList(emp.getProjectList());
+			if(prjService.getProjectById(emp.getProjId())!=null) {
+				empToUpdate.get().setProjId(emp.getProjId());
+			}
 			empRepo.save(empToUpdate.get());
 			return empDTO;
 		}else {

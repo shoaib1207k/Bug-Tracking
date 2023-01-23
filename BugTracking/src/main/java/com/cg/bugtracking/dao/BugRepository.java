@@ -15,4 +15,9 @@ public interface BugRepository extends JpaRepository<Bug,Long>{
 //	@Query("Select b from Bug where b.status= :status")
 //	public List<Bug> getAllBugsByStatus(@Param("status")String status);
 
+	
+	
+	
+	
+	
 }
