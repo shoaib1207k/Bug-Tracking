@@ -10,9 +10,18 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.bugtracking.dao.AdminRepository;
+import com.cg.bugtracking.dao.BugRepository;
+import com.cg.bugtracking.dao.EmployeeRepository;
+import com.cg.bugtracking.dao.ProjectRepository;
 import com.cg.bugtracking.dao.UserRepository;
 import com.cg.bugtracking.dto.AdminDTO;
+import com.cg.bugtracking.dto.BugDTO;
+import com.cg.bugtracking.dto.EmployeeDTO;
+import com.cg.bugtracking.dto.ProjectDTO;
 import com.cg.bugtracking.entity.Admin;
+import com.cg.bugtracking.entity.Bug;
+import com.cg.bugtracking.entity.Employee;
+import com.cg.bugtracking.entity.Project;
 import com.cg.bugtracking.entity.User;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
@@ -26,13 +35,22 @@ public class AdminServiceImpl implements AdminService {
 	private static final String NO_USER_FOUND = "User ID not found.";
 
 	@Autowired
+	private ModelMapper modelMapper;
+
+	@Autowired
 	private AdminRepository aRepo;
 
 	@Autowired
 	private UserRepository uRepo;
 
 	@Autowired
-	private ModelMapper modelMapper;
+	private EmployeeRepository eRepo;
+
+	@Autowired
+	private BugRepository bRepo;
+
+	@Autowired
+	private ProjectRepository pRepo;
 
 	@Override
 	public AdminDTO createAdmin(AdminDTO adminDto) throws NoSuchUserFoundException, NoAdminRoleFoundException {
@@ -96,6 +114,33 @@ public class AdminServiceImpl implements AdminService {
 		else
 			throw new NoSuchAdminFoundException(NO_ADMIN_FOUND);
 		return modelMapper.map(admDel.get(), AdminDTO.class);
+	}
+
+	// employee
+
+	@Override
+	public EmployeeDTO createEmployee(EmployeeDTO empDTO) {
+		Employee emp = modelMapper.map(empDTO, Employee.class);
+		eRepo.save(emp);
+		return empDTO;
+	}
+
+	// project
+
+	@Override
+	public ProjectDTO createProject(ProjectDTO prjDTO) {
+		Project prj = modelMapper.map(prjDTO, Project.class);
+		pRepo.save(prj);
+		return prjDTO;
+	}
+
+	// bug
+
+	@Override
+	public BugDTO createBug(BugDTO bugDTO) {
+		Bug bug = modelMapper.map(bugDTO, Bug.class);
+		bRepo.save(bug);
+		return bugDTO;
 	}
 
 }
