@@ -5,18 +5,9 @@ public class AdminDTO {
 	private long adminId;
 	private String adminName;
 	private String adminContact;
-	private boolean isAdmin = true;
 
 	public AdminDTO() {
 		
-	}
-
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
 	}
 
 	public long getAdminId() {
