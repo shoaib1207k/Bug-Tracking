@@ -24,6 +24,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private static final String NO_USER_FOUND = "User ID not found.";
 	private static final String NO_ADMIN_ROLE = "No admin role found";
 	
+	
+	private static final String ADMIN_ROLE_REQUIRED = "Admin role is required.";
+	private static final String NO_USER_FOUND = "User ID not found.";
+	
 	@Autowired
 	private EmployeeRepository empRepo;
 
@@ -38,20 +42,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public EmployeeDTO createEmployee(EmployeeDTO empDTO) throws NoAdminRoleFoundException, NoSuchUserFoundException {
-
+		
 		Optional<User> find = uRepo.findById(empDTO.getEmpId());
-		if (find.isPresent()) {
-			if (find.get().checkAdmin()) {
-				Employee emp = modelMapper.map(empDTO, Employee.class);
-				empRepo.save(emp);
-				return empDTO;
-
-			} else {
-				throw new NoAdminRoleFoundException(NO_ADMIN_ROLE);
-			}
-		} else {
-			throw new NoSuchUserFoundException(NO_USER_FOUND);
-		}
+      if (find.isPresent()) {
+        if (find.get().checkAdmin()) {
+            Employee emp = modelMapper.map(empDTO, Employee.class);
+            empRepo.save(emp);
+            return empDTO;
+        } else {
+            throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+        } 
+     }else {
+        throw new NoSuchUserFoundException(NO_USER_FOUND);
+    }
+        
 	}
 
 	@Override

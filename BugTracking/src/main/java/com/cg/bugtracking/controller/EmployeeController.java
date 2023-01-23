@@ -29,11 +29,6 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService empService;
 	
-	@PostMapping("/employee")
-	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO) throws NoAdminRoleFoundException, NoSuchUserFoundException{
-		return new ResponseEntity<>(empService.createEmployee(empDTO), HttpStatus.CREATED);
-	}
-	
 	@GetMapping("/employees")
 	public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
 		return new ResponseEntity<>(empService.getAllEmployees(), HttpStatus.OK);
@@ -44,7 +39,7 @@ public class EmployeeController {
 		return new ResponseEntity<>(empService.getEmployeeById(id), HttpStatus.FOUND);
 	}
 	
-	@PostMapping("/employee/{id}")
+	@PutMapping("/employee/{id}")
 	public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id")long id, @Valid @RequestBody EmployeeDTO empDTO) throws NoSuchEmployeeFoundException, NoSuchProjectFoundException{
 		return new ResponseEntity<>(empService.updateEmployee(id, empDTO), HttpStatus.OK);
 	}
