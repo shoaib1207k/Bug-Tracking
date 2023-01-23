@@ -1,40 +1,40 @@
 package com.cg.bugtracking.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bugs")
+@Table(name = "bugs")
 public class Bug {
 	@Id
+	@Column(name="Bug_id")
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long bugId;
+	
 	private String title;
 	private String description;
-    private String type;
+	private String type;
 	private String priority;
 	private int progress;
-	private String empName; 
+	private String empName;
 	private String status;
-	private Date startDate;
-	private Date endDate;
-	
+	private LocalDate startDate;
+	private LocalDate endDate;
+
 	@ManyToOne
 	private Project project;
-	
-	
-	
+
 	public Bug() {
 		super();
 	}
 
-
-
-	public Bug(long bugId, String title, String description, String type, String priority, int progress,
-			String empName, String status, Date startDate, Date endDate, Project project) {
+	public Bug(long bugId, String title, String description, String type, String priority, int progress, String empName,
+			String status, LocalDate startDate, LocalDate endDate, Project project) {
 		super();
 		this.bugId = bugId;
 		this.title = title;
@@ -48,140 +48,94 @@ public class Bug {
 		this.endDate = endDate;
 		this.project = project;
 	}
-
-
 
 	public long getBugId() {
 		return bugId;
 	}
 
-
-
 	public void setBugId(long bugId) {
 		this.bugId = bugId;
 	}
-
-
 
 	public String getTitle() {
 		return title;
 	}
 
-
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-
 
 	public String getType() {
 		return type;
 	}
 
-
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-
 
 	public String getPriority() {
 		return priority;
 	}
 
-
-
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
-
-
 
 	public int getProgress() {
 		return progress;
 	}
 
-
-
 	public void setProgress(int progress) {
 		this.progress = progress;
 	}
-
-
 
 	public String getEmpName() {
 		return empName;
 	}
 
-
-
 	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
-
-
 
 	public String getStatus() {
 		return status;
 	}
 
-
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-
-
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-
-
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-
-
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-
-
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
-
-
 
 	public Project getProject() {
 		return project;
 	}
 
-
-
 	public void setProject(Project project) {
 		this.project = project;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -189,10 +143,5 @@ public class Bug {
 				+ ", priority=" + priority + ", progress=" + progress + ", empName=" + empName + ", status=" + status
 				+ ", startDate=" + startDate + ", endDate=" + endDate + ", project=" + project + "]";
 	}
-	
-	
-	
-	
-	
 
 }
