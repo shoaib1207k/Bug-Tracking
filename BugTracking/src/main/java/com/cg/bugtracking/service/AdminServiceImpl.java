@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cg.bugtracking.dao.AdminRepository;
 import com.cg.bugtracking.dao.UserRepository;
 import com.cg.bugtracking.dto.AdminDTO;
@@ -20,6 +21,7 @@ import com.cg.bugtracking.exception.NoSuchUserFoundException;
 @Service
 public class AdminServiceImpl implements AdminService {
 
+	private static final Logger LOG = LogManager.getLogger(AdminServiceImpl.class);
 	private static final String NO_ADMIN_FOUND = "Admin ID not found.";
 	private static final String NO_USER_FOUND = "User ID not found.";
 
@@ -38,7 +40,9 @@ public class AdminServiceImpl implements AdminService {
 		if (find.isPresent()) {
 			if (find.get().checkAdmin()) {
 				Admin admin = modelMapper.map(adminDto, Admin.class);
+				LOG.info("Saving admin");
 				aRepo.save(admin);
+				LOG.info("Saved. Returning admin");
 				return adminDto;
 			} else {
 				throw new NoAdminRoleFoundException("Admin role is required.");
@@ -50,15 +54,19 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<AdminDTO> findAllAdmins() {
+		LOG.info("Returning all admins");
 		return aRepo.findAll().stream().map(adm -> modelMapper.map(adm, AdminDTO.class)).collect(Collectors.toList());
 	}
 
 	@Override
 	public AdminDTO findAdminById(long id) throws NoSuchAdminFoundException {
 		Optional<Admin> adm = aRepo.findById(id);
-		if (adm.isPresent())
+		if (adm.isPresent()) {
+			LOG.info("Returning admin using id");
 			return modelMapper.map(adm.get(), AdminDTO.class);
-		throw new NoSuchAdminFoundException(NO_ADMIN_FOUND);
+		} else {
+			throw new NoSuchAdminFoundException(NO_ADMIN_FOUND);
+		}
 	}
 
 	@Override
@@ -67,10 +75,13 @@ public class AdminServiceImpl implements AdminService {
 		Optional<Admin> admUpdate = aRepo.findById(id);
 		Admin admin = modelMapper.map(adminDto, Admin.class);
 		if (admUpdate.isPresent()) {
+			LOG.info("Admin present. Updating...");
 			admUpdate.get().setAdminName(admin.getAdminName());
 			admUpdate.get().setAdminId(admin.getAdminId());
 			admUpdate.get().setAdminContact(admin.getAdminContact());
+			LOG.info("Saving...");
 			aRepo.save(admUpdate.get());
+			LOG.info("Saved. Returning admin");
 			return adminDto;
 		} else {
 			throw new NoSuchAdminFoundException(NO_ADMIN_FOUND);
