@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,6 @@ public class UserServiceImpl implements UserService {
 	private ModelMapper modelMapper;
 
 	@Override
-	@Transactional
 	public UserDTO createUser(UserDTO userDto) throws IdAlreadyExistsException {
 		Optional<User> findUser = uRepo.findById(userDto.getUserId());
 		if (findUser.isPresent()) {
@@ -53,7 +50,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional
 	public UserDTO updateUser(long id, UserDTO userDto) throws NoSuchUserFoundException {
 		Optional<User> usrUpdate = uRepo.findById(id);
 		User user = modelMapper.map(userDto, User.class);
@@ -67,7 +63,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional
 	public UserDTO deleteUser(long id) throws NoSuchUserFoundException {
 		Optional<User> usrDel = uRepo.findById(id);
 		if (usrDel.isPresent())

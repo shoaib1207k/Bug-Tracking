@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +33,6 @@ public class AdminServiceImpl implements AdminService {
 	private ModelMapper modelMapper;
 
 	@Override
-	@Transactional
 	public AdminDTO createAdmin(AdminDTO adminDto) throws NoSuchUserFoundException, NoAdminRoleFoundException {
 		Optional<User> find = uRepo.findById(adminDto.getAdminId());
 		if (find.isPresent()) {
@@ -65,7 +62,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	@Transactional
 	public AdminDTO updateAdmin(long id, AdminDTO adminDto)
 			throws NoSuchAdminFoundException, NoAdminRoleFoundException {
 		Optional<Admin> admUpdate = aRepo.findById(id);
