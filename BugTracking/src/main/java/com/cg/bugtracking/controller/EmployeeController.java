@@ -39,7 +39,7 @@ public class EmployeeController {
 		return new ResponseEntity<>(empService.getEmployeeById(id), HttpStatus.FOUND);
 	}
 	
-	@PostMapping("/employee/{id}")
+	@PutMapping("/employee/{id}")
 	public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id")long id, @Valid @RequestBody EmployeeDTO empDTO) throws NoSuchEmployeeFoundException, NoSuchProjectFoundException{
 		return new ResponseEntity<>(empService.updateEmployee(id, empDTO), HttpStatus.OK);
 	}

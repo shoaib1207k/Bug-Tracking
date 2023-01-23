@@ -10,7 +10,7 @@ import com.cg.bugtracking.exception.NoSuchUserFoundException;
 
 public interface EmployeeService {
 
-	EmployeeDTO createEmployee(EmployeeDTO empDTO) throws NoAdminRoleFoundException, NoSuchUserFoundException; 
+	EmployeeDTO createEmployee(EmployeeDTO empDTO) throws NoAdminRoleFoundException, NoSuchUserFoundException;
 
 	EmployeeDTO getEmployeeById(long empId) throws NoSuchEmployeeFoundException;
 
