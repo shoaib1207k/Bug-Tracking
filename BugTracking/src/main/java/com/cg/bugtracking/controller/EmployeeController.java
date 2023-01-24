@@ -30,9 +30,9 @@ public class EmployeeController {
 
 
 	
-	@GetMapping("/{adminID}")
-	public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
-		return new ResponseEntity<>(empService.getAllEmployees(), HttpStatus.OK);
+	@GetMapping
+	public ResponseEntity<List<EmployeeDTO>> getAllEmployees(@PathVariable("adminId") long adminId) throws NoAdminRoleFoundException{
+		return new ResponseEntity<>(empService.getAllEmployees(adminId), HttpStatus.OK);
 	}
 
 	@GetMapping("/{empId}")
