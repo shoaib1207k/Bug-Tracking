@@ -2,11 +2,14 @@ package com.cg.bugtracking.entity;
 
 
 
+import javax.persistence.CascadeType;
+
 //import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,7 +26,7 @@ public class Project {
 	@Column(name="project_name", nullable = false)
 	private String projName;
 	
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Employee projManager;
 	
 	@Column(name = "project_status", nullable = false)

@@ -1,12 +1,14 @@
 package com.cg.bugtracking.entity;
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
+
 
 
 @Entity
@@ -19,31 +21,42 @@ public class Employee {
 	private String empName;
 	private String email;
 	private String contact;
-	private long projId;
-	
+
+	@OneToMany(mappedBy = "projManager")
+	private List<Project> projList;
 	public Employee() {}
 	
-	public Employee(long empId, String empName, String email, String contact, long projId) {
+	public Employee(long empId, String empName, String email, String contact, List<Project> projList) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
 		this.email = email;
 		this.contact = contact;
-		this.projId	= projId;
+//		this.projId	= projId;
+		this.projList = projList;
 	}
 	
 	
-	public long getProjId() {
-		return projId;
-	}
-
-	public void setProjId(long projId) {
-		this.projId = projId;
-	}
+	
+//	public long getProjId() {
+//		return projId;
+//	}
+//
+//	public void setProjId(long projId) {
+//		this.projId = projId;
+//	}
 
 	public long getEmpId() {
 		return empId;
 	}
+	public List<Project> getProjList() {
+		return projList;
+	}
+
+	public void setProjList(List<Project> projList) {
+		this.projList = projList;
+	}
+
 	public void setEmpId(long empId) {
 		this.empId = empId;
 	}
@@ -70,7 +83,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [empId=" + empId + ", empName=" + empName + ", email=" + email + ", contact=" + contact
-				+ ", projId=" + projId + "]";
+				+  "]";
 	}
 	
 }

@@ -80,9 +80,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 			empToUpdate.get().setEmpName(emp.getEmpName());
 			empToUpdate.get().setEmail(emp.getEmail());
 			empToUpdate.get().setContact(emp.getContact());
-			if (prjService.getProjectById(emp.getProjId()) != null) {
-				empToUpdate.get().setProjId(emp.getProjId());
-			}
+//			if (prjService.getProjectById(emp.getProjId()) != null) {
+				empToUpdate.get().setProjList(emp.getProjList());
+//			}
 			empRepo.save(empToUpdate.get());
 			return empDTO;
 		} else {
