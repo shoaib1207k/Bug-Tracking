@@ -1,7 +1,6 @@
 package com.cg.bugtracking.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -43,11 +42,10 @@ class TestAdminController {
 	@InjectMocks
 	private AdminController adminController;
 
+	private UserDTO userDto;
 	private AdminDTO adminDto;
 	private EmployeeDTO employeeDto;
 	private ProjectDTO projectDto;
-
-	UserDTO userDto;
 
 	@BeforeEach
 	public void init() {
@@ -104,35 +102,35 @@ class TestAdminController {
 	}
 
 	@Test
-	void testFindAll() {
+	void testFindAll() throws NotAdminException {
 		List<AdminDTO> adminList = new ArrayList<>();
 		adminList.add(adminDto);
-		when(adminService.findAllAdmins()).thenReturn(adminList);
-		ResponseEntity<List<AdminDTO>> response = adminController.getAllAdmins();
+		when(adminService.findAllAdmins(1)).thenReturn(adminList);
+		ResponseEntity<List<AdminDTO>> response = adminController.getAllAdmins(1);
 		assertEquals(HttpStatus.FOUND, response.getStatusCode());
 		assertEquals(adminList.size(), response.getBody().size());
 	}
 
 	@Test
-	void testFindById() throws NoSuchAdminFoundException {
-		when(adminService.findAdminById(anyLong())).thenReturn(adminDto);
-		ResponseEntity<AdminDTO> response = adminController.getById(1);
+	void testFindById() throws NoSuchAdminFoundException, NotAdminException {
+		when(adminService.findAdminById(1, 1)).thenReturn(adminDto);
+		ResponseEntity<AdminDTO> response = adminController.getById(1, 1);
 		assertEquals(HttpStatus.FOUND, response.getStatusCode());
 		assertEquals(adminDto, response.getBody());
 	}
 
 	@Test
-	void testUpdate() throws NoSuchAdminFoundException, NoAdminRoleFoundException {
-		when(adminService.updateAdmin(1, adminDto)).thenReturn(adminDto);
-		ResponseEntity<AdminDTO> response = adminController.updateAdmin(adminDto,1);
+	void testUpdate() throws NoSuchAdminFoundException, NoAdminRoleFoundException, NotAdminException {
+		when(adminService.updateAdmin(1, adminDto, 1)).thenReturn(adminDto);
+		ResponseEntity<AdminDTO> response = adminController.updateAdmin(adminDto,1, 1);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(adminDto, response.getBody());
 	}
 
 	@Test
-	void testRemove() throws NoSuchAdminFoundException {
-		when(adminService.deleteAdmin(anyLong())).thenReturn(adminDto);
-		ResponseEntity<AdminDTO> response = adminController.deleteAdmin(1);
+	void testRemove() throws NoSuchAdminFoundException, NotAdminException {
+		when(adminService.deleteAdmin(1, 1)).thenReturn(adminDto);
+		ResponseEntity<AdminDTO> response = adminController.deleteAdmin(1, 1);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(adminDto, response.getBody());
 	}
