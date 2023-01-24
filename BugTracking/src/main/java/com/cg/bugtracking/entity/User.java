@@ -18,7 +18,12 @@ public class User {
 
 	// if admin, returns true
 	public boolean checkAdmin() {
-		return (getRole().equals("admin"));
+		return (getRole().equalsIgnoreCase("admin"));
+	}
+
+	// if employee, returns true
+	public boolean checkEmployee() {
+		return (getRole().equalsIgnoreCase("employee"));
 	}
 
 	public User() {
