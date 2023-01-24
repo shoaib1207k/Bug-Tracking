@@ -87,7 +87,7 @@ class TestAdminController {
 
 	@Test
 	void testCreateProject() {
-		Employee emp = new Employee();
+		EmployeeDTO emp = new EmployeeDTO();
 		emp.setEmpId(userDto.getUserId());
 		emp.setEmpName("Rahul");
 		emp.setEmail("rahul@mail.com");
