@@ -11,13 +11,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.cg.bugtracking.dto.AdminDTO;
 import com.cg.bugtracking.dto.EmployeeDTO;
+import com.cg.bugtracking.entity.Admin;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
@@ -25,20 +28,24 @@ import com.cg.bugtracking.exception.NoSuchUserFoundException;
 import com.cg.bugtracking.service.EmployeeService;
 
 @ExtendWith(MockitoExtension.class)
-@WebMvcTest(EmployeeController.class)
 class TestEmployeeController {
 
-	@MockBean
+	@Mock
 	private EmployeeService empService;
 
 	@InjectMocks
 	private EmployeeController empController;
 
 	private EmployeeDTO empDTO;
+	private AdminDTO adminDTO;
 	private List<EmployeeDTO> empDTOList;
 
 	@BeforeEach
 	public void setUp() {
+		adminDTO = new AdminDTO();
+		adminDTO.setAdminId(11);
+		adminDTO.setAdminName("Rahul");
+		adminDTO.setAdminContact("1234567890");
 
 		empDTO = new EmployeeDTO();
 		empDTO.setEmpId(1);
@@ -52,31 +59,25 @@ class TestEmployeeController {
 	}
 
 
-//	@Test
-//	void testCreateEmployee() {
-//		try {
-//			when(empService.createEmployee(empDTO)).thenReturn(empDTO);
-//			ResponseEntity<EmployeeDTO> response = empController.createEmployee(empDTO);
-//			assertEquals(HttpStatus.CREATED, response.getStatusCode());
-//		} catch (NoAdminRoleFoundException | NoSuchUserFoundException e) {
-//			fail("Unexpected exception");
-//		}
-//	}
-
 	@Test
 	void testGetAllEmployees()  {
-		when(empService.getAllEmployees()).thenReturn(empDTOList);
-		ResponseEntity<List<EmployeeDTO>> response = empController.getAllEmployees();		
-		assertEquals(HttpStatus.OK, response.getStatusCode());
+		ResponseEntity<List<EmployeeDTO>> response;
+		try {
+			when(empService.getAllEmployees(11)).thenReturn(empDTOList);
+			response = empController.getAllEmployees(11);
+			assertEquals(HttpStatus.OK, response.getStatusCode());
+		} catch (NoAdminRoleFoundException e) {
+			fail("Unexpected exception");
+		}		
 	}
 
 	@Test
 	void testGetEmployeeById() {
 		try {
-			when(empService.getEmployeeById(1)).thenReturn(empDTO);
-			ResponseEntity<EmployeeDTO> response = empController.getEmployeeById(1);
+			when(empService.getEmployeeById(1,11)).thenReturn(empDTO);
+			ResponseEntity<EmployeeDTO> response = empController.getEmployeeById(1,11);
 			assertEquals(HttpStatus.FOUND, response.getStatusCode());
-		} catch (NoSuchEmployeeFoundException e) {
+		} catch (NoSuchEmployeeFoundException | NoAdminRoleFoundException e) {
 			fail("Unexpected exception");
 		}
 	}
@@ -85,10 +86,10 @@ class TestEmployeeController {
 	void testUpdateEmployee() {
 		empDTO.setContact("987456321");
 		try {
-			when(empService.updateEmployee(1, empDTO)).thenReturn(empDTO);
-			ResponseEntity<EmployeeDTO> response = empController.updateEmployee(1, empDTO);
+			when(empService.updateEmployee(1, empDTO, 11)).thenReturn(empDTO);
+			ResponseEntity<EmployeeDTO> response = empController.updateEmployee(1, empDTO,11);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchEmployeeFoundException | NoSuchProjectFoundException e) {
+		} catch (NoSuchEmployeeFoundException | NoSuchProjectFoundException | NoAdminRoleFoundException e) {
 			fail("Unexpected exception");
 		}
 	}
@@ -96,10 +97,10 @@ class TestEmployeeController {
 	@Test
 	void testDeleteEmployee() {
 		try {
-			when(empService.deleteEmployee(1)).thenReturn(empDTO);
-			ResponseEntity<EmployeeDTO> response = empController.deleteEmployee(1);
+			when(empService.deleteEmployee(1,11)).thenReturn(empDTO);
+			ResponseEntity<EmployeeDTO> response = empController.deleteEmployee(1,11);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchEmployeeFoundException e) {
+		} catch (NoSuchEmployeeFoundException | NoAdminRoleFoundException e) {
 			fail("Unexpected exception");
 		}
 	}

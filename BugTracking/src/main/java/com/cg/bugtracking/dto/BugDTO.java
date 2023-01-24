@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import com.cg.bugtracking.entity.Project;
-//import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 public class BugDTO {
 	
