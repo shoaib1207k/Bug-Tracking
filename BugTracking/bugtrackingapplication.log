@@ -4421,3 +4421,41 @@ Caused by: java.lang.ClassNotFoundException: ResponseEnity
 ""2023-01-24 [http-nio-8080-exec-4] INFO  c.c.b.service.AdminServiceImpl - Returning all projects
 "
 
+"2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on LAPTOP-V3O974T0 with PID 13760 (C:\Users\user\git\Bug-Tracking\BugTracking\target\classes started by Draken in C:\Users\user\git\Bug-Tracking\BugTracking)
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - No active profile set, falling back to 1 default profile: "default"
+""2023-01-24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+""2023-01-24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 74 ms. Found 5 JPA repository interfaces.
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+""2023-01-24 [restartedMain] INFO  o.a.c.c.C.[.[.[/bugtracking] - Initializing Spring embedded WebApplicationContext
+""2023-01-24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2509 ms
+""2023-01-24 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2023-01-24 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.14.Final
+""2023-01-24 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2023-01-24 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+""2023-01-24 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2023-01-24 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2023-01-24 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/bugtracking'
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Started BugTrackingApplication in 8.87 seconds (JVM running for 33.288)
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Bug Tracking Application started...
+""2023-01-24 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/bugtracking] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+""2023-01-24 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+""2023-01-24 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+""2023-01-24 [http-nio-8080-exec-8] INFO  c.c.b.service.UserServiceImpl - Saving user
+""2023-01-24 [http-nio-8080-exec-8] INFO  c.c.b.service.UserServiceImpl - Saved. Returning user
+""2023-01-24 [http-nio-8080-exec-9] INFO  c.c.b.service.AdminServiceImpl - Saving admin
+""2023-01-24 [http-nio-8080-exec-9] INFO  c.c.b.service.AdminServiceImpl - Saved. Returning admin
+""2023-01-24 [RMI TCP Connection(9)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+""2023-01-24 [RMI TCP Connection(9)-127.0.0.1] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+""2023-01-24 [RMI TCP Connection(9)-127.0.0.1] INFO  o.a.c.c.C.[.[.[/bugtracking] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+""2023-01-24 [RMI TCP Connection(9)-127.0.0.1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [RMI TCP Connection(9)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2023-01-24 [RMI TCP Connection(9)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+"
