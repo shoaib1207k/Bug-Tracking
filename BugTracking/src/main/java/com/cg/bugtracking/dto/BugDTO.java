@@ -5,6 +5,7 @@ import java.util.Date;
 import com.cg.bugtracking.entity.Employee;
 import com.cg.bugtracking.entity.Project;
 
+
 public class BugDTO {
 
 	private long bugId;
