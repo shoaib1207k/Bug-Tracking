@@ -66,8 +66,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<AdminDTO> findAllAdmins(long adminId) throws NotAdminException {
-		Optional<Admin> findAdmin = aRepo.findById(adminId);
-		if (findAdmin.isPresent()) {
+		if (aRepo.existsById(adminId)) {
 			LOG.info("Returning all admins");
 			return aRepo.findAll().stream().map(adm -> modelMapper.map(adm, AdminDTO.class))
 					.collect(Collectors.toList());
@@ -78,8 +77,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public AdminDTO findAdminById(long id, long adminId) throws NoSuchAdminFoundException, NotAdminException {
-		Optional<Admin> findAdmin = aRepo.findById(adminId);
-		if (findAdmin.isPresent()) {
+		if (aRepo.existsById(adminId)) {
 			Optional<Admin> adm = aRepo.findById(id);
 			if (adm.isPresent()) {
 				LOG.info("Returning admin using id");
@@ -98,8 +96,7 @@ public class AdminServiceImpl implements AdminService {
 			throws NoSuchAdminFoundException, NoAdminRoleFoundException, NotAdminException {
 		Optional<Admin> admUpdate = aRepo.findById(id);
 		Admin admin = modelMapper.map(adminDto, Admin.class);
-		Optional<Admin> findAdmin = aRepo.findById(adminId);
-		if (findAdmin.isPresent()) {
+		if (aRepo.existsById(adminId)) {
 			if (admUpdate.isPresent()) {
 				LOG.info("Admin present. Updating...");
 				admUpdate.get().setAdminName(admin.getAdminName());
@@ -121,8 +118,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public AdminDTO deleteAdmin(long id, long adminId) throws NoSuchAdminFoundException, NotAdminException {
 		Optional<Admin> admDel = aRepo.findById(id);
-		Optional<Admin> findAdmin = aRepo.findById(adminId);
-		if (findAdmin.isPresent()) {
+		if (aRepo.existsById(adminId)) {
 			if (admDel.isPresent()) {
 				LOG.info("Deleting...");
 				aRepo.delete(admDel.get());
