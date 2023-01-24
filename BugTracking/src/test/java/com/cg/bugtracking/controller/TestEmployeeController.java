@@ -25,6 +25,7 @@ import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.EmployeeService;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,7 +53,6 @@ class TestEmployeeController {
 		empDTO.setEmpName("Shoaib Khan");
 		empDTO.setEmail("sho@gmail.com");
 		empDTO.setContact("0123456789");
-//		empDTO.setProjId(11);
 
 		empDTOList = new ArrayList<>();
 		empDTOList.add(empDTO);
@@ -66,7 +66,7 @@ class TestEmployeeController {
 			when(empService.getAllEmployees(11)).thenReturn(empDTOList);
 			response = empController.getAllEmployees(11);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoAdminRoleFoundException e) {
+		} catch (NotAdminException e) {
 			fail("Unexpected exception");
 		}		
 	}
@@ -77,7 +77,7 @@ class TestEmployeeController {
 			when(empService.getEmployeeById(1,11)).thenReturn(empDTO);
 			ResponseEntity<EmployeeDTO> response = empController.getEmployeeById(1,11);
 			assertEquals(HttpStatus.FOUND, response.getStatusCode());
-		} catch (NoSuchEmployeeFoundException | NoAdminRoleFoundException e) {
+		} catch (NoSuchEmployeeFoundException | NotAdminException e) {
 			fail("Unexpected exception");
 		}
 	}
@@ -89,7 +89,7 @@ class TestEmployeeController {
 			when(empService.updateEmployee(1, empDTO, 11)).thenReturn(empDTO);
 			ResponseEntity<EmployeeDTO> response = empController.updateEmployee(1, empDTO,11);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchEmployeeFoundException | NoAdminRoleFoundException e) {
+		} catch (NoSuchEmployeeFoundException | NotAdminException e) {
 			fail("Unexpected exception");
 		}
 	}
@@ -100,7 +100,7 @@ class TestEmployeeController {
 			when(empService.deleteEmployee(1,11)).thenReturn(empDTO);
 			ResponseEntity<EmployeeDTO> response = empController.deleteEmployee(1,11);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchEmployeeFoundException | NoAdminRoleFoundException e) {
+		} catch (NoSuchEmployeeFoundException | NotAdminException e) {
 			fail("Unexpected exception");
 		}
 	}
