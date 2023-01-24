@@ -30,30 +30,31 @@ public class Project {
 	@Column(name="project_name", nullable = false)
 	private String projName;
 	
+	
+	@Column(name = "project_status", nullable = false)
+	private String projStatus;
+	
 	@Autowired
 	@ManyToOne
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private Employee projManager;
 	
-	@Column(name = "project_status", nullable = false)
-	private String projStatus;
-	
-//	@OneToMany
-//	private List<Bug> bugList;
-	
-	
 
 	public Project() {}
 
-	public Project(long projId, String projName, Employee projManager, String projStatus) {
+	public Project(long projId, String projName, String projStatus) {
 		super();
 		this.projId = projId;
 		this.projName = projName;
-		this.projManager = projManager;
 		this.projStatus = projStatus;
 //		this.bugList = bugList;
 	}
 
+	@Autowired
+	public Project(Employee emp) {
+		super();
+		this.projManager = emp;
+	}
 //	public List<Bug> getBugList() {
 //		return bugList;
 //	}

@@ -27,13 +27,19 @@ public class Employee {
 	private List<Project> projList;
 	public Employee() {}
 	
-	public Employee(long empId, String empName, String email, String contact, List<Project> projList) {
+	public Employee(long empId, String empName, String email, String contact) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
 		this.email = email;
 		this.contact = contact;
 //		this.projId	= projId;
+	}
+	public Employee(List<Project> projList) {
+		this.projList = projList;
+		for(Project project: projList) {
+			project.setProjManager(this);
+		}
 		this.projList = projList;
 	}
 	
