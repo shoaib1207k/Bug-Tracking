@@ -8,9 +8,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.bugtracking.dao.AdminRepository;
 import com.cg.bugtracking.dao.EmployeeRepository;
 import com.cg.bugtracking.dao.UserRepository;
 import com.cg.bugtracking.dto.EmployeeDTO;
+import com.cg.bugtracking.entity.Admin;
 import com.cg.bugtracking.entity.Employee;
 import com.cg.bugtracking.entity.User;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
@@ -35,21 +37,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
 	private UserRepository uRepo;
+	
+	@Autowired
+	private AdminRepository adminRepo;
 
 	@Override
-	public EmployeeDTO createEmployee(EmployeeDTO empDTO) throws NoAdminRoleFoundException, NoSuchUserFoundException {
+	public EmployeeDTO createEmployee(EmployeeDTO empDTO, long adminID) throws NoAdminRoleFoundException, NoSuchUserFoundException {
 		
-		Optional<User> find = uRepo.findById(empDTO.getEmpId());
-      if (find.isPresent()) {
-        if (find.get().checkAdmin()) {
+	  Optional<User> user = uRepo.findById(empDTO.getEmpId());
+	  
+	  Optional<Admin> findAdmin = adminRepo.findById(adminID);
+	  
+	  if (findAdmin.isPresent()) {
+		  if (user.isPresent()) {
             Employee emp = modelMapper.map(empDTO, Employee.class);
             empRepo.save(emp);
             return empDTO;
         } else {
-            throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+        	throw new NoSuchUserFoundException(NO_USER_FOUND);
         } 
      }else {
-        throw new NoSuchUserFoundException(NO_USER_FOUND);
+        throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
     }
         
 	}

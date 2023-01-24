@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.bugtracking.dto.EmployeeDTO;
@@ -22,12 +23,13 @@ import com.cg.bugtracking.service.EmployeeService;
 
 
 @RestController
+@RequestMapping("/employee")
 public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService empService;
 	
-	@GetMapping("/employees")
+	@GetMapping("/{adminID}")
 	public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
 		return new ResponseEntity<>(empService.getAllEmployees(), HttpStatus.OK);
 	}
