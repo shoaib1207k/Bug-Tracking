@@ -17,7 +17,7 @@ public class ProjectDTO {
 	private String projName;
 	
 	
-	private Employee projManager;
+	private EmployeeDTO projManager;
 	
 	@NotBlank(message = "Status is required")
 	@Size(max = 15, min = 2, message = "atleast 2 characters")
@@ -43,11 +43,11 @@ public class ProjectDTO {
 		this.projName = projName;
 	}
 
-	public Employee getProjManager() {
+	public EmployeeDTO getProjManager() {
 		return projManager;
 	}
 
-	public void setProjManager(Employee projManager) {
+	public void setProjManager(EmployeeDTO projManager) {
 		this.projManager = projManager;
 	}
 
