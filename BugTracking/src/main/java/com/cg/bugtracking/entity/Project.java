@@ -14,12 +14,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
 @Table(name= "projects")
+@Scope("prototype")
 public class Project {
 
 	@Id

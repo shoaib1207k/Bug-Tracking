@@ -10,10 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Scope;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-@Entity
+
 @Table(name="employees")
+@Scope("prototype")
+@Entity
 public class Employee {
 	
 	@Id
@@ -24,6 +29,7 @@ public class Employee {
 	private String contact;
 
 	@OneToMany(mappedBy = "projManager",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Project> projList;
 	public Employee() {}
 	
@@ -36,11 +42,9 @@ public class Employee {
 //		this.projId	= projId;
 	}
 	public Employee(List<Project> projList) {
-		this.projList = projList;
 		for(Project project: projList) {
 			project.setProjManager(this);
 		}
-		this.projList = projList;
 	}
 	
 	
@@ -62,6 +66,9 @@ public class Employee {
 
 	public void setProjList(List<Project> projList) {
 		this.projList = projList;
+		for(Project project: projList) {
+			project.setProjManager(this);
+		}
 	}
 
 	public void setEmpId(long empId) {
