@@ -1,10 +1,6 @@
 package com.cg.bugtracking.controller;
 
 import java.util.List;
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,27 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bugtracking.dto.BugDTO;
 
 import com.cg.bugtracking.exception.NoSuchBugFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.BugService;
-
-
-
-
-
 
 @RestController
 public class BugController {
 	
-
-	
 	@Autowired
 	private BugService bugService;
 	
-	@PostMapping("/bug")
-	public ResponseEntity<BugDTO> createBug(@RequestBody BugDTO bugDTO) {
-		
-		return new ResponseEntity<>(bugService.createBug(bugDTO), HttpStatus.CREATED);
-	}
-	
+
 	
 	@PostMapping("/bug/{id}")
 	public ResponseEntity<BugDTO> updateBug(@PathVariable("id")long id, @RequestBody BugDTO bugDTO) throws NoSuchBugFoundException{
@@ -47,9 +32,9 @@ public class BugController {
    }
 	
 	@GetMapping("/bug/{id}")
-	public ResponseEntity<BugDTO> getBug(@PathVariable("id") long id) throws NoSuchBugFoundException{
+	public ResponseEntity<BugDTO> getBug(@PathVariable("id") long id,@PathVariable("adminId")long adminId) throws NoSuchBugFoundException, NotAdminException{
 		
-		return new ResponseEntity<>(bugService.getBug(id), HttpStatus.FOUND);
+		return new ResponseEntity<>(bugService.getBug(id,adminId), HttpStatus.FOUND);
 	}
 
 	@GetMapping("/bugs")
@@ -57,8 +42,24 @@ public class BugController {
 		return new ResponseEntity<>(bugService.getAllBug(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/bugstatus")
+	public ResponseEntity<List<BugDTO>> getAllBugStatus(@PathVariable String status){
+		return new ResponseEntity<>(bugService.getAllBugStatus(status), HttpStatus.OK);
+	}
+	
+	
 	@DeleteMapping("/bug/{id}")
 	public ResponseEntity<BugDTO> deleteBug(@PathVariable("id")long id) throws NoSuchBugFoundException{
 		return new ResponseEntity<>(bugService.deleteBug(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/bugbyproject/{id}")
+	public ResponseEntity<List<BugDTO>> getAllBugsByProjectId(@PathVariable long id){
+		return new ResponseEntity<>(bugService.getAllBugsByProjectId(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/bugbyemployee")
+	public ResponseEntity<List<BugDTO>> findBugByEmpName(@PathVariable String empName){
+		return new ResponseEntity<>(bugService.findBugByEmpName(empName), HttpStatus.OK);
 	}
 }

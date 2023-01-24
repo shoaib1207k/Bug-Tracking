@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bugtracking.dto.AdminDTO;
 import com.cg.bugtracking.dto.EmployeeDTO;
 import com.cg.bugtracking.dto.ProjectDTO;
+import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.AdminService;
 import com.cg.bugtracking.service.EmployeeService;
 import com.cg.bugtracking.service.ProjectService;
@@ -42,14 +44,15 @@ public class AdminController {
 
 	@PostMapping
 	public ResponseEntity<AdminDTO> createAdmin(@Valid @RequestBody AdminDTO adminDto)
-			throws NoAdminRoleFoundException, NoSuchUserFoundException {
+			throws NoAdminRoleFoundException, NoSuchUserFoundException, IdAlreadyExistsException {
 		return new ResponseEntity<>(aService.createAdmin(adminDto), HttpStatus.CREATED);
 	}
 
-	@PostMapping("/employee")
-	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO)
-			throws NoAdminRoleFoundException, NoSuchUserFoundException {
-		return new ResponseEntity<>(empService.createEmployee(empDTO), HttpStatus.CREATED);
+	@PostMapping("/{adminId}/employee")
+	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO,
+			@PathVariable("adminId") long adminId)
+			throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException {
+		return new ResponseEntity<>(empService.createEmployee(empDTO, adminId), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/project")
@@ -59,25 +62,28 @@ public class AdminController {
 
 	// admin CRUD
 
-	@GetMapping
-	public ResponseEntity<List<AdminDTO>> getAllAdmins() {
-		return new ResponseEntity<>(aService.findAllAdmins(), HttpStatus.OK);
+	@GetMapping("/{adminId}")
+	public ResponseEntity<List<AdminDTO>> getAllAdmins(@PathVariable("adminId") long adminId) throws NotAdminException {
+		return new ResponseEntity<>(aService.findAllAdmins(adminId), HttpStatus.FOUND);
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<AdminDTO> getById(@PathVariable long id) throws NoSuchAdminFoundException {
-		return new ResponseEntity<>(aService.findAdminById(id), HttpStatus.FOUND);
+	@GetMapping("/{adminId}/{id}")
+	public ResponseEntity<AdminDTO> getById(@PathVariable long id, @PathVariable("adminId") long adminId)
+			throws NoSuchAdminFoundException, NotAdminException {
+		return new ResponseEntity<>(aService.findAdminById(id, adminId), HttpStatus.FOUND);
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<AdminDTO> updateAdmin(@Valid @RequestBody AdminDTO adminDto, @PathVariable long id)
-			throws NoSuchAdminFoundException, NoAdminRoleFoundException {
-		return new ResponseEntity<>(aService.updateAdmin(id, adminDto), HttpStatus.OK);
+	@PutMapping("/{adminId}/{id}")
+	public ResponseEntity<AdminDTO> updateAdmin(@Valid @RequestBody AdminDTO adminDto, @PathVariable long id,
+			@PathVariable("adminId") long adminId)
+			throws NoSuchAdminFoundException, NoAdminRoleFoundException, NotAdminException {
+		return new ResponseEntity<>(aService.updateAdmin(id, adminDto, adminId), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<AdminDTO> deleteAdmin(@PathVariable long id) throws NoSuchAdminFoundException {
-		return new ResponseEntity<>(aService.deleteAdmin(id), HttpStatus.OK);
+	@DeleteMapping("/{adminId}/{id}")
+	public ResponseEntity<AdminDTO> deleteAdmin(@PathVariable long id, @PathVariable("adminId") long adminId)
+			throws NoSuchAdminFoundException, NotAdminException {
+		return new ResponseEntity<>(aService.deleteAdmin(id, adminId), HttpStatus.OK);
 	}
 
 }

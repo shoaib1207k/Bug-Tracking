@@ -7,16 +7,19 @@ import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 
 public interface EmployeeService {
 
-	EmployeeDTO createEmployee(EmployeeDTO empDTO) throws NoAdminRoleFoundException, NoSuchUserFoundException;
+	EmployeeDTO createEmployee(EmployeeDTO empDTO, long adminId) throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException;
 
-	EmployeeDTO getEmployeeById(long empId) throws NoSuchEmployeeFoundException;
+	EmployeeDTO getEmployeeById(long empId, long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException;
 
-	List<EmployeeDTO> getAllEmployees();
+	List<EmployeeDTO> getAllEmployees(long adminId) throws NoAdminRoleFoundException;
 
-	EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO) throws NoSuchEmployeeFoundException,NoSuchProjectFoundException;
+	EmployeeDTO updateEmployee(long empId, EmployeeDTO empDTO, long adminId) throws NoSuchEmployeeFoundException,NoAdminRoleFoundException;
 
-	EmployeeDTO deleteEmployee(long id) throws NoSuchEmployeeFoundException;
+	EmployeeDTO deleteEmployee(long empId, long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException;
+	
+	List<EmployeeDTO> getEmployeeByProjectId(long adminId, long projId) throws NoAdminRoleFoundException;
 }
