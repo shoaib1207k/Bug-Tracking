@@ -32,7 +32,7 @@ public class UserController {
 
 	@Autowired
 	private BugService bugService;
-	
+
 	// create (user, bug)
 
 	@PostMapping
@@ -46,10 +46,10 @@ public class UserController {
 	}
 
 	// user CRUD
-	
+
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> getAllUsers() {
-		return new ResponseEntity<>(uService.findAllUsers(), HttpStatus.OK);
+		return new ResponseEntity<>(uService.findAllUsers(), HttpStatus.FOUND);
 	}
 
 	@GetMapping("/{id}")

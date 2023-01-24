@@ -61,7 +61,7 @@ public class AdminController {
 
 	@GetMapping
 	public ResponseEntity<List<AdminDTO>> getAllAdmins() {
-		return new ResponseEntity<>(aService.findAllAdmins(), HttpStatus.OK);
+		return new ResponseEntity<>(aService.findAllAdmins(), HttpStatus.FOUND);
 	}
 
 	@GetMapping("/{id}")
