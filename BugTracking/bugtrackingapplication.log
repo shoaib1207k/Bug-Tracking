@@ -1,3 +1,176 @@
+
+2023-01-24 01:16:35.653  INFO 3404 --- [main] c.c.b.controller.ProjectControllerTest   : Starting ProjectControllerTest using Java 17.0.5 on DESKTOP-ORNCG6R with PID 3404 (started by Lokesh in C:\Users\lokes\git\Bug-Tracking\BugTracking)
+2023-01-24 01:16:35.655  INFO 3404 --- [main] c.c.b.controller.ProjectControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2023-01-24 01:16:37.471  INFO 3404 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-01-24 01:16:37.471  INFO 3404 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-01-24 01:16:37.474  INFO 3404 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2023-01-24 01:16:37.512  INFO 3404 --- [main] c.c.b.controller.ProjectControllerTest   : Started ProjectControllerTest in 2.383 seconds (JVM running for 4.373)
+2023-01-24 01:17:11.502  INFO 19856 --- [main] c.c.b.controller.ProjectControllerTest   : Starting ProjectControllerTest using Java 17.0.5 on DESKTOP-ORNCG6R with PID 19856 (started by Lokesh in C:\Users\lokes\git\Bug-Tracking\BugTracking)
+2023-01-24 01:17:11.505  INFO 19856 --- [main] c.c.b.controller.ProjectControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2023-01-24 01:17:13.210  INFO 19856 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-01-24 01:17:13.210  INFO 19856 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-01-24 01:17:13.213  INFO 19856 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2023-01-24 01:17:13.253  INFO 19856 --- [main] c.c.b.controller.ProjectControllerTest   : Started ProjectControllerTest in 2.238 seconds (JVM running for 3.999)
+"2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on DESKTOP-ORNCG6R with PID 26440 (C:\Users\lokes\git\Bug-Tracking\BugTracking\target\classes started by Lokesh in C:\Users\lokes\git\Bug-Tracking\BugTracking)
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - No active profile set, falling back to 1 default profile: "default"
+""2023-01-24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+""2023-01-24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 94 ms. Found 5 JPA repository interfaces.
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+""2023-01-24 [restartedMain] INFO  o.a.c.c.C.[.[.[/bugtracking] - Initializing Spring embedded WebApplicationContext
+""2023-01-24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3128 ms
+""2023-01-24 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2023-01-24 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.14.Final
+""2023-01-24 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2023-01-24 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "bugs" does not exist, skipping
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "projects" does not exist, skipping
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "admins" does not exist, skipping
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "bugs" does not exist, skipping
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "employees" does not exist, skipping
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "projects" does not exist, skipping
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""2023-01-24 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "users" does not exist, skipping
+""2023-01-24 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2023-01-24 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2023-01-24 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/bugtracking'
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Started BugTrackingApplication in 9.606 seconds (JVM running for 10.575)
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Bug Tracking Application started...
+""2023-01-24 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+""2023-01-24 [Thread-4] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+""2023-01-24 [Thread-4] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [Thread-4] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2023-01-24 [Thread-4] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on DESKTOP-ORNCG6R with PID 26440 (C:\Users\lokes\git\Bug-Tracking\BugTracking\target\classes started by Lokesh in C:\Users\lokes\git\Bug-Tracking\BugTracking)
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - No active profile set, falling back to 1 default profile: "default"
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 51 ms. Found 5 JPA repository interfaces.
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+""2023-01-24 [restartedMain] INFO  o.a.c.c.C.[.[.[/bugtracking] - Initializing Spring embedded WebApplicationContext
+""2023-01-24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1308 ms
+""2023-01-24 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+""2023-01-24 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+""2023-01-24 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2023-01-24 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2023-01-24 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/bugtracking'
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Started BugTrackingApplication in 3.134 seconds (JVM running for 979.122)
+""2023-01-24 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Bug Tracking Application started...
+""2023-01-24 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+""2023-01-24 [Thread-7] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+""2023-01-24 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+""2023-01-24 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on DESKTOP-ORNCG6R with PID 26440 (C:\Users\lokes\git\Bug-Tracking\BugTracking\target\classes started by Lokesh in C:\Users\lokes\git\Bug-Tracking\BugTracking)
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - No active profile set, falling back to 1 default profile: "default"
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 85 ms. Found 5 JPA repository interfaces.
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+""2023-01-24 [restartedMain] INFO  o.a.c.c.C.[.[.[/bugtracking] - Initializing Spring embedded WebApplicationContext
+""2023-01-24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 861 ms
+""2023-01-24 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+""2023-01-24 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+""2023-01-24 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2023-01-24 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2023-01-24 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/bugtracking'
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Started BugTrackingApplication in 2.444 seconds (JVM running for 996.011)
+""2023-01-24 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Bug Tracking Application started...
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on DESKTOP-ORNCG6R with PID 8184 (C:\Users\lokes\git\Bug-Tracking\BugTracking\target\classes started by Lokesh in C:\Users\lokes\git\Bug-Tracking\BugTracking)
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - No active profile set, falling back to 1 default profile: "default"
+""2023-01-24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+""2023-01-24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 94 ms. Found 5 JPA repository interfaces.
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+""2023-01-24 [restartedMain] INFO  o.a.c.c.C.[.[.[/bugtracking] - Initializing Spring embedded WebApplicationContext
+""2023-01-24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3141 ms
+""2023-01-24 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2023-01-24 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.14.Final
+""2023-01-24 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2023-01-24 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+""2023-01-24 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2023-01-24 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2023-01-24 [restartedMain] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+""2023-01-24 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+""2023-01-24 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+""2023-01-24 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+""2023-01-24 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+""2023-01-24 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+""2023-01-24 [Thread-11] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+""2023-01-24 [Thread-11] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+""2023-01-24 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on DESKTOP-ORNCG6R with PID 26440 (C:\Users\lokes\git\Bug-Tracking\BugTracking\target\classes started by Lokesh in C:\Users\lokes\git\Bug-Tracking\BugTracking)
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - No active profile set, falling back to 1 default profile: "default"
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 5 JPA repository interfaces.
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+""2023-01-24 [restartedMain] INFO  o.a.c.c.C.[.[.[/bugtracking] - Initializing Spring embedded WebApplicationContext
+""2023-01-24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 692 ms
+""2023-01-24 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+""2023-01-24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+""2023-01-24 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+""2023-01-24 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2023-01-24 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2023-01-24 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2023-01-24 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/bugtracking'
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Started BugTrackingApplication in 2.233 seconds (JVM running for 1065.218)
+""2023-01-24 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Bug Tracking Application started...
+
 "2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on izayazxd with PID 4056 (C:\Users\mwftr\git\Bug-Tracking\BugTracking\target\classes started by mwftr in C:\Users\mwftr\git\Bug-Tracking\BugTracking)
 ""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - No active profile set, falling back to 1 default profile: "default"
 ""2023-01-24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
@@ -758,6 +931,7 @@ Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo can
 ""2023-01-24 [RMI TCP Connection(10)-127.0.0.1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 ""2023-01-24 [RMI TCP Connection(10)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
 ""2023-01-24 [RMI TCP Connection(10)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+
 ""2023-01-24 [main] INFO  c.c.b.BugTrackingApplicationTests - Starting BugTrackingApplicationTests using Java 17.0.5 on LAPTOP-V3O974T0 with PID 4780 (started by Draken in C:\Users\user\git\Bug-Tracking\BugTracking)
 ""2023-01-24 [main] INFO  c.c.b.BugTrackingApplicationTests - No active profile set, falling back to 1 default profile: "default"
 ""2023-01-24 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
@@ -1243,15 +1417,23 @@ Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo can
 	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
 	... 99 common frames omitted
 "2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on LAPTOP-V3O974T0 with PID 11656 (C:\Users\user\git\Bug-Tracking\BugTracking\target\classes started by Draken in C:\Users\user\git\Bug-Tracking\BugTracking)
+
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on DESKTOP-ORNCG6R with PID 20940 (C:\Users\lokes\git\Bug-Tracking\BugTracking\target\classes started by Lokesh in C:\Users\lokes\git\Bug-Tracking\BugTracking)
+
 ""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - No active profile set, falling back to 1 default profile: "default"
 ""2023-01-24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
 ""2023-01-24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
 ""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+
 ""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 61 ms. Found 5 JPA repository interfaces.
+
+""2023-01-24 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 182 ms. Found 5 JPA repository interfaces.
+
 ""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
 ""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
 ""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
 ""2023-01-24 [restartedMain] INFO  o.a.c.c.C.[.[.[/bugtracking] - Initializing Spring embedded WebApplicationContext
+
 ""2023-01-24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1690 ms
 ""2023-01-24 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
 ""2023-01-24 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.14.Final
@@ -3341,6 +3523,9 @@ Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo can
 ""2023-01-24 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
 ""2023-01-24 [restartedMain] INFO  o.a.c.c.C.[.[.[/bugtracking] - Initializing Spring embedded WebApplicationContext
 ""2023-01-24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5226 ms
+
+""2023-01-24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4448 ms
+
 ""2023-01-24 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
 ""2023-01-24 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.14.Final
 ""2023-01-24 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
@@ -3352,6 +3537,7 @@ Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo can
 ""2023-01-24 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 ""2023-01-24 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
 ""2023-01-24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/bugtracking'
+
 ""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Started BugTrackingApplication in 14.718 seconds (JVM running for 15.842)
 ""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Bug Tracking Application started...
 ""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on LAPTOP-V3O974T0 with PID 14024 (C:\Users\user\git\Bug-Tracking\BugTracking\target\classes started by Draken in C:\Users\user\git\Bug-Tracking\BugTracking)
@@ -4421,6 +4607,7 @@ Caused by: java.lang.ClassNotFoundException: ResponseEnity
 ""2023-01-24 [http-nio-8080-exec-4] INFO  c.c.b.service.AdminServiceImpl - Returning all projects
 "
 
+<<<<<<< HEAD
 "2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Starting BugTrackingApplication using Java 17.0.5 on LAPTOP-V3O974T0 with PID 13760 (C:\Users\user\git\Bug-Tracking\BugTracking\target\classes started by Draken in C:\Users\user\git\Bug-Tracking\BugTracking)
 ""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - No active profile set, falling back to 1 default profile: "default"
 ""2023-01-24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
@@ -4459,3 +4646,13 @@ Caused by: java.lang.ClassNotFoundException: ResponseEnity
 ""2023-01-24 [RMI TCP Connection(9)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 ""2023-01-24 [RMI TCP Connection(9)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
 "
+=======
+
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Started BugTrackingApplication in 13.05 seconds (JVM running for 14.443)
+""2023-01-24 [restartedMain] INFO  c.c.b.BugTrackingApplication - Bug Tracking Application started...
+""2023-01-24 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/bugtracking] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+""2023-01-24 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+""2023-01-24 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+"
+
+>>>>>>> branch 'Shoaib-Employee' of https://github.com/shoaib12k/Bug-Tracking.git
