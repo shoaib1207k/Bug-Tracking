@@ -68,11 +68,9 @@ class TestUserController {
 		emp.setEmpName("Rahul");
 		emp.setEmail("rahul@mail.com");
 		emp.setContact("1234567890");
-		emp.setProjId(111);
 		pro.setProjId(111);
 		pro.setProjName("Java Project");
 		pro.setProjStatus("open");
-		pro.setProjManager(emp);
 		bugDto.setProject(pro);
 	}
 
