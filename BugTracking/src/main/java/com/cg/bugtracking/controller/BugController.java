@@ -58,7 +58,7 @@ public class BugController {
 	}
 	
 	@DeleteMapping("/bug/{id}")
-	public ResponseEntity<BugDTO> deleteEmployee(@PathVariable("id")long id) throws NoSuchBugFoundException{
+	public ResponseEntity<BugDTO> deleteBug(@PathVariable("id")long id) throws NoSuchBugFoundException{
 		return new ResponseEntity<>(bugService.deleteBug(id), HttpStatus.OK);
 	}
 }
