@@ -20,4 +20,6 @@ public interface EmployeeService {
 	EmployeeDTO updateEmployee(long empId, EmployeeDTO empDTO, long adminId) throws NoSuchEmployeeFoundException,NoSuchProjectFoundException,NoAdminRoleFoundException;
 
 	EmployeeDTO deleteEmployee(long empId, long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException;
+	
+	List<EmployeeDTO> getEmployeeByProjectId(long adminId, long projId) throws NoAdminRoleFoundException;
 }
