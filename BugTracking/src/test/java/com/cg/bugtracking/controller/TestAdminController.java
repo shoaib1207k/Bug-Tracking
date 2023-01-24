@@ -19,7 +19,6 @@ import com.cg.bugtracking.dto.AdminDTO;
 import com.cg.bugtracking.dto.EmployeeDTO;
 import com.cg.bugtracking.dto.ProjectDTO;
 import com.cg.bugtracking.dto.UserDTO;
-import com.cg.bugtracking.entity.Employee;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
@@ -64,7 +63,6 @@ class TestAdminController {
 		employeeDto.setEmpName("Rahul");
 		employeeDto.setEmail("rahul@mail.com");
 		employeeDto.setContact("1234567890");
-		employeeDto.setProjId(111);
 	}
 
 	@Test
@@ -90,12 +88,10 @@ class TestAdminController {
 		emp.setEmpName("Rahul");
 		emp.setEmail("rahul@mail.com");
 		emp.setContact("1234567890");
-		emp.setProjId(111);
 		projectDto = new ProjectDTO();
 		projectDto.setProjId(111);
 		projectDto.setProjName("Java Project");
 		projectDto.setProjStatus("open");
-		projectDto.setProjManager(emp);
 		when(projectService.createProject(projectDto)).thenReturn(projectDto);
 		ResponseEntity<ProjectDTO> response = adminController.createProject(projectDto);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
