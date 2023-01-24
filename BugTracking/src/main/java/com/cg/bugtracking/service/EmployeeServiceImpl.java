@@ -45,9 +45,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private AdminRepository adminRepo;
 
-	@Autowired
-	private AdminRepository adminRepo;
-
 	@Override
 	public EmployeeDTO createEmployee(EmployeeDTO empDTO, long adminId)
 			throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException {
@@ -97,20 +94,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-
-	public EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO)
+	public EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO, long adminId)
 			throws NoSuchEmployeeFoundException, NoSuchProjectFoundException {
+		
+		
 		Optional<Employee> empToUpdate = empRepo.findById(id);
 		Employee emp = modelMapper.map(empDTO, Employee.class);
-
+		
 		if (empToUpdate.isPresent()) {
 
 			empToUpdate.get().setEmpName(emp.getEmpName());
 			empToUpdate.get().setEmail(emp.getEmail());
 			empToUpdate.get().setContact(emp.getContact());
-//			if (prjService.getProjectById(emp.getProjId()) != null) {
-				empToUpdate.get().setProjList(emp.getProjList());
-//			}
+			if (prjService.getProjectById(emp.getProjId()) != null) {
+				empToUpdate.get().setProjId(emp.getProjId());
+			}
 			empRepo.save(empToUpdate.get());
 			return empDTO;
 		} else {
