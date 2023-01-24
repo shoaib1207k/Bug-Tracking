@@ -27,8 +27,6 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService empService;
-
-
 	
 	@GetMapping
 	public ResponseEntity<List<EmployeeDTO>> getAllEmployees(@PathVariable("adminId") long adminId) throws NoAdminRoleFoundException{
