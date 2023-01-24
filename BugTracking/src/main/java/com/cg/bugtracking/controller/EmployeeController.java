@@ -52,4 +52,10 @@ public class EmployeeController {
 			@PathVariable("adminId") long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException {
 		return new ResponseEntity<>(empService.deleteEmployee(empId, adminId), HttpStatus.OK);
 	}
+	
+	
+	@GetMapping("/projId/{projId}")
+	public ResponseEntity<List<EmployeeDTO>> getEmployeeByProjId(@PathVariable("adminId") long adminId, @PathVariable("projId") long projId) throws NoAdminRoleFoundException{
+		return new ResponseEntity<>(empService.getEmployeeByProjectId(adminId, projId), HttpStatus.OK);
+	}
 }
