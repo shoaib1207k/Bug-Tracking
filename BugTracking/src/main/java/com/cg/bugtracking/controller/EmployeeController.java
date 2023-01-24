@@ -44,7 +44,7 @@ public class EmployeeController {
 	@PutMapping("/{empId}")
 	public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("empId") long empId,
 			@Valid @RequestBody EmployeeDTO empDTO, @PathVariable("adminId") long adminId)
-			throws NoSuchEmployeeFoundException, NoSuchProjectFoundException, NoAdminRoleFoundException {
+			throws NoSuchEmployeeFoundException, NoAdminRoleFoundException {
 		return new ResponseEntity<>(empService.updateEmployee(empId, empDTO, adminId), HttpStatus.OK);
 	}
 

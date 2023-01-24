@@ -97,7 +97,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO, long adminId)
-			throws NoSuchEmployeeFoundException, NoSuchProjectFoundException,NoAdminRoleFoundException {
+			throws NoSuchEmployeeFoundException,NoAdminRoleFoundException {
 		
 		Optional<Admin> findAdmin = adminRepo.findById(adminId);
 		if(findAdmin.isPresent()) {
@@ -108,9 +108,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 				empToUpdate.get().setEmpName(emp.getEmpName());
 				empToUpdate.get().setEmail(emp.getEmail());
 				empToUpdate.get().setContact(emp.getContact());
-				if (prjService.getProjectById(emp.getProjId()) != null) {
-					empToUpdate.get().setProjId(emp.getProjId());
-				}
+				empToUpdate.get().setProject(emp.getProject());
+				
 				empRepo.save(empToUpdate.get());
 				return empDTO;
 			} else {

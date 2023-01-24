@@ -12,7 +12,7 @@ import com.cg.bugtracking.entity.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	
-	@Query("Select e from Employee e where e.projId=:projId")
+	@Query("Select e from Employee e Join e.project p where p.projId=:projId")
 	public List<Employee> getEmployeeByProjectId(@Param("projId") long projId);
 
 }
