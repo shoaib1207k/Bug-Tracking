@@ -1,16 +1,24 @@
 package com.cg.bugtracking.entity;
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
+
+import org.springframework.context.annotation.Scope;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-@Entity
+
 @Table(name="employees")
+@Scope("prototype")
+@Entity
 public class Employee {
 	
 	@Id
@@ -19,31 +27,50 @@ public class Employee {
 	private String empName;
 	private String email;
 	private String contact;
-	private long projId;
-	
+
+	@OneToMany(mappedBy = "projManager",cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Project> projList;
 	public Employee() {}
 	
-	public Employee(long empId, String empName, String email, String contact, long projId) {
+	public Employee(long empId, String empName, String email, String contact) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
 		this.email = email;
 		this.contact = contact;
-		this.projId	= projId;
+//		this.projId	= projId;
+	}
+	public Employee(List<Project> projList) {
+		for(Project project: projList) {
+			project.setProjManager(this);
+		}
 	}
 	
 	
-	public long getProjId() {
-		return projId;
-	}
-
-	public void setProjId(long projId) {
-		this.projId = projId;
-	}
+	
+//	public long getProjId() {
+//		return projId;
+//	}
+//
+//	public void setProjId(long projId) {
+//		this.projId = projId;
+//	}
 
 	public long getEmpId() {
 		return empId;
 	}
+	public List<Project> getProjList() {
+		return projList;
+	}
+
+	public void setProjList(List<Project> projList) {
+		this.projList = projList;
+		for(Project project: projList) {
+			project.setProjManager(this);
+		}
+	}
+
 	public void setEmpId(long empId) {
 		this.empId = empId;
 	}
@@ -70,7 +97,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [empId=" + empId + ", empName=" + empName + ", email=" + email + ", contact=" + contact
-				+ ", projId=" + projId + "]";
+				+  "]";
 	}
 	
 }
