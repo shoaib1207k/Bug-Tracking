@@ -46,10 +46,10 @@ public class AdminController {
 		return new ResponseEntity<>(aService.createAdmin(adminDto), HttpStatus.CREATED);
 	}
 
-	@PostMapping("/employee")
-	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO)
+	@PostMapping("/{adminID}/employee")
+	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO, @PathVariable("adminID") long adminID)
 			throws NoAdminRoleFoundException, NoSuchUserFoundException {
-		return new ResponseEntity<>(empService.createEmployee(empDTO), HttpStatus.CREATED);
+		return new ResponseEntity<>(empService.createEmployee(empDTO, adminID), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/project")
