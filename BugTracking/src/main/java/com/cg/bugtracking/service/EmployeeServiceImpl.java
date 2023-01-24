@@ -133,4 +133,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
 	}
 
+	@Override
+	public List<EmployeeDTO> getEmployeeByProjectId(long adminId, long projId) throws NoAdminRoleFoundException {
+		Optional<Admin> findAdmin = adminRepo.findById(adminId);
+		if (findAdmin.isPresent()) {
+			return empRepo.getEmployeeByProjectId(projId).stream().map(emp -> modelMapper.map(emp, EmployeeDTO.class))
+					.collect(Collectors.toList());
+		} else
+			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+
+	}
+
 }
