@@ -20,6 +20,7 @@ import com.cg.bugtracking.dto.BugDTO;
 import com.cg.bugtracking.dto.UserDTO;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.BugService;
 import com.cg.bugtracking.service.UserService;
 
@@ -32,7 +33,7 @@ public class UserController {
 
 	@Autowired
 	private BugService bugService;
-	
+
 	// create (user, bug)
 
 	@PostMapping
@@ -46,26 +47,28 @@ public class UserController {
 	}
 
 	// user CRUD
-	
-	@GetMapping
-	public ResponseEntity<List<UserDTO>> getAllUsers() {
-		return new ResponseEntity<>(uService.findAllUsers(), HttpStatus.OK);
+
+	@GetMapping("/{adminId}")
+	public ResponseEntity<List<UserDTO>> getAllUsers(@PathVariable("adminId") long adminId) throws NotAdminException {
+		return new ResponseEntity<>(uService.findAllUsers(adminId), HttpStatus.FOUND);
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<UserDTO> getById(@PathVariable long id) throws NoSuchUserFoundException {
-		return new ResponseEntity<>(uService.findById(id), HttpStatus.FOUND);
+	@GetMapping("/{adminId}/{id}")
+	public ResponseEntity<UserDTO> getById(@PathVariable long id, @PathVariable("adminId") long adminId)
+			throws NoSuchUserFoundException, NotAdminException {
+		return new ResponseEntity<>(uService.findById(id, adminId), HttpStatus.FOUND);
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDto, @PathVariable long id)
-			throws NoSuchUserFoundException {
-		return new ResponseEntity<>(uService.updateUser(id, userDto), HttpStatus.OK);
+	@PutMapping("/{adminId}/{id}")
+	public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDto, @PathVariable long id,
+			@PathVariable("adminId") long adminId) throws NoSuchUserFoundException, NotAdminException {
+		return new ResponseEntity<>(uService.updateUser(id, userDto, adminId), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<UserDTO> deleteUser(@PathVariable long id) throws NoSuchUserFoundException {
-		return new ResponseEntity<>(uService.deleteUser(id), HttpStatus.OK);
+	@DeleteMapping("/{adminId}/{id}")
+	public ResponseEntity<UserDTO> deleteUser(@PathVariable long id, @PathVariable("adminId") long adminId)
+			throws NoSuchUserFoundException, NotAdminException {
+		return new ResponseEntity<>(uService.deleteUser(id, adminId), HttpStatus.OK);
 	}
 
 }
