@@ -13,13 +13,13 @@ public interface EmployeeService {
 
 	EmployeeDTO createEmployee(EmployeeDTO empDTO, long adminId) throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException;
 
-	EmployeeDTO getEmployeeById(long empId, long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException;
+	EmployeeDTO getEmployeeById(long empId, long adminId) throws NoSuchEmployeeFoundException, NotAdminException;
 
-	List<EmployeeDTO> getAllEmployees(long adminId) throws NoAdminRoleFoundException;
+	List<EmployeeDTO> getAllEmployees(long adminId) throws NotAdminException;
 
-	EmployeeDTO updateEmployee(long empId, EmployeeDTO empDTO, long adminId) throws NoSuchEmployeeFoundException,NoAdminRoleFoundException;
+	EmployeeDTO updateEmployee(long empId, EmployeeDTO empDTO, long adminId) throws NoSuchEmployeeFoundException,NotAdminException;
 
-	EmployeeDTO deleteEmployee(long empId, long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException;
+	EmployeeDTO deleteEmployee(long empId, long adminId) throws NoSuchEmployeeFoundException, NotAdminException;
 	
-	List<EmployeeDTO> getEmployeeByProjectId(long adminId, long projId) throws NoAdminRoleFoundException;
+	List<EmployeeDTO> getEmployeeByProjectId(long adminId, long projId) throws NotAdminException;
 }

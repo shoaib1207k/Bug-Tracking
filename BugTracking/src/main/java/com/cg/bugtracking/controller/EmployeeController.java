@@ -19,6 +19,7 @@ import com.cg.bugtracking.dto.EmployeeDTO;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.EmployeeService;
 
 @RestController
@@ -29,32 +30,32 @@ public class EmployeeController {
 	private EmployeeService empService;
 	
 	@GetMapping
-	public ResponseEntity<List<EmployeeDTO>> getAllEmployees(@PathVariable("adminId") long adminId) throws NoAdminRoleFoundException{
+	public ResponseEntity<List<EmployeeDTO>> getAllEmployees(@PathVariable("adminId") long adminId) throws NotAdminException{
 		return new ResponseEntity<>(empService.getAllEmployees(adminId), HttpStatus.OK);
 	}
 
 	@GetMapping("/{empId}")
 	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("empId") long empId,
-			@PathVariable("adminId") long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException {
+			@PathVariable("adminId") long adminId) throws NoSuchEmployeeFoundException, NotAdminException {
 		return new ResponseEntity<>(empService.getEmployeeById(empId, adminId), HttpStatus.FOUND);
 	}
 
 	@PutMapping("/{empId}")
 	public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("empId") long empId,
 			@Valid @RequestBody EmployeeDTO empDTO, @PathVariable("adminId") long adminId)
-			throws NoSuchEmployeeFoundException, NoAdminRoleFoundException {
+			throws NoSuchEmployeeFoundException, NotAdminException {
 		return new ResponseEntity<>(empService.updateEmployee(empId, empDTO, adminId), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{empId}")
 	public ResponseEntity<EmployeeDTO> deleteEmployee(@PathVariable("empId") long empId,
-			@PathVariable("adminId") long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException {
+			@PathVariable("adminId") long adminId) throws NoSuchEmployeeFoundException, NotAdminException {
 		return new ResponseEntity<>(empService.deleteEmployee(empId, adminId), HttpStatus.OK);
 	}
 	
 	
 	@GetMapping("/projId/{projId}")
-	public ResponseEntity<List<EmployeeDTO>> getEmployeeByProjId(@PathVariable("adminId") long adminId, @PathVariable("projId") long projId) throws NoAdminRoleFoundException{
+	public ResponseEntity<List<EmployeeDTO>> getEmployeeByProjId(@PathVariable("adminId") long adminId, @PathVariable("projId") long projId) throws NotAdminException{
 		return new ResponseEntity<>(empService.getEmployeeByProjectId(adminId, projId), HttpStatus.OK);
 	}
 }
