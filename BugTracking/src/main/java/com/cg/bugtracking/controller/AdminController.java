@@ -48,10 +48,11 @@ public class AdminController {
 		return new ResponseEntity<>(aService.createAdmin(adminDto), HttpStatus.CREATED);
 	}
 
-	@PostMapping("/{adminID}/employee")
-	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO, @PathVariable("adminID") long adminID)
+	@PostMapping("/{adminId}/employee")
+	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO,
+			@PathVariable("adminId") long adminId)
 			throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException {
-		return new ResponseEntity<>(empService.createEmployee(empDTO, adminID), HttpStatus.CREATED);
+		return new ResponseEntity<>(empService.createEmployee(empDTO, adminId), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/project")
@@ -61,25 +62,28 @@ public class AdminController {
 
 	// admin CRUD
 
-	@GetMapping
-	public ResponseEntity<List<AdminDTO>> getAllAdmins() {
-		return new ResponseEntity<>(aService.findAllAdmins(), HttpStatus.FOUND);
+	@GetMapping("/{adminId}")
+	public ResponseEntity<List<AdminDTO>> getAllAdmins(@PathVariable("adminId") long adminId) throws NotAdminException {
+		return new ResponseEntity<>(aService.findAllAdmins(adminId), HttpStatus.FOUND);
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<AdminDTO> getById(@PathVariable long id) throws NoSuchAdminFoundException {
-		return new ResponseEntity<>(aService.findAdminById(id), HttpStatus.FOUND);
+	@GetMapping("/{adminId}/{id}")
+	public ResponseEntity<AdminDTO> getById(@PathVariable long id, @PathVariable("adminId") long adminId)
+			throws NoSuchAdminFoundException, NotAdminException {
+		return new ResponseEntity<>(aService.findAdminById(id, adminId), HttpStatus.FOUND);
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<AdminDTO> updateAdmin(@Valid @RequestBody AdminDTO adminDto, @PathVariable long id)
-			throws NoSuchAdminFoundException, NoAdminRoleFoundException {
-		return new ResponseEntity<>(aService.updateAdmin(id, adminDto), HttpStatus.OK);
+	@PutMapping("/{adminId}/{id}")
+	public ResponseEntity<AdminDTO> updateAdmin(@Valid @RequestBody AdminDTO adminDto, @PathVariable long id,
+			@PathVariable("adminId") long adminId)
+			throws NoSuchAdminFoundException, NoAdminRoleFoundException, NotAdminException {
+		return new ResponseEntity<>(aService.updateAdmin(id, adminDto, adminId), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<AdminDTO> deleteAdmin(@PathVariable long id) throws NoSuchAdminFoundException {
-		return new ResponseEntity<>(aService.deleteAdmin(id), HttpStatus.OK);
+	@DeleteMapping("/{adminId}/{id}")
+	public ResponseEntity<AdminDTO> deleteAdmin(@PathVariable long id, @PathVariable("adminId") long adminId)
+			throws NoSuchAdminFoundException, NotAdminException {
+		return new ResponseEntity<>(aService.deleteAdmin(id, adminId), HttpStatus.OK);
 	}
 
 }
