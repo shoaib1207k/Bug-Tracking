@@ -9,18 +9,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cg.bugtracking.dao.AdminRepository;
 import com.cg.bugtracking.dao.BugRepository;
+import com.cg.bugtracking.dto.AdminDTO;
 import com.cg.bugtracking.dto.BugDTO;
+import com.cg.bugtracking.dto.ProjectDTO;
+import com.cg.bugtracking.entity.Admin;
 import com.cg.bugtracking.entity.Bug;
+import com.cg.bugtracking.entity.Project;
+import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchBugFoundException;
+import com.cg.bugtracking.exception.NoSuchProjectFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 
 
 @Service
 public class BugServiceImpl implements BugService{
 	
+	private static final String NOT_ADMIN = "You are not an Admin!";
 	
 	@Autowired
 	private BugRepository bRepo;
+	
+	@Autowired
+	private AdminRepository aRepo;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -53,11 +65,17 @@ public class BugServiceImpl implements BugService{
 		
 	}
 	@Override
-	public BugDTO getBug(long id) throws NoSuchBugFoundException {
+	public BugDTO getBug(long id,long adminId) throws NoSuchBugFoundException, NotAdminException {
 			Optional<Bug> buglist =bRepo.findById(id);
-			if(buglist.isPresent())
-				return  modelMapper.map(buglist.get(),BugDTO.class);
-			else throw new NoSuchBugFoundException("No Such Bug");
+			
+			Optional<Admin> findAdmin = aRepo.findById(adminId);
+			if (findAdmin.isPresent()) {
+				if(buglist.isPresent())
+					return  modelMapper.map(buglist.get(),BugDTO.class);
+				else throw new NoSuchBugFoundException("No Such Bug");
+			} else {
+				throw new NotAdminException(NOT_ADMIN);
+			}
 	}
 
 	@Override
@@ -67,11 +85,14 @@ public class BugServiceImpl implements BugService{
 				.collect(Collectors.toList());
 	}
 
-//	@Override
-//	public List <Bug> getAllBugsByStatus(String status) throws NoSuchBugFoundException {
-//		List<Bug> bfind=bRepo.getAllBugsByStatus(status);
-//		return bfind;
-//	}
+
+	@Override
+	public
+	List <BugDTO> getAllBugStatus(String status)  {
+		return  bRepo.getAllBugsByStatus(status)
+				.stream().map(bug ->modelMapper.map(status,BugDTO.class))
+				.collect(Collectors.toList());
+	}
 
 	@Override
 	public BugDTO deleteBug(long id) throws NoSuchBugFoundException{
@@ -83,5 +104,19 @@ public class BugServiceImpl implements BugService{
 			return modelMapper.map(bugDel.get(), BugDTO.class);
 	
 
+	}
+
+	@Override
+	public List<BugDTO> getAllBugsByProjectId(long id) {
+		return bRepo.getAllBugsByProjectId(id)
+				.stream().map(bug ->modelMapper.map(id,BugDTO.class))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<BugDTO> findBugByEmpName(String empName) {
+		return bRepo.findBugByEmpName(empName)
+				.stream().map(bug -> modelMapper.map(empName,BugDTO.class))
+				.collect(Collectors.toList());
 	}
 }
