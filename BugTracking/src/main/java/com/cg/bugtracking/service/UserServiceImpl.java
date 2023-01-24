@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.cg.bugtracking.dao.AdminRepository;
 import com.cg.bugtracking.dao.UserRepository;
 import com.cg.bugtracking.dto.UserDTO;
-import com.cg.bugtracking.entity.Admin;
 import com.cg.bugtracking.entity.User;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
@@ -40,8 +39,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO createUser(UserDTO userDto) throws IdAlreadyExistsException {
-		Optional<User> findUser = uRepo.findById(userDto.getUserId());
-		if (findUser.isPresent()) {
+		if (uRepo.existsById(userDto.getUserId())) {
 			LOG.error(ID_EXISTS);
 			throw new IdAlreadyExistsException(ID_EXISTS);
 		} else {
@@ -55,8 +53,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserDTO> findAllUsers(long adminId) throws NotAdminException {
-		Optional<Admin> findAdmin = aRepo.findById(adminId);
-		if (findAdmin.isPresent()) {
+		if (aRepo.existsById(adminId)) {
 			LOG.info("Returning all users");
 			return uRepo.findAll().stream().map(usr -> modelMapper.map(usr, UserDTO.class))
 					.collect(Collectors.toList());
@@ -67,9 +64,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO findById(long id, long adminId) throws NoSuchUserFoundException, NotAdminException {
-		Optional<Admin> findAdmin = aRepo.findById(adminId);
 		Optional<User> usr = uRepo.findById(id);
-		if (findAdmin.isPresent()) {
+		if (aRepo.existsById(adminId)) {
 			if (usr.isPresent()) {
 				LOG.info("Returning user using id");
 				return modelMapper.map(usr.get(), UserDTO.class);
@@ -87,8 +83,7 @@ public class UserServiceImpl implements UserService {
 			throws NoSuchUserFoundException, NotAdminException {
 		Optional<User> usrUpdate = uRepo.findById(id);
 		User user = modelMapper.map(userDto, User.class);
-		Optional<Admin> findAdmin = aRepo.findById(adminId);
-		if (findAdmin.isPresent()) {
+		if (aRepo.existsById(adminId)) {
 			if (usrUpdate.isPresent()) {
 				LOG.info("User present. Updating...");
 				usrUpdate.get().setRole(user.getRole());
@@ -108,8 +103,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO deleteUser(long id, long adminId) throws NoSuchUserFoundException, NotAdminException {
 		Optional<User> usrDel = uRepo.findById(id);
-		Optional<Admin> findAdmin = aRepo.findById(adminId);
-		if (findAdmin.isPresent()) {
+		if (aRepo.existsById(adminId)) {
 			if (usrDel.isPresent()) {
 				LOG.info("Deleting...");
 				uRepo.delete(usrDel.get());

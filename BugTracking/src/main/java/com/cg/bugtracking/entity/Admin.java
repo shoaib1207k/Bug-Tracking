@@ -4,13 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.springframework.context.annotation.Scope;
 
 @Entity
 @Table(name = "admins")
+@Scope("prototype")
 public class Admin {
 
 	@Id
-	@Column(name = "admin_id")
+	@Column(name = "admin_id", unique = true)
 	private long adminId;
 
 	@Column(name = "admin_name", nullable = false)
