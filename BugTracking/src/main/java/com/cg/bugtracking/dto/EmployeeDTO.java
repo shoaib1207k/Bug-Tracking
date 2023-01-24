@@ -1,9 +1,13 @@
 package com.cg.bugtracking.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.cg.bugtracking.entity.Project;
 
 public class EmployeeDTO {
 	
@@ -20,18 +24,28 @@ public class EmployeeDTO {
 	@Size(min = 10)
 	private String contact;
     
-	private long projId;
+	private List<Project> projList;
 
 	
 	
-	public long getProjId() {
-		return projId;
+	public List<Project> getProjList() {
+		return projList;
 	}
 
 
-	public void setProjId(long projId) {
-		this.projId = projId;
+	public void setProjList(List<Project> projList) {
+		this.projList = projList;
 	}
+
+//
+//	public long getProjId() {
+//		return projId;
+//	}
+//
+//
+//	public void setProjId(long projId) {
+//		this.projId = projId;
+//	}
 
 
 	public EmployeeDTO() {
