@@ -1,13 +1,12 @@
 package com.cg.bugtracking.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import com.cg.bugtracking.dao.AdminRepository;
+import com.cg.bugtracking.dao.UserRepository;
 import com.cg.bugtracking.dto.AdminDTO;
 import com.cg.bugtracking.dto.UserDTO;
 
@@ -15,6 +14,9 @@ class TestAdminServiceImpl {
 
 	@Mock
 	private AdminRepository adminRepository;
+
+	@Mock
+	private UserRepository userRepository;
 
 	@InjectMocks
 	private AdminServiceImpl adminServiceImpl;
@@ -24,12 +26,22 @@ class TestAdminServiceImpl {
 
 	@BeforeEach
 	public void init() {
-
+		// user details
+		userDto = new UserDTO();
+		userDto.setUserId(1);
+		userDto.setRole("admin");
+		// admin details
+		adminDto = new AdminDTO();
+		adminDto.setAdminId(1);
+		adminDto.setAdminName("Rahul");
+		adminDto.setAdminContact("1234567890");
+		adminServiceImpl = new AdminServiceImpl();
+		MockitoAnnotations.openMocks(this);
 	}
 
-	@Test
-	void testCreate() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	void testAddAdmin() throws NoSuchUserFoundException, NoAdminRoleFoundException, IdAlreadyExistsException {
+//
+//	}
 
 }
