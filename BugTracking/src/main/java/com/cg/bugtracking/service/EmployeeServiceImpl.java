@@ -19,6 +19,7 @@ import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -27,6 +28,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	private static final String ADMIN_ROLE_REQUIRED = "Admin role is required.";
 
+	private static final String NOT_ADMIN = "You are not admin.";
+	
+	private static final String NO_EMPLOYEE_FOUND = "No employee found with this ID.";
+	
 	@Autowired
 	private EmployeeRepository empRepo;
 
@@ -38,27 +43,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private UserRepository uRepo;
-
+	
 	@Autowired
 	private AdminRepository adminRepo;
 
 	@Override
 	public EmployeeDTO createEmployee(EmployeeDTO empDTO, long adminId)
-			throws NoAdminRoleFoundException, NoSuchUserFoundException {
+			throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException {
 		Optional<User> findUser = uRepo.findById(empDTO.getEmpId());
 		Optional<Admin> findAdmin = adminRepo.findById(adminId);
 		if (findAdmin.isPresent()) {
-			if (findUser.isPresent() && (findUser.get().checkAdmin() || findUser.get().checkEmployee())) {
-				Employee emp = modelMapper.map(empDTO, Employee.class);
-				empRepo.save(emp);
-				return empDTO;
+			if (findUser.isPresent()) {
+				if (findUser.get().checkAdmin() || findUser.get().checkEmployee()) {
+					Employee emp = modelMapper.map(empDTO, Employee.class);
+					empRepo.save(emp);
+					return empDTO;
+				} else {
+					throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+				}
 			} else {
-				throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+				throw new NoSuchUserFoundException(NO_USER_FOUND);
 			}
 		} else {
-			throw new NoSuchUserFoundException(NO_USER_FOUND);
+			throw new NotAdminException(NOT_ADMIN);
 		}
-
 	}
 
 	@Override
@@ -69,7 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			Optional<Employee> emp = empRepo.findById(empId);
 			if (emp.isPresent())
 				return modelMapper.map(emp.get(), EmployeeDTO.class);
-			throw new NoSuchEmployeeFoundException("No Such employee found");
+			throw new NoSuchEmployeeFoundException(NO_EMPLOYEE_FOUND);
 		} else
 			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
 
@@ -88,28 +96,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public EmployeeDTO updateEmployee(long empId, EmployeeDTO empDTO, long adminId)
-			throws NoSuchEmployeeFoundException, NoSuchProjectFoundException, NoAdminRoleFoundException {
-		Optional<Admin> findAdmin = adminRepo.findById(empId);
-		if (findAdmin.isPresent()) {
-			Optional<Employee> empToUpdate = empRepo.findById(empId);
+	public EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO, long adminId)
+			throws NoSuchEmployeeFoundException,NoAdminRoleFoundException {
+		
+		Optional<Admin> findAdmin = adminRepo.findById(adminId);
+		if(findAdmin.isPresent()) {
+			Optional<Employee> empToUpdate = empRepo.findById(id);
 			Employee emp = modelMapper.map(empDTO, Employee.class);
-
 			if (empToUpdate.isPresent()) {
-
+	
 				empToUpdate.get().setEmpName(emp.getEmpName());
 				empToUpdate.get().setEmail(emp.getEmail());
 				empToUpdate.get().setContact(emp.getContact());
-				if (prjService.getProjectById(emp.getProjId()) != null) {
-					empToUpdate.get().setProjId(emp.getProjId());
-				}
+				empToUpdate.get().setProject(emp.getProject());
+				
 				empRepo.save(empToUpdate.get());
 				return empDTO;
 			} else {
-				throw new NoSuchEmployeeFoundException("No employee with this id");
+				throw new NoSuchEmployeeFoundException(NO_EMPLOYEE_FOUND);
 			}
-		} else
+		}else{
 			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+		}
 	}
 
 	@Override
@@ -121,10 +129,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (empToDel.isPresent())
 				empRepo.delete(empToDel.get());
 			else
-				throw new NoSuchEmployeeFoundException("No employee with this id");
+				throw new NoSuchEmployeeFoundException(NO_EMPLOYEE_FOUND);
 			return modelMapper.map(empToDel.get(), EmployeeDTO.class);
 		} else
 			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+	}
+
+	@Override
+	public List<EmployeeDTO> getEmployeeByProjectId(long adminId, long projId) throws NoAdminRoleFoundException {
+		Optional<Admin> findAdmin = adminRepo.findById(adminId);
+		if (findAdmin.isPresent()) {
+			return empRepo.getEmployeeByProjectId(projId).stream().map(emp -> modelMapper.map(emp, EmployeeDTO.class))
+					.collect(Collectors.toList());
+		} else
+			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+
 	}
 
 }

@@ -27,10 +27,9 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService empService;
-
+	
 	@GetMapping
-	public ResponseEntity<List<EmployeeDTO>> getAllEmployees(@PathVariable("adminId") long adminId)
-			throws NoAdminRoleFoundException {
+	public ResponseEntity<List<EmployeeDTO>> getAllEmployees(@PathVariable("adminId") long adminId) throws NoAdminRoleFoundException{
 		return new ResponseEntity<>(empService.getAllEmployees(adminId), HttpStatus.OK);
 	}
 
@@ -43,7 +42,7 @@ public class EmployeeController {
 	@PutMapping("/{empId}")
 	public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("empId") long empId,
 			@Valid @RequestBody EmployeeDTO empDTO, @PathVariable("adminId") long adminId)
-			throws NoSuchEmployeeFoundException, NoSuchProjectFoundException, NoAdminRoleFoundException {
+			throws NoSuchEmployeeFoundException, NoAdminRoleFoundException {
 		return new ResponseEntity<>(empService.updateEmployee(empId, empDTO, adminId), HttpStatus.OK);
 	}
 
@@ -51,5 +50,11 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeDTO> deleteEmployee(@PathVariable("empId") long empId,
 			@PathVariable("adminId") long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException {
 		return new ResponseEntity<>(empService.deleteEmployee(empId, adminId), HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/projId/{projId}")
+	public ResponseEntity<List<EmployeeDTO>> getEmployeeByProjId(@PathVariable("adminId") long adminId, @PathVariable("projId") long projId) throws NoAdminRoleFoundException{
+		return new ResponseEntity<>(empService.getEmployeeByProjectId(adminId, projId), HttpStatus.OK);
 	}
 }

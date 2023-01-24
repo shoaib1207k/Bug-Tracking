@@ -7,18 +7,20 @@ import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 
 public interface AdminService {
 
+	public AdminDTO createAdmin(AdminDTO adminDto)
+			throws NoSuchUserFoundException, NoAdminRoleFoundException, IdAlreadyExistsException;
 
-	public AdminDTO createAdmin(AdminDTO adminDto) throws NoSuchUserFoundException, NoAdminRoleFoundException, IdAlreadyExistsException;
+	List<AdminDTO> findAllAdmins(long adminId) throws NotAdminException;
 
-	List<AdminDTO> findAllAdmins();
+	public AdminDTO findAdminById(long id, long adminId) throws NoSuchAdminFoundException, NotAdminException;
 
-	public AdminDTO findAdminById(long id) throws NoSuchAdminFoundException;
+	public AdminDTO updateAdmin(long id, AdminDTO adminDto, long adminId)
+			throws NoSuchAdminFoundException, NoAdminRoleFoundException, NotAdminException;
 
-	public AdminDTO updateAdmin(long id, AdminDTO adminDto) throws NoSuchAdminFoundException, NoAdminRoleFoundException;
-
-	public AdminDTO deleteAdmin(long id) throws NoSuchAdminFoundException;
+	public AdminDTO deleteAdmin(long id, long adminId) throws NoSuchAdminFoundException, NotAdminException;
 
 }

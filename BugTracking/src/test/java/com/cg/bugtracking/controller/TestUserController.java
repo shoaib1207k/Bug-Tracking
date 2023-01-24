@@ -1,7 +1,6 @@
 package com.cg.bugtracking.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -24,6 +23,7 @@ import com.cg.bugtracking.entity.Project;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.BugService;
 import com.cg.bugtracking.service.UserService;
 
@@ -93,35 +93,35 @@ class TestUserController {
 	}
 
 	@Test
-	void testFindAll() {
+	void testFindAll() throws NotAdminException {
 		List<UserDTO> userList = new ArrayList<>();
 		userList.add(userDto);
-		when(userService.findAllUsers()).thenReturn(userList);
-		ResponseEntity<List<UserDTO>> response = userController.getAllUsers();
+		when(userService.findAllUsers(1)).thenReturn(userList);
+		ResponseEntity<List<UserDTO>> response = userController.getAllUsers(1);
 		assertEquals(HttpStatus.FOUND, response.getStatusCode());
 		assertEquals(userList.size(), response.getBody().size());
 	}
 
 	@Test
-	void testFindById() throws NoSuchUserFoundException {
-		when(userService.findById(anyLong())).thenReturn(userDto);
-		ResponseEntity<UserDTO> response = userController.getById(1);
+	void testFindById() throws NoSuchUserFoundException, NotAdminException {
+		when(userService.findById(1, 1)).thenReturn(userDto);
+		ResponseEntity<UserDTO> response = userController.getById(1, 1);
 		assertEquals(HttpStatus.FOUND, response.getStatusCode());
 		assertEquals(userDto, response.getBody());
 	}
 
 	@Test
-	void testUpdate() throws NoSuchUserFoundException {
-		when(userService.updateUser(1, userDto)).thenReturn(userDto);
-		ResponseEntity<UserDTO> response = userController.updateUser(userDto,1);
+	void testUpdate() throws NoSuchUserFoundException, NotAdminException {
+		when(userService.updateUser(1, userDto, 1)).thenReturn(userDto);
+		ResponseEntity<UserDTO> response = userController.updateUser(userDto,1, 1);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(userDto, response.getBody());
 	}
 
 	@Test
-	void testRemove() throws NoSuchAdminFoundException, NoSuchUserFoundException {
-		when(userService.deleteUser(anyLong())).thenReturn(userDto);
-		ResponseEntity<UserDTO> response = userController.deleteUser(1);
+	void testRemove() throws NoSuchAdminFoundException, NoSuchUserFoundException, NotAdminException {
+		when(userService.deleteUser(1, 1)).thenReturn(userDto);
+		ResponseEntity<UserDTO> response = userController.deleteUser(1, 1);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(userDto, response.getBody());
 	}

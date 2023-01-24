@@ -73,4 +73,6 @@ public class Project {
 		return "Project [projId=" + projId + ", projName=" + projName + ", projStatus=" + projStatus + "]";
 	}
 	
+
 }
+
