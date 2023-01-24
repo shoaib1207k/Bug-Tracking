@@ -59,17 +59,6 @@ class TestEmployeeController {
 	}
 
 
-//	@Test
-//	void testCreateEmployee() {
-//		try {
-//			when(empService.createEmployee(empDTO)).thenReturn(empDTO);
-//			ResponseEntity<EmployeeDTO> response = empController.createEmployee(empDTO);
-//			assertEquals(HttpStatus.CREATED, response.getStatusCode());
-//		} catch (NoAdminRoleFoundException | NoSuchUserFoundException e) {
-//			fail("Unexpected exception");
-//		}
-//	}
-
 	@Test
 	void testGetAllEmployees()  {
 		ResponseEntity<List<EmployeeDTO>> response;
