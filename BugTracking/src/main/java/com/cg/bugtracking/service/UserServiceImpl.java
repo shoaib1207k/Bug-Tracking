@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
 
 	private static final Logger LOG = LogManager.getLogger(UserServiceImpl.class);
 	private static final String NO_USER_FOUND = "User ID not found.";
+	private static final String ID_EXISTS = "ID already exists.";
 
 	@Autowired
 	private UserRepository uRepo;
@@ -34,7 +35,8 @@ public class UserServiceImpl implements UserService {
 	public UserDTO createUser(UserDTO userDto) throws IdAlreadyExistsException {
 		Optional<User> findUser = uRepo.findById(userDto.getUserId());
 		if (findUser.isPresent()) {
-			throw new IdAlreadyExistsException("ID already exists in the database");
+			LOG.error(ID_EXISTS);
+			throw new IdAlreadyExistsException(ID_EXISTS);
 		} else {
 			User user = modelMapper.map(userDto, User.class);
 			LOG.info("Saving user");
@@ -57,6 +59,7 @@ public class UserServiceImpl implements UserService {
 			LOG.info("Returning user using id");
 			return modelMapper.map(usr.get(), UserDTO.class);
 		} else {
+			LOG.error(NO_USER_FOUND);
 			throw new NoSuchUserFoundException(NO_USER_FOUND);
 		}
 	}
@@ -73,6 +76,7 @@ public class UserServiceImpl implements UserService {
 			LOG.info("Saved. Returning user");
 			return userDto;
 		} else {
+			LOG.error(NO_USER_FOUND);
 			throw new NoSuchUserFoundException(NO_USER_FOUND);
 		}
 	}
@@ -80,10 +84,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO deleteUser(long id) throws NoSuchUserFoundException {
 		Optional<User> usrDel = uRepo.findById(id);
-		if (usrDel.isPresent())
+		if (usrDel.isPresent()) {
+			LOG.info("Deleting...");
 			uRepo.delete(usrDel.get());
-		else
+			LOG.info("Deleted.");
+		} else {
+			LOG.error(NO_USER_FOUND);
 			throw new NoSuchUserFoundException(NO_USER_FOUND);
+		}
 		return modelMapper.map(usrDel.get(), UserDTO.class);
 	}
 
