@@ -13,6 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @Table(name= "projects")
@@ -26,7 +30,9 @@ public class Project {
 	@Column(name="project_name", nullable = false)
 	private String projName;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@Autowired
+	@ManyToOne
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private Employee projManager;
 	
 	@Column(name = "project_status", nullable = false)

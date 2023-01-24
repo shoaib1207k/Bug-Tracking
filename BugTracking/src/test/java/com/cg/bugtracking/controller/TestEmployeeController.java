@@ -45,7 +45,7 @@ class TestEmployeeController {
 		empDTO.setEmpName("Shoaib Khan");
 		empDTO.setEmail("sho@gmail.com");
 		empDTO.setContact("0123456789");
-		empDTO.setProjId(11);
+//		empDTO.setProjId(11);
 
 		empDTOList = new ArrayList<>();
 		empDTOList.add(empDTO);

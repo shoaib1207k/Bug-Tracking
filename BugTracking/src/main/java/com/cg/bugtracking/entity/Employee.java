@@ -3,6 +3,7 @@ package com.cg.bugtracking.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ public class Employee {
 	private String email;
 	private String contact;
 
-	@OneToMany(mappedBy = "projManager")
+	@OneToMany(mappedBy = "projManager",cascade = CascadeType.ALL)
 	private List<Project> projList;
 	public Employee() {}
 	
