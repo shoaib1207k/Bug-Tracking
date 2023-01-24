@@ -10,13 +10,13 @@ import com.cg.bugtracking.exception.NoSuchUserFoundException;
 
 public interface EmployeeService {
 
-	EmployeeDTO createEmployee(EmployeeDTO empDTO) throws NoAdminRoleFoundException, NoSuchUserFoundException;
+	EmployeeDTO createEmployee(EmployeeDTO empDTO, long adminId) throws NoAdminRoleFoundException, NoSuchUserFoundException;
 
-	EmployeeDTO getEmployeeById(long empId) throws NoSuchEmployeeFoundException;
+	EmployeeDTO getEmployeeById(long empId, long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException;
 
-	List<EmployeeDTO> getAllEmployees();
+	List<EmployeeDTO> getAllEmployees(long adminId) throws NoAdminRoleFoundException;
 
-	EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO) throws NoSuchEmployeeFoundException,NoSuchProjectFoundException;
+	EmployeeDTO updateEmployee(long empId, EmployeeDTO empDTO, long adminId) throws NoSuchEmployeeFoundException,NoSuchProjectFoundException,NoAdminRoleFoundException;
 
-	EmployeeDTO deleteEmployee(long id) throws NoSuchEmployeeFoundException;
+	EmployeeDTO deleteEmployee(long empId, long adminId) throws NoSuchEmployeeFoundException, NoAdminRoleFoundException;
 }
