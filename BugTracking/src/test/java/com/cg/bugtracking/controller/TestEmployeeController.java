@@ -89,7 +89,7 @@ class TestEmployeeController {
 			when(empService.updateEmployee(1, empDTO, 11)).thenReturn(empDTO);
 			ResponseEntity<EmployeeDTO> response = empController.updateEmployee(1, empDTO,11);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchEmployeeFoundException | NoSuchProjectFoundException | NoAdminRoleFoundException e) {
+		} catch (NoSuchEmployeeFoundException | NoAdminRoleFoundException e) {
 			fail("Unexpected exception");
 		}
 	}
