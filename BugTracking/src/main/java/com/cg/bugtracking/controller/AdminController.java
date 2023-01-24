@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bugtracking.dto.AdminDTO;
 import com.cg.bugtracking.dto.EmployeeDTO;
 import com.cg.bugtracking.dto.ProjectDTO;
+import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.AdminService;
 import com.cg.bugtracking.service.EmployeeService;
 import com.cg.bugtracking.service.ProjectService;
@@ -42,14 +44,14 @@ public class AdminController {
 
 	@PostMapping
 	public ResponseEntity<AdminDTO> createAdmin(@Valid @RequestBody AdminDTO adminDto)
-			throws NoAdminRoleFoundException, NoSuchUserFoundException {
+			throws NoAdminRoleFoundException, NoSuchUserFoundException, IdAlreadyExistsException {
 		return new ResponseEntity<>(aService.createAdmin(adminDto), HttpStatus.CREATED);
 	}
 
-	@PostMapping("/employee")
-	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO)
-			throws NoAdminRoleFoundException, NoSuchUserFoundException {
-		return new ResponseEntity<>(empService.createEmployee(empDTO), HttpStatus.CREATED);
+	@PostMapping("/{adminID}/employee")
+	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO, @PathVariable("adminID") long adminID)
+			throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException {
+		return new ResponseEntity<>(empService.createEmployee(empDTO, adminID), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/project")
@@ -61,7 +63,7 @@ public class AdminController {
 
 	@GetMapping
 	public ResponseEntity<List<AdminDTO>> getAllAdmins() {
-		return new ResponseEntity<>(aService.findAllAdmins(), HttpStatus.OK);
+		return new ResponseEntity<>(aService.findAllAdmins(), HttpStatus.FOUND);
 	}
 
 	@GetMapping("/{id}")
