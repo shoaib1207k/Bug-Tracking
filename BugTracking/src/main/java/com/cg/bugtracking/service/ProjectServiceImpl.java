@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +15,15 @@ import com.cg.bugtracking.dao.ProjectRepository;
 import com.cg.bugtracking.dto.ProjectDTO;
 
 import com.cg.bugtracking.entity.Project;
-import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
+
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
+	private static final Logger LOG = LogManager.getLogger(AdminServiceImpl.class);
+	private static final String NO_PROJECT_FOUND = "ProjectS not found.";
+	
 	@Autowired
 	private ProjectRepository pRepo; 
 	
@@ -27,20 +33,26 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public ProjectDTO createProject(ProjectDTO prjDTO) {
 		Project prj = modelMapper.map(prjDTO, Project.class);
+		LOG.info("Saving project");
 		pRepo.save(prj);
+		LOG.info("Saved Return project");
 		return prjDTO;
 	}
 
 	@Override
 	public ProjectDTO getProjectById(long prjId) throws NoSuchProjectFoundException {
 		Optional<Project> prj = pRepo.findById(prjId);
-		if(prj.isPresent())
+		if(prj.isPresent()) {
+			LOG.info("Returning project using id");
 			return modelMapper.map(prj.get(),ProjectDTO.class);
-		throw new NoSuchProjectFoundException("No Such project found");
+	}else {
+		throw new NoSuchProjectFoundException(NO_PROJECT_FOUND);
 	}
+}
 
 	@Override
 	public List<ProjectDTO> getAllProjects() {
+		LOG.info("Returning all projects");
 		return pRepo.findAll().stream().map(prj->modelMapper.map(prj, ProjectDTO.class))
 				.collect(Collectors.toList());
 
@@ -52,14 +64,17 @@ public class ProjectServiceImpl implements ProjectService {
 		Project prj = modelMapper.map(pDTO, Project.class);
 
 		if(prjToUpdate.isPresent()) {
+			LOG.info("Project present. Updating...");
 			prjToUpdate.get().setProjId(prj.getProjId());
 			prjToUpdate.get().setProjName(prj.getProjName());
 			prjToUpdate.get().setProjManager(prj.getProjManager());
 			prjToUpdate.get().setProjStatus(prj.getProjStatus());		
+			LOG.info("Saving...");
 			pRepo.save(prjToUpdate.get());
+			LOG.info("Saved. Returning project");
 			return pDTO;
 		}else {
-			throw new NoSuchProjectFoundException("No project with this id");
+			throw new NoSuchProjectFoundException(NO_PROJECT_FOUND);
 		}
 	}
 	
@@ -70,7 +85,7 @@ public class ProjectServiceImpl implements ProjectService {
 		if(prjToDel.isPresent()) 
 			pRepo.delete(prjToDel.get());	
 		else
-			throw new NoSuchProjectFoundException("No project with this id");
+			throw new NoSuchProjectFoundException(NO_PROJECT_FOUND);
 		return modelMapper.map(prjToDel.get(), ProjectDTO.class);
 	}
 
