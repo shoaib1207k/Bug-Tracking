@@ -53,13 +53,14 @@ public class BugController {
 		return new ResponseEntity<>(bugService.deleteBug(id,adminId), HttpStatus.OK);
 	}
 	
+	
 	@GetMapping("/bugbyproject/{id}")
-	public ResponseEntity<List<BugDTO>> getAllBugsByProjectId(@PathVariable long id){
+	public ResponseEntity<List<BugDTO>> getAllBugsByProjectId(@PathVariable("id") long id){
 		return new ResponseEntity<>(bugService.getAllBugsByProjectId(id), HttpStatus.OK);
 	}
 	
-	@GetMapping("/bugbyemployee")
-	public ResponseEntity<List<BugDTO>> findBugByEmpName(@PathVariable String empName){
+	@GetMapping("/bugbyemployee/{empName}")
+	public ResponseEntity<List<BugDTO>> findBugByEmpName(@PathVariable("empName") String empName){
 		return new ResponseEntity<>(bugService.findBugByEmpName(empName), HttpStatus.OK);
 	}
 }
