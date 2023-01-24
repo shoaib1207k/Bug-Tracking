@@ -14,6 +14,7 @@ import com.cg.bugtracking.dao.UserRepository;
 import com.cg.bugtracking.dto.AdminDTO;
 import com.cg.bugtracking.entity.Admin;
 import com.cg.bugtracking.entity.User;
+import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
@@ -25,6 +26,7 @@ public class AdminServiceImpl implements AdminService {
 	private static final String NO_ADMIN_FOUND = "Admin ID not found.";
 	private static final String NO_USER_FOUND = "User ID not found.";
 	private static final String ADMIN_ROLE_REQD = "Admin role is required.";
+	private static final String ADMIN_EXISTS = "Admin ID already exists";
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -36,20 +38,27 @@ public class AdminServiceImpl implements AdminService {
 	private UserRepository uRepo;
 
 	@Override
-	public AdminDTO createAdmin(AdminDTO adminDto) throws NoSuchUserFoundException, NoAdminRoleFoundException {
+	public AdminDTO createAdmin(AdminDTO adminDto)
+			throws NoSuchUserFoundException, NoAdminRoleFoundException, IdAlreadyExistsException {
 		Optional<User> find = uRepo.findById(adminDto.getAdminId());
-		if (find.isPresent()) {
-			if (find.get().checkAdmin()) {
-				Admin admin = modelMapper.map(adminDto, Admin.class);
-				LOG.info("Saving admin");
-				aRepo.save(admin);
-				LOG.info("Saved. Returning admin");
-				return adminDto;
-			} else {
-				throw new NoAdminRoleFoundException(ADMIN_ROLE_REQD);
-			}
+		if (aRepo.existsById(adminDto.getAdminId())) {
+			throw new IdAlreadyExistsException(ADMIN_EXISTS);
 		} else {
-			throw new NoSuchUserFoundException(NO_USER_FOUND);
+			if (find.isPresent()) {
+				if (find.get().checkAdmin()) {
+					Admin admin = modelMapper.map(adminDto, Admin.class);
+					LOG.info("Saving admin");
+					aRepo.save(admin);
+					LOG.info("Saved. Returning admin");
+					return adminDto;
+				} else {
+					LOG.error(ADMIN_ROLE_REQD);
+					throw new NoAdminRoleFoundException(ADMIN_ROLE_REQD);
+				}
+			} else {
+				LOG.error(NO_USER_FOUND);
+				throw new NoSuchUserFoundException(NO_USER_FOUND);
+			}
 		}
 	}
 
@@ -66,6 +75,7 @@ public class AdminServiceImpl implements AdminService {
 			LOG.info("Returning admin using id");
 			return modelMapper.map(adm.get(), AdminDTO.class);
 		} else {
+			LOG.error(NO_ADMIN_FOUND);
 			throw new NoSuchAdminFoundException(NO_ADMIN_FOUND);
 		}
 	}
@@ -85,6 +95,7 @@ public class AdminServiceImpl implements AdminService {
 			LOG.info("Saved. Returning admin");
 			return adminDto;
 		} else {
+			LOG.error(NO_ADMIN_FOUND);
 			throw new NoSuchAdminFoundException(NO_ADMIN_FOUND);
 		}
 	}
@@ -92,10 +103,14 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public AdminDTO deleteAdmin(long id) throws NoSuchAdminFoundException {
 		Optional<Admin> admDel = aRepo.findById(id);
-		if (admDel.isPresent())
+		if (admDel.isPresent()) {
+			LOG.info("Deleting...");
 			aRepo.delete(admDel.get());
-		else
+			LOG.info("Deleted.");
+		} else {
+			LOG.error(NO_ADMIN_FOUND);
 			throw new NoSuchAdminFoundException(NO_ADMIN_FOUND);
+		}
 		return modelMapper.map(admDel.get(), AdminDTO.class);
 	}
 
