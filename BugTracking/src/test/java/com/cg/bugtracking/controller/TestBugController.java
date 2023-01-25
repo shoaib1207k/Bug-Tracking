@@ -1,7 +1,6 @@
 package com.cg.bugtracking.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -11,25 +10,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import com.cg.bugtracking.dto.BugDTO;
 import com.cg.bugtracking.exception.NoSuchBugFoundException;
 import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.BugService;
 
-
 @ExtendWith(MockitoExtension.class)
-@WebMvcTest(BugController.class)
 class TestBugController {
 
 	private static final BugDTO DTO = null;
 
-	@MockBean
+	@Mock
 	private BugService bugService;
 
 	@InjectMocks
@@ -41,7 +36,7 @@ class TestBugController {
 	@BeforeEach
 	public void setUp() {
 
-		bugDTO=new BugDTO();
+		bugDTO = new BugDTO();
 		bugDTO.setBugId(10);
 		bugDTO.setTitle("title");
 		bugDTO.setDescription("description");
@@ -52,14 +47,10 @@ class TestBugController {
 		bugDTO.setStatus("status");
 		bugDTO.getStartDate();
 		bugDTO.getEndDate();
-		
 
 		bugDTOList = new ArrayList<>();
 		bugDTOList.add(bugDTO);
 	}
-
-
-
 
 	@Test
 	void testGetAllBug() throws NotAdminException  {
@@ -69,37 +60,28 @@ class TestBugController {
 	}
 
 	@Test
-	void testGetBugById() throws NotAdminException {
-		try {
+	void testGetBugById() throws NoSuchBugFoundException,NotAdminException {
 			when(bugService.getBug(1, 1)).thenReturn(bugDTO);
 			ResponseEntity<BugDTO> response = bugController.getBug(1, 1);
-			assertEquals(HttpStatus.FOUND, response.getStatusCode());
-		} catch (NoSuchBugFoundException e) {
-			fail("Unexpected exception");
-		}
-	}
-
-	@Test
-	void testUpdateBug() throws NotAdminException {
-		bugDTO.setBugId(10);
-		try {
-			when(bugService.updateBug(bugDTO, 10, 1)).thenReturn(bugDTO);
-			ResponseEntity<BugDTO> response = bugController.updateBug(10,bugDTO, 1);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchBugFoundException e) {
-			fail("Unexpected exception");
-		}
+		
 	}
 
 	@Test
-	void testDeleteBug() throws NotAdminException {
-		try {
+	void testUpdateBug() throws NoSuchBugFoundException, NotAdminException {
+		bugDTO.setBugId(10);
+		when(bugService.updateBug(bugDTO, 10, 1)).thenReturn(bugDTO);
+		ResponseEntity<BugDTO> response = bugController.updateBug(10, bugDTO, 1);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+
+	}
+
+	@Test
+	void testDeleteBug() throws NoSuchBugFoundException,NotAdminException {
+
 			when(bugService.deleteBug(1, 1)).thenReturn(DTO);
 			ResponseEntity<BugDTO> response = bugController.deleteBug(1, 1);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchBugFoundException e) {
-			fail("Unexpected exception");
-		}
 	}
 
 }

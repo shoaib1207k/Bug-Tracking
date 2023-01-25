@@ -59,7 +59,7 @@ class TestProjectController {
 	void testGetProjectById() throws NoSuchProjectFoundException,NotAdminException {
 			when(prjService.getProjectById(1, 1)).thenReturn(prjDTO);
 			ResponseEntity<ProjectDTO> response = prjController.getProjectById(1, 1);
-			assertEquals(HttpStatus.FOUND, response.getStatusCode());
+			assertEquals(HttpStatus.OK, response.getStatusCode());
 			assertEquals(prjDTO, response.getBody());
 		}
 

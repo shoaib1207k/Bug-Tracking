@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -25,6 +26,7 @@ public class Bug {
 	private LocalDate endDate;
 	
 	@ManyToOne
+	@JoinColumn(name="project_id")
 	private Project project;
 
 	public Bug() {
