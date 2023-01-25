@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Scope;
 public class Admin {
 
 	@Id
-	@Column(name = "admin_id", unique = true)
+	@Column(name = "admin_id")
 	private long adminId;
 
-	@Column(name = "admin_name", nullable = false)
+	@Column(name = "admin_name")
 	private String adminName;
 
-	@Column(name = "admin_contact", unique = true)
+	@Column(name = "admin_contact")
 	private String adminContact;
 
 	public Admin() {
