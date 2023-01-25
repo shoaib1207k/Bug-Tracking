@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.bugtracking.dto.EmployeeDTO;
-import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
-import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.EmployeeService;
 
@@ -37,7 +35,7 @@ public class EmployeeController {
 	@GetMapping("/{empId}")
 	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("empId") long empId,
 			@PathVariable("adminId") long adminId) throws NoSuchEmployeeFoundException, NotAdminException {
-		return new ResponseEntity<>(empService.getEmployeeById(empId, adminId), HttpStatus.FOUND);
+		return new ResponseEntity<>(empService.getEmployeeById(empId, adminId), HttpStatus.OK);
 	}
 
 	@PutMapping("/{empId}")

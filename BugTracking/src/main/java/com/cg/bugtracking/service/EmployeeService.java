@@ -11,7 +11,7 @@ import com.cg.bugtracking.exception.NotAdminException;
 
 public interface EmployeeService {
 
-	EmployeeDTO createEmployee(EmployeeDTO empDTO, long adminId) throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException;
+	EmployeeDTO createEmployee(EmployeeDTO empDTO, long adminId) throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException,NoSuchProjectFoundException;
 
 	EmployeeDTO getEmployeeById(long empId, long adminId) throws NoSuchEmployeeFoundException, NotAdminException;
 

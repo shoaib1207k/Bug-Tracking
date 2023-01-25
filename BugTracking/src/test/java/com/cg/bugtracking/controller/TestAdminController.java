@@ -22,6 +22,7 @@ import com.cg.bugtracking.dto.UserDTO;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
+import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
 import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.AdminService;
@@ -74,7 +75,9 @@ class TestAdminController {
 	}
 
 	@Test
-	void testCreateEmployee() throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException {
+	void testCreateEmployee()
+			throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException, NoSuchProjectFoundException {
+
 		System.out.println(employeeDto);
 		when(employeeService.createEmployee(employeeDto, 1)).thenReturn(employeeDto);
 		ResponseEntity<EmployeeDTO> response = adminController.createEmployee(employeeDto, 1);
@@ -103,7 +106,7 @@ class TestAdminController {
 		adminList.add(adminDto);
 		when(adminService.findAllAdmins(1)).thenReturn(adminList);
 		ResponseEntity<List<AdminDTO>> response = adminController.getAllAdmins(1);
-		assertEquals(HttpStatus.FOUND, response.getStatusCode());
+		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(adminList.size(), response.getBody().size());
 	}
 
@@ -111,7 +114,7 @@ class TestAdminController {
 	void testFindById() throws NoSuchAdminFoundException, NotAdminException {
 		when(adminService.findAdminById(1, 1)).thenReturn(adminDto);
 		ResponseEntity<AdminDTO> response = adminController.getById(1, 1);
-		assertEquals(HttpStatus.FOUND, response.getStatusCode());
+		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(adminDto, response.getBody());
 	}
 
