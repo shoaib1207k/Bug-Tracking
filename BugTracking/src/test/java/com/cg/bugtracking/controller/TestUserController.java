@@ -96,7 +96,7 @@ class TestUserController {
 		userList.add(userDto);
 		when(userService.findAllUsers(1)).thenReturn(userList);
 		ResponseEntity<List<UserDTO>> response = userController.getAllUsers(1);
-		assertEquals(HttpStatus.FOUND, response.getStatusCode());
+		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(userList.size(), response.getBody().size());
 	}
 
@@ -104,7 +104,7 @@ class TestUserController {
 	void testFindById() throws NoSuchUserFoundException, NotAdminException {
 		when(userService.findById(1, 1)).thenReturn(userDto);
 		ResponseEntity<UserDTO> response = userController.getById(1, 1);
-		assertEquals(HttpStatus.FOUND, response.getStatusCode());
+		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(userDto, response.getBody());
 	}
 
