@@ -7,17 +7,16 @@ import javax.validation.constraints.Size;
 
 public class EmployeeDTO {
 	
-	@NotNull
 	@Min(value = 1, message="must be greater than zero")
 	private long empId;
 	@NotNull
 	@Size(min = 3, message = "atleast 3 charachters required")
 	private String empName;
 	@NotNull
-	@Email
+	@Email(message = "enter valid email")
 	private String email;
 	@NotNull
-	@Size(min = 10)
+	@Size(min = 10, message = "must be greater than 10")
 	private String contact;
 
 	private ProjectDTO projectDTO;
