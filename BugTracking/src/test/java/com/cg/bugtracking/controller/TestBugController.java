@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.cg.bugtracking.dto.BugDTO;
 import com.cg.bugtracking.exception.NoSuchBugFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.BugService;
 
 
@@ -61,17 +62,17 @@ class TestBugController {
 
 
 	@Test
-	void testGetAllBug()  {
-		when(bugService.getAllBug()).thenReturn(bugDTOList);
-		ResponseEntity<List<BugDTO>> response = bugController.getAllBug();		
+	void testGetAllBug() throws NotAdminException  {
+		when(bugService.getAllBug(1)).thenReturn(bugDTOList);
+		ResponseEntity<List<BugDTO>> response = bugController.getAllBug(1);		
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 
 	@Test
-	void testGetBugById() {
+	void testGetBugById() throws NotAdminException {
 		try {
-			when(bugService.getBug(1)).thenReturn(bugDTO);
-			ResponseEntity<BugDTO> response = bugController.getBug(1);
+			when(bugService.getBug(1, 1)).thenReturn(bugDTO);
+			ResponseEntity<BugDTO> response = bugController.getBug(1, 1);
 			assertEquals(HttpStatus.FOUND, response.getStatusCode());
 		} catch (NoSuchBugFoundException e) {
 			fail("Unexpected exception");
@@ -79,11 +80,11 @@ class TestBugController {
 	}
 
 	@Test
-	void testUpdateBug() {
+	void testUpdateBug() throws NotAdminException {
 		bugDTO.setBugId(10);
 		try {
-			when(bugService.updateBug(bugDTO, 1)).thenReturn(bugDTO);
-			ResponseEntity<BugDTO> response = bugController.updateBug(10,bugDTO);
+			when(bugService.updateBug(bugDTO, 1, 1)).thenReturn(bugDTO);
+			ResponseEntity<BugDTO> response = bugController.updateBug(10,bugDTO, 0);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
 		} catch (NoSuchBugFoundException e) {
 			fail("Unexpected exception");
@@ -91,10 +92,10 @@ class TestBugController {
 	}
 
 	@Test
-	void testDeleteBug() {
+	void testDeleteBug() throws NotAdminException {
 		try {
-			when(bugService.deleteBug(1)).thenReturn(DTO);
-			ResponseEntity<BugDTO> response = bugController.deleteBug(1);
+			when(bugService.deleteBug(1, 1)).thenReturn(DTO);
+			ResponseEntity<BugDTO> response = bugController.deleteBug(1, 1);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
 		} catch (NoSuchBugFoundException e) {
 			fail("Unexpected exception");
