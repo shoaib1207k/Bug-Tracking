@@ -22,6 +22,7 @@ import com.cg.bugtracking.dto.UserDTO;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
+import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
 import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.AdminService;
@@ -74,7 +75,7 @@ class TestAdminController {
 	}
 
 	@Test
-	void testCreateEmployee() throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException {
+	void testCreateEmployee() throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException, NoSuchProjectFoundException {
 		System.out.println(employeeDto);
 		when(employeeService.createEmployee(employeeDto, 1)).thenReturn(employeeDto);
 		ResponseEntity<EmployeeDTO> response = adminController.createEmployee(employeeDto, 1);

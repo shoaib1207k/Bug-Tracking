@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,6 @@ import com.cg.bugtracking.dao.ProjectRepository;
 import com.cg.bugtracking.dto.ProjectDTO;
 import com.cg.bugtracking.entity.Admin;
 import com.cg.bugtracking.entity.Project;
-import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.exception.NotAdminException;
 
@@ -64,6 +64,8 @@ public class ProjectServiceImpl implements ProjectService {
 			throw new NotAdminException(NOT_ADMIN);
 		}
 	}
+	
+	
 
 	@Override
 	public List<ProjectDTO> getAllProjects(long adminId) throws NotAdminException {
@@ -105,7 +107,6 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public ProjectDTO deleteProject(long id, long adminId) throws NoSuchProjectFoundException, NotAdminException {
 		Optional<Project> prjToDel = pRepo.findById(id);
-		Optional<Admin> admDel = aRepo.findById(id);
 		if (aRepo.existsById(adminId)) {
 			if (prjToDel.isPresent()) {
 				LOG.info("Deleting...");
@@ -118,5 +119,14 @@ public class ProjectServiceImpl implements ProjectService {
 			throw new NotAdminException(NOT_ADMIN);
 		}
 
+	}
+
+	@Override
+	public List<ProjectDTO> getProjectByEmployeId(long empId,long adminId) throws NotAdminException  {
+		if (aRepo.existsById(adminId)) {
+			return modelMapper.map(pRepo.getProjectByEmployeId(empId),new TypeToken<List<Project>>(){}.getType());
+		}else {
+			throw new NotAdminException(NOT_ADMIN);
+		}
 	}
 }
