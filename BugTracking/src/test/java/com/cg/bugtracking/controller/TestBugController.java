@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -24,12 +25,11 @@ import com.cg.bugtracking.service.BugService;
 
 
 @ExtendWith(MockitoExtension.class)
-@WebMvcTest(BugController.class)
 class TestBugController {
 
 	private static final BugDTO DTO = null;
 
-	@MockBean
+	@Mock
 	private BugService bugService;
 
 	@InjectMocks
@@ -83,8 +83,8 @@ class TestBugController {
 	void testUpdateBug() throws NotAdminException {
 		bugDTO.setBugId(10);
 		try {
-			when(bugService.updateBug(bugDTO, 1, 1)).thenReturn(bugDTO);
-			ResponseEntity<BugDTO> response = bugController.updateBug(10,bugDTO, 0);
+			when(bugService.updateBug(bugDTO, 10, 1)).thenReturn(bugDTO);
+			ResponseEntity<BugDTO> response = bugController.updateBug(10,bugDTO, 1);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
 		} catch (NoSuchBugFoundException e) {
 			fail("Unexpected exception");
