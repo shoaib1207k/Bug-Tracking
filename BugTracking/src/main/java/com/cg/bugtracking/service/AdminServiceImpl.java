@@ -66,7 +66,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<AdminDTO> findAllAdmins(long adminId) throws NotAdminException {
-		if (aRepo.existsById(adminId)) {
+		Optional<Admin> findAdmin = aRepo.findById(adminId);
+		if (findAdmin.isPresent()) {
 			LOG.info("Returning all admins");
 			return aRepo.findAll().stream().map(adm -> modelMapper.map(adm, AdminDTO.class))
 					.collect(Collectors.toList());

@@ -13,18 +13,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.cg.bugtracking.dto.AdminDTO;
 import com.cg.bugtracking.dto.EmployeeDTO;
-import com.cg.bugtracking.entity.Admin;
-import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
-import com.cg.bugtracking.exception.NoSuchProjectFoundException;
-import com.cg.bugtracking.exception.NoSuchUserFoundException;
 import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.EmployeeService;
 
@@ -76,7 +70,7 @@ class TestEmployeeController {
 		try {
 			when(empService.getEmployeeById(1,11)).thenReturn(empDTO);
 			ResponseEntity<EmployeeDTO> response = empController.getEmployeeById(1,11);
-			assertEquals(HttpStatus.FOUND, response.getStatusCode());
+			assertEquals(HttpStatus.OK, response.getStatusCode());
 		} catch (NoSuchEmployeeFoundException | NotAdminException e) {
 			fail("Unexpected exception");
 		}
