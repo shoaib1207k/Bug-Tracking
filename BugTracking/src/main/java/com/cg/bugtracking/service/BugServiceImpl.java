@@ -112,9 +112,6 @@ public class BugServiceImpl implements BugService{
 	List <BugDTO> getAllBugStatus(String status)  {
 		LOG.info("Returning  bugs with status");
 		return modelMapper.map(bRepo.getAllBugsByStatus(status),new TypeToken<List<BugDTO>>(){}.getType());
-//		return  bRepo.getAllBugsByStatus(status)
-//				.stream().map(bug ->modelMapper.map(bug,BugDTO.class))
-//				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -139,17 +136,12 @@ public class BugServiceImpl implements BugService{
 	public List<BugDTO> getAllBugsByProjectId(long id) {
 		return modelMapper.map(bRepo.getAllBugsByProjectId(id),new TypeToken<List<BugDTO>>(){}.getType());
 	
-//		return bRepo.getAllBugsByProjectId(id)
-//				.stream().map(bug ->modelMapper.map(id,BugDTO.class))
-//				.collect(Collectors.toList());
+
 	}
 
 	@Override
 	public List<BugDTO> findBugByEmpName(String empName) {
 		return modelMapper.map(bRepo.findBugByEmpName(empName),new TypeToken<List<BugDTO>>(){}.getType());
-//		return bRepo.findBugByEmpName(empName)
-//				.stream().map(bug -> modelMapper.map(empName,BugDTO.class))
-//				.collect(Collectors.toList());
-//	}
+
 }
 }

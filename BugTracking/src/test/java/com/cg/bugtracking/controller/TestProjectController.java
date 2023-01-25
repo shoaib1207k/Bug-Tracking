@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,10 +24,9 @@ import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.ProjectService;
 
 @ExtendWith(MockitoExtension.class)
-@WebMvcTest(ProjectController.class)
 class TestProjectController {
 
-	@MockBean
+	@Mock
 	private ProjectService prjService;
 
 	@InjectMocks

@@ -2,9 +2,9 @@ package com.cg.bugtracking.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,8 +90,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<EmployeeDTO> getAllEmployees(long adminId) throws NotAdminException {
 		Optional<Admin> findAdmin = adminRepo.findById(adminId);
 		if (findAdmin.isPresent()) {
-			return empRepo.findAll().stream().map(emp -> modelMapper.map(emp, EmployeeDTO.class))
-					.collect(Collectors.toList());
+			return modelMapper.map(empRepo.findAll(),new TypeToken<List<EmployeeDTO>>(){}.getType());
 		} else {
 			throw new NotAdminException(NOT_ADMIN);
 
@@ -142,8 +141,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<EmployeeDTO> getEmployeeByProjectId(long adminId, long projId) throws NotAdminException {
 		Optional<Admin> findAdmin = adminRepo.findById(adminId);
 		if (findAdmin.isPresent()) {
-			return empRepo.getEmployeeByProjectId(projId).stream().map(emp -> modelMapper.map(emp, EmployeeDTO.class))
-					.collect(Collectors.toList());
+			return modelMapper.map(empRepo.getEmployeeByProjectId(projId),new TypeToken<List<EmployeeDTO>>(){}.getType());
+			
 		} else
 			throw new NotAdminException(NOT_ADMIN);
 
