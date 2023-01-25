@@ -25,7 +25,9 @@ import com.cg.bugtracking.service.ProjectService;
 
 
 @RestController
-@RequestMapping("{adminId}/project")
+
+@RequestMapping("/{adminId}/project")
+
 public class ProjectController {
 
 	@Autowired
