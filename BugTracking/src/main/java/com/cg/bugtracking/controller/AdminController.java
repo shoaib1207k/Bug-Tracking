@@ -55,9 +55,10 @@ public class AdminController {
 		return new ResponseEntity<>(empService.createEmployee(empDTO, adminId), HttpStatus.CREATED);
 	}
 
-	@PostMapping("/project")
-	public ResponseEntity<ProjectDTO> createProject(@Valid @RequestBody ProjectDTO prjDTO) {
-		return new ResponseEntity<>(prjService.createProject(prjDTO), HttpStatus.CREATED);
+	@PostMapping("/{adminId}/project")
+	public ResponseEntity<ProjectDTO> createProject(@Valid @RequestBody ProjectDTO prjDTO,
+			@PathVariable("adminId") long adminId) throws NotAdminException {
+		return new ResponseEntity<>(prjService.createProject(prjDTO, adminId), HttpStatus.CREATED);
 	}
 
 	// admin CRUD

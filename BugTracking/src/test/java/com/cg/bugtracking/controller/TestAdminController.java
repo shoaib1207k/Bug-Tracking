@@ -82,7 +82,7 @@ class TestAdminController {
 	}
 
 	@Test
-	void testCreateProject() {
+	void testCreateProject() throws NotAdminException {
 		EmployeeDTO emp = new EmployeeDTO();
 		emp.setEmpId(userDto.getUserId());
 		emp.setEmpName("Rahul");
@@ -92,8 +92,8 @@ class TestAdminController {
 		projectDto.setProjId(111);
 		projectDto.setProjName("Java Project");
 		projectDto.setProjStatus("open");
-		when(projectService.createProject(projectDto)).thenReturn(projectDto);
-		ResponseEntity<ProjectDTO> response = adminController.createProject(projectDto);
+		when(projectService.createProject(projectDto, 1)).thenReturn(projectDto);
+		ResponseEntity<ProjectDTO> response = adminController.createProject(projectDto, 1);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
 	}
 
