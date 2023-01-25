@@ -8,6 +8,7 @@ public class UserDTO {
 
 	@Min(value = 1, message = "Should be greater than 1 in user ID")
 	private long userId;
+	
 	@NotBlank(message = "Role is required")
 	@Size(max = 15, min = 5, message = "atleast 5 characters in role")
 	private String role;

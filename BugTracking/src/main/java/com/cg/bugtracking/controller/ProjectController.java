@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.bugtracking.dto.ProjectDTO;
-import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.ProjectService;
@@ -25,9 +24,7 @@ import com.cg.bugtracking.service.ProjectService;
 
 
 @RestController
-
 @RequestMapping("/{adminId}/project")
-
 public class ProjectController {
 
 	@Autowired
@@ -41,7 +38,7 @@ public class ProjectController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<ProjectDTO> getProjectById(@PathVariable("id") long id, @PathVariable("adminId") long adminId) throws NoSuchProjectFoundException, NotAdminException{
-		return new ResponseEntity<>(prjService.getProjectById(id,adminId), HttpStatus.FOUND);
+		return new ResponseEntity<>(prjService.getProjectById(id,adminId), HttpStatus.OK);
 	}
 	
 	@PutMapping("/{id}")
@@ -52,5 +49,9 @@ public class ProjectController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ProjectDTO> deleteProject(@PathVariable("id")long id, @PathVariable("adminId") long adminId) throws NoSuchProjectFoundException,NotAdminException{
 		return new ResponseEntity<>(prjService.deleteProject(id, adminId), HttpStatus.OK);
+	}
+	@GetMapping("/byEmpId/{empId}")
+	public ResponseEntity<List<ProjectDTO>> getProjectByEmployeId(@PathVariable("empId") long empId ,@PathVariable("adminId") long adminId)throws NotAdminException {
+		return new ResponseEntity<>(prjService.getProjectByEmployeId(empId,adminId), HttpStatus.OK);
 	}
 }
