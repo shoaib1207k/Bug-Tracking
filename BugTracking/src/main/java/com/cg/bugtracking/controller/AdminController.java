@@ -21,6 +21,7 @@ import com.cg.bugtracking.dto.ProjectDTO;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoAdminRoleFoundException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
+import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
 import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.AdminService;
@@ -51,7 +52,7 @@ public class AdminController {
 	@PostMapping("/{adminId}/employee")
 	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO empDTO,
 			@PathVariable("adminId") long adminId)
-			throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException {
+			throws NoAdminRoleFoundException, NoSuchUserFoundException, NotAdminException, NoSuchProjectFoundException {
 		return new ResponseEntity<>(empService.createEmployee(empDTO, adminId), HttpStatus.CREATED);
 	}
 
