@@ -24,7 +24,7 @@ public class Employee {
 	private String email;
 	private String contact;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="project_id")
 	private Project project;
 	

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,11 @@ import com.cg.bugtracking.exception.NotAdminException;
 @Service
 public class BugServiceImpl implements BugService{
 	
+	private static final Logger LOG = LogManager.getLogger(BugServiceImpl.class);
+	
 	private static final String NOT_ADMIN = "You are not an Admin!";
+	
+	private static final String NO_Bug_FOUND = "Bug not found.";
 	
 	@Autowired
 	private BugRepository bRepo;
@@ -34,12 +40,15 @@ public class BugServiceImpl implements BugService{
 
 	@Override
 	@Transactional
-	public BugDTO createBug(BugDTO bugDTO) {
+	public BugDTO createBug(BugDTO bugDTO){
 		Bug bug = modelMapper.map(bugDTO,Bug.class); 
+		LOG.info("Saving project");
 		bRepo.save(bug);
+		LOG.info("Saved. Returning bug");
 		return bugDTO;
 	}
-
+	
+	
 	@Override
 	public BugDTO updateBug(BugDTO bugDTO ,long id, long adminId) throws NoSuchBugFoundException , NotAdminException{
 		Optional<Bug> bugUpdate = bRepo.findById(id);
@@ -47,16 +56,18 @@ public class BugServiceImpl implements BugService{
 		Optional<Admin> findAdmin = aRepo.findById(adminId);
 		if (findAdmin.isPresent()) {
 		   if(bugUpdate.isPresent()) {
-			
+			   LOG.info("Bug present. Updating...");
 			bugUpdate.get().setBugId(bug.getBugId());
 			bugUpdate.get().setType(bug.getType());
 			bugUpdate.get().setPriority(bug.getPriority());
 			bugUpdate.get().setProgress(bug.getProgress());
 			bugUpdate.get().setEndDate(bug.getEndDate());
+			LOG.info("Updating bug....");
 		    bRepo.save(bugUpdate.get());
+		    LOG.info("Saved. Returning bug");
 			return bugDTO;
 		}else {
-			throw new NoSuchBugFoundException("No Bug with this id");
+			throw new NoSuchBugFoundException(NO_Bug_FOUND);
 		}
 		
 		}else {
@@ -69,9 +80,12 @@ public class BugServiceImpl implements BugService{
 			
 			Optional<Admin> findAdmin = aRepo.findById(adminId);
 			if (findAdmin.isPresent()) {
-				if(buglist.isPresent())
+				if(buglist.isPresent()) {
+					LOG.info("Returning bug using id");
 					return  modelMapper.map(buglist.get(),BugDTO.class);
-				else throw new NoSuchBugFoundException("No Such Bug");
+				}else{
+					throw new NoSuchBugFoundException(NO_Bug_FOUND);
+					}
 			} else {
 				throw new NotAdminException(NOT_ADMIN);
 			}
@@ -81,6 +95,7 @@ public class BugServiceImpl implements BugService{
 	public List<BugDTO> getAllBug(long adminId)throws NotAdminException {
 		Optional<Admin> findAdmin = aRepo.findById(adminId);
 		if (findAdmin.isPresent()) {
+			LOG.info("Returning all bugs");
 		return  bRepo.findAll()
 				.stream().map(bug ->modelMapper.map(bug,BugDTO.class))
 				.collect(Collectors.toList());
@@ -94,6 +109,7 @@ public class BugServiceImpl implements BugService{
 	@Override
 	public
 	List <BugDTO> getAllBugStatus(String status)  {
+		LOG.info("Returning  bugs with status");
 		return  bRepo.getAllBugsByStatus(status)
 				.stream().map(bug ->modelMapper.map(status,BugDTO.class))
 				.collect(Collectors.toList());
@@ -104,10 +120,12 @@ public class BugServiceImpl implements BugService{
 		Optional<Admin> findAdmin = aRepo.findById(adminId);
 		if (findAdmin.isPresent()) {
 		Optional<Bug> bugDel = bRepo.findById(id);
-			if(bugDel.isPresent()) 
+			if(bugDel.isPresent()) {
+				LOG.info("Deleting...");
 				bRepo.delete(bugDel.get());	
-			else
-				throw new NoSuchBugFoundException("No Bug with this id");
+				LOG.info("Deleted.");
+			}else
+				throw new NoSuchBugFoundException(NO_Bug_FOUND);
 			return modelMapper.map(bugDel.get(), BugDTO.class);
 		}else {
 			throw new NotAdminException(NOT_ADMIN);
