@@ -1,7 +1,5 @@
 package com.cg.bugtracking.dto;
 
-import java.util.List;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -21,33 +19,8 @@ public class EmployeeDTO {
 	@NotNull
 	@Size(min = 10)
 	private String contact;
-    
-//	private List<Long> projIdList;
-	
-//	@JsonProperty(access = Access.READ_ONLY)
-//	private List<Project> projList;
 
 	private ProjectDTO projectDTO;
-	
-//	public List<Project> getProjList() {
-//		return projList;
-//	}
-//
-//
-//	public void setProjList(List<Project> projList) {
-//		this.projList = projList;
-//	}
-
-//
-//	public long getProjId() {
-//		return projId;
-//	}
-//
-//
-//	public void setProjId(long projId) {
-//		this.projId = projId;
-//	}
-
 
 	public ProjectDTO getProject() {
 		return projectDTO;
@@ -56,19 +29,6 @@ public class EmployeeDTO {
 	public void setProject(ProjectDTO project) {
 		this.projectDTO = project;
 	}
-
-	public EmployeeDTO() {
-//		Hibernate creates an instance of entities using reflection it uses the Class.newInstance()
-
-	}
-//
-//	public List<Long> getProjIdList() {
-//		return projIdList;
-//	}
-//
-//	public void setProjIdList(List<Long> projIdList) {
-//		this.projIdList = projIdList;
-//	}
 
 	public long getEmpId() {
 		return empId;
