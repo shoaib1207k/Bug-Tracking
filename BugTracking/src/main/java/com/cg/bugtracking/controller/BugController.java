@@ -21,46 +21,47 @@ import com.cg.bugtracking.service.BugService;
 @RestController
 @RequestMapping("/{adminId}/bug")
 public class BugController {
-	
+
 	@Autowired
 	private BugService bugService;
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<BugDTO> updateBug(@PathVariable("id")long id, @RequestBody BugDTO bugDTO,@PathVariable("adminId")long adminId) throws NoSuchBugFoundException, NotAdminException{
-	 
-	return new  ResponseEntity<>(bugService.updateBug(bugDTO, id,adminId),HttpStatus.OK);
-   }
-	
+	public ResponseEntity<BugDTO> updateBug(@PathVariable("id") long id, @RequestBody BugDTO bugDTO,
+			@PathVariable("adminId") long adminId) throws NoSuchBugFoundException, NotAdminException {
+
+		return new ResponseEntity<>(bugService.updateBug(bugDTO, id, adminId), HttpStatus.OK);
+	}
+
 	@GetMapping("/{id}")
-	public ResponseEntity<BugDTO> getBug(@PathVariable("id") long id,@PathVariable("adminId")long adminId) throws NoSuchBugFoundException, NotAdminException{
-		
-		return new ResponseEntity<>(bugService.getBug(id,adminId), HttpStatus.OK);
+	public ResponseEntity<BugDTO> getBug(@PathVariable("id") long id, @PathVariable("adminId") long adminId)
+			throws NoSuchBugFoundException, NotAdminException {
+
+		return new ResponseEntity<>(bugService.getBug(id, adminId), HttpStatus.OK);
 	}
 
 	@GetMapping
-	public ResponseEntity<List<BugDTO>> getAllBug(long adminId)throws NotAdminException{
+	public ResponseEntity<List<BugDTO>> getAllBug(long adminId) throws NotAdminException {
 		return new ResponseEntity<>(bugService.getAllBug(adminId), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/bugstatus/{status}")
-	public ResponseEntity<List<BugDTO>> getAllBugStatus(@PathVariable("status") String status){
+	public ResponseEntity<List<BugDTO>> getAllBugStatus(@PathVariable("status") String status) {
 		return new ResponseEntity<>(bugService.getAllBugStatus(status), HttpStatus.OK);
 	}
-	
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<BugDTO> deleteBug(@PathVariable("id")long id,@PathVariable("adminId")long adminId) throws NoSuchBugFoundException, NotAdminException{
-		return new ResponseEntity<>(bugService.deleteBug(id,adminId), HttpStatus.OK);
+	public ResponseEntity<BugDTO> deleteBug(@PathVariable("id") long id, @PathVariable("adminId") long adminId)
+			throws NoSuchBugFoundException, NotAdminException {
+		return new ResponseEntity<>(bugService.deleteBug(id, adminId), HttpStatus.OK);
 	}
-	
-	
-	@GetMapping("/bugbyproject/{id}")
-	public ResponseEntity<List<BugDTO>> getAllBugsByProjectId(@PathVariable("id") long id){
+
+	@GetMapping("/byProject/{id}")
+	public ResponseEntity<List<BugDTO>> getAllBugsByProjectId(@PathVariable("id") long id) {
 		return new ResponseEntity<>(bugService.getAllBugsByProjectId(id), HttpStatus.OK);
 	}
-	
-	@GetMapping("/bugbyemployee/{empName}")
-	public ResponseEntity<List<BugDTO>> findBugByEmpName(@PathVariable("empName") String empName){
+
+	@GetMapping("/byEmployee/{empName}")
+	public ResponseEntity<List<BugDTO>> findBugByEmpName(@PathVariable("empName") String empName) {
 		return new ResponseEntity<>(bugService.findBugByEmpName(empName), HttpStatus.OK);
 	}
 }
