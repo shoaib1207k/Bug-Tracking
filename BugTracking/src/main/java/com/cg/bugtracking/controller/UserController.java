@@ -50,13 +50,13 @@ public class UserController {
 
 	@GetMapping("/{adminId}")
 	public ResponseEntity<List<UserDTO>> getAllUsers(@PathVariable("adminId") long adminId) throws NotAdminException {
-		return new ResponseEntity<>(uService.findAllUsers(adminId), HttpStatus.FOUND);
+		return new ResponseEntity<>(uService.findAllUsers(adminId), HttpStatus.OK);
 	}
 
 	@GetMapping("/{adminId}/{id}")
 	public ResponseEntity<UserDTO> getById(@PathVariable long id, @PathVariable("adminId") long adminId)
 			throws NoSuchUserFoundException, NotAdminException {
-		return new ResponseEntity<>(uService.findById(id, adminId), HttpStatus.FOUND);
+		return new ResponseEntity<>(uService.findById(id, adminId), HttpStatus.OK);
 	}
 
 	@PutMapping("/{adminId}/{id}")
