@@ -1,7 +1,6 @@
 package com.cg.bugtracking.entity;
 
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,7 +23,7 @@ public class Employee {
 	private String email;
 	private String contact;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="project_id")
 	private Project project;
 	

@@ -35,8 +35,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	// create (user, bug)
-
 	@Override
 	public UserDTO createUser(UserDTO userDto) throws IdAlreadyExistsException {
 		if (uRepo.existsById(userDto.getUserId())) {
