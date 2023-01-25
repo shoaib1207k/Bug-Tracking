@@ -2,7 +2,6 @@ package com.cg.bugtracking.entity;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -14,13 +13,10 @@ import javax.persistence.Table;
 public class Bug {
 	
 	@Id
-	@Column(name="Bug_id")
 	private long bugId;
 	private String title;
 	private String description;
     private String type;
-    
-    @Column(name = "Bug_priority", nullable = false)
 	private String priority;
 	private int progress;
 	private String empName; 
