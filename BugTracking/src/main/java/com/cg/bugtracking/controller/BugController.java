@@ -26,9 +26,9 @@ public class BugController {
 
 	
 	@PostMapping("/bug/{id}")
-	public ResponseEntity<BugDTO> updateBug(@PathVariable("id")long id, @RequestBody BugDTO bugDTO) throws NoSuchBugFoundException{
+	public ResponseEntity<BugDTO> updateBug(@PathVariable("id")long id, @RequestBody BugDTO bugDTO,@PathVariable("adminId")long adminId) throws NoSuchBugFoundException, NotAdminException{
 	 
-	return new  ResponseEntity<>(bugService.updateBug(bugDTO, id),HttpStatus.OK);
+	return new  ResponseEntity<>(bugService.updateBug(bugDTO, id,adminId),HttpStatus.OK);
    }
 	
 	@GetMapping("/bug/{id}")
@@ -38,8 +38,8 @@ public class BugController {
 	}
 
 	@GetMapping("/bugs")
-	public ResponseEntity<List<BugDTO>> getAllBug(){
-		return new ResponseEntity<>(bugService.getAllBug(), HttpStatus.OK);
+	public ResponseEntity<List<BugDTO>> getAllBug(long adminId)throws NotAdminException{
+		return new ResponseEntity<>(bugService.getAllBug(adminId), HttpStatus.OK);
 	}
 	
 	@GetMapping("/bugstatus")
@@ -49,17 +49,18 @@ public class BugController {
 	
 	
 	@DeleteMapping("/bug/{id}")
-	public ResponseEntity<BugDTO> deleteBug(@PathVariable("id")long id) throws NoSuchBugFoundException{
-		return new ResponseEntity<>(bugService.deleteBug(id), HttpStatus.OK);
+	public ResponseEntity<BugDTO> deleteBug(@PathVariable("id")long id,@PathVariable("adminId")long adminId) throws NoSuchBugFoundException, NotAdminException{
+		return new ResponseEntity<>(bugService.deleteBug(id,adminId), HttpStatus.OK);
 	}
 	
+	
 	@GetMapping("/bugbyproject/{id}")
-	public ResponseEntity<List<BugDTO>> getAllBugsByProjectId(@PathVariable long id){
+	public ResponseEntity<List<BugDTO>> getAllBugsByProjectId(@PathVariable("id") long id){
 		return new ResponseEntity<>(bugService.getAllBugsByProjectId(id), HttpStatus.OK);
 	}
 	
-	@GetMapping("/bugbyemployee")
-	public ResponseEntity<List<BugDTO>> findBugByEmpName(@PathVariable String empName){
+	@GetMapping("/bugbyemployee/{empName}")
+	public ResponseEntity<List<BugDTO>> findBugByEmpName(@PathVariable("empName") String empName){
 		return new ResponseEntity<>(bugService.findBugByEmpName(empName), HttpStatus.OK);
 	}
 }
