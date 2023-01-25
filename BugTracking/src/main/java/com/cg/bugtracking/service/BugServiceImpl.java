@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,10 +26,10 @@ public class BugServiceImpl implements BugService{
 	
 	private static final Logger LOG = LogManager.getLogger(BugServiceImpl.class);
 	
+	private static final String NO_BUG_FOUND = "Bug not found.";
+	
 	private static final String NOT_ADMIN = "You are not an Admin!";
-	
-	private static final String NO_Bug_FOUND = "Bug not found.";
-	
+
 	@Autowired
 	private BugRepository bRepo;
 	
@@ -67,7 +68,7 @@ public class BugServiceImpl implements BugService{
 		    LOG.info("Saved. Returning bug");
 			return bugDTO;
 		}else {
-			throw new NoSuchBugFoundException(NO_Bug_FOUND);
+			throw new NoSuchBugFoundException(NO_BUG_FOUND);
 		}
 		
 		}else {
@@ -84,7 +85,7 @@ public class BugServiceImpl implements BugService{
 					LOG.info("Returning bug using id");
 					return  modelMapper.map(buglist.get(),BugDTO.class);
 				}else{
-					throw new NoSuchBugFoundException(NO_Bug_FOUND);
+					throw new NoSuchBugFoundException(NO_BUG_FOUND);
 					}
 			} else {
 				throw new NotAdminException(NOT_ADMIN);
@@ -110,9 +111,10 @@ public class BugServiceImpl implements BugService{
 	public
 	List <BugDTO> getAllBugStatus(String status)  {
 		LOG.info("Returning  bugs with status");
-		return  bRepo.getAllBugsByStatus(status)
-				.stream().map(bug ->modelMapper.map(status,BugDTO.class))
-				.collect(Collectors.toList());
+		return modelMapper.map(bRepo.getAllBugsByStatus(status),new TypeToken<List<BugDTO>>(){}.getType());
+//		return  bRepo.getAllBugsByStatus(status)
+//				.stream().map(bug ->modelMapper.map(bug,BugDTO.class))
+//				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -125,7 +127,7 @@ public class BugServiceImpl implements BugService{
 				bRepo.delete(bugDel.get());	
 				LOG.info("Deleted.");
 			}else
-				throw new NoSuchBugFoundException(NO_Bug_FOUND);
+				throw new NoSuchBugFoundException(NO_BUG_FOUND);
 			return modelMapper.map(bugDel.get(), BugDTO.class);
 		}else {
 			throw new NotAdminException(NOT_ADMIN);
@@ -135,15 +137,19 @@ public class BugServiceImpl implements BugService{
 
 	@Override
 	public List<BugDTO> getAllBugsByProjectId(long id) {
-		return bRepo.getAllBugsByProjectId(id)
-				.stream().map(bug ->modelMapper.map(id,BugDTO.class))
-				.collect(Collectors.toList());
+		return modelMapper.map(bRepo.getAllBugsByProjectId(id),new TypeToken<List<BugDTO>>(){}.getType());
+	
+//		return bRepo.getAllBugsByProjectId(id)
+//				.stream().map(bug ->modelMapper.map(id,BugDTO.class))
+//				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<BugDTO> findBugByEmpName(String empName) {
-		return bRepo.findBugByEmpName(empName)
-				.stream().map(bug -> modelMapper.map(empName,BugDTO.class))
-				.collect(Collectors.toList());
-	}
+		return modelMapper.map(bRepo.findBugByEmpName(empName),new TypeToken<List<BugDTO>>(){}.getType());
+//		return bRepo.findBugByEmpName(empName)
+//				.stream().map(bug -> modelMapper.map(empName,BugDTO.class))
+//				.collect(Collectors.toList());
+//	}
+}
 }
