@@ -35,7 +35,7 @@ public class EmployeeController {
 	@GetMapping("/{empId}")
 	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("empId") long empId,
 			@PathVariable("adminId") long adminId) throws NoSuchEmployeeFoundException, NotAdminException {
-		return new ResponseEntity<>(empService.getEmployeeById(empId, adminId), HttpStatus.FOUND);
+		return new ResponseEntity<>(empService.getEmployeeById(empId, adminId), HttpStatus.OK);
 	}
 
 	@PutMapping("/{empId}")
