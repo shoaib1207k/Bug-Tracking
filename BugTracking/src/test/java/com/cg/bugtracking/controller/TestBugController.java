@@ -83,8 +83,8 @@ class TestBugController {
 	void testUpdateBug() throws NotAdminException {
 		bugDTO.setBugId(10);
 		try {
-			when(bugService.updateBug(bugDTO, 1, 1)).thenReturn(bugDTO);
-			ResponseEntity<BugDTO> response = bugController.updateBug(10,bugDTO, 0);
+			when(bugService.updateBug(bugDTO, 10, 1)).thenReturn(bugDTO);
+			ResponseEntity<BugDTO> response = bugController.updateBug(10,bugDTO, 1);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
 		} catch (NoSuchBugFoundException e) {
 			fail("Unexpected exception");
