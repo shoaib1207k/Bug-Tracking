@@ -66,13 +66,13 @@ public class AdminController {
 
 	@GetMapping("/{adminId}")
 	public ResponseEntity<List<AdminDTO>> getAllAdmins(@PathVariable("adminId") long adminId) throws NotAdminException {
-		return new ResponseEntity<>(aService.findAllAdmins(adminId), HttpStatus.FOUND);
+		return new ResponseEntity<>(aService.findAllAdmins(adminId), HttpStatus.OK);
 	}
 
 	@GetMapping("/{adminId}/{id}")
 	public ResponseEntity<AdminDTO> getById(@PathVariable long id, @PathVariable("adminId") long adminId)
 			throws NoSuchAdminFoundException, NotAdminException {
-		return new ResponseEntity<>(aService.findAdminById(id, adminId), HttpStatus.FOUND);
+		return new ResponseEntity<>(aService.findAdminById(id, adminId), HttpStatus.OK);
 	}
 
 	@PutMapping("/{adminId}/{id}")
