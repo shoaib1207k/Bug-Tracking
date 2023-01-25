@@ -28,8 +28,8 @@ public class BugDTO {
 	@Size(max=20,min=3)
 	private String priority;
 	
-	@Size(max=20,min=3)
-	@NotBlank(message = "Progress is required")
+	//@Size(max=20,min=3)
+	//@NotBlank(message = "Progress is required")
 	private int progress;
 	
 	@Size(min = 3, message = "atleast 3 charachters required")
@@ -40,11 +40,11 @@ public class BugDTO {
 	@NotBlank(message = "Status is required")
 	private String status;
 	
-	@NotBlank(message = "Start Date is required")
+//	@NotBlank(message = "Start Date is required")
 //	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
 	private LocalDate startDate;
 	
-	@NotBlank(message = "End Date is required")
+//	@NotBlank(message = "End Date is required")
 //	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
 	private LocalDate endDate;
 	
