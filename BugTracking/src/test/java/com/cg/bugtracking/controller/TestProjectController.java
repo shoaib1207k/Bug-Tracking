@@ -18,14 +18,13 @@ import org.springframework.http.ResponseEntity;
 
 import com.cg.bugtracking.dto.EmployeeDTO;
 import com.cg.bugtracking.dto.ProjectDTO;
-import com.cg.bugtracking.entity.Employee;
-import com.cg.bugtracking.exception.NoSuchEmployeeFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.ProjectService;
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(ProjectController.class)
-class ProjectControllerTest {
+class TestProjectController {
 
 	@MockBean
 	private ProjectService prjService;
@@ -42,20 +41,19 @@ class ProjectControllerTest {
 		prjDTO = new ProjectDTO();
 		prjDTO.setProjId(101);
 		prjDTO.setProjName("Spring Project");
-		
-		
-		empDTO= new EmployeeDTO();
+
+		empDTO = new EmployeeDTO();
 		empDTO.setEmpId(1);
 		empDTO.setEmpName("Prakash");
 		empDTO.setEmail("abc@123");
 		empDTO.setContact("99999999999");
-		
-		prjDTO.setProjManager(empDTO);
+
+		// prjDTO.setProjManager(empDTO);
 		prjDTO.setProjStatus("active");
-		
+
 		prjDTOList = new ArrayList<>();
 		prjDTOList.add(prjDTO);
-		
+
 	}
 
 //	@Test
@@ -64,46 +62,36 @@ class ProjectControllerTest {
 //	}
 
 	@Test
-	void testGetAllProjects() {
-		when(prjService.getAllProjects()).thenReturn(prjDTOList);
-		ResponseEntity<List<ProjectDTO>> response = prjController.getAllProjects();		
+	void testGetAllProjects() throws NotAdminException {
+		when(prjService.getAllProjects(1)).thenReturn(prjDTOList);
+		ResponseEntity<List<ProjectDTO>> response = prjController.getAllProjects(1);		
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 
 	@Test
-	void testGetProjectById() {
-		try {
-			when(prjService.getProjectById(1)).thenReturn(prjDTO);
-			ResponseEntity<ProjectDTO> response = prjController.getProjectById(1);
+	void testGetProjectById() throws NoSuchProjectFoundException,NotAdminException {
+			when(prjService.getProjectById(1, 1)).thenReturn(prjDTO);
+			ResponseEntity<ProjectDTO> response = prjController.getProjectById(1, 1);
 			assertEquals(HttpStatus.FOUND, response.getStatusCode());
-		} catch (NoSuchProjectFoundException e) {
-			fail("Unexpected exception");
+			assertEquals(prjDTO, response.getBody());
 		}
-	}
-	
-	
 
 	@Test
-	void testUpdateProject() {
+	void testUpdateProject() throws NoSuchProjectFoundException, NotAdminException {
 		prjDTO.setProjName("Java");
-		try {
-			when(prjService.updateProject(1, prjDTO)).thenReturn(prjDTO);
-			ResponseEntity<ProjectDTO> response = prjController.updateProject(1, prjDTO);
-			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchProjectFoundException e) {
-			fail("Unexpected exception");
-		}
+		when(prjService.updateProject(1, prjDTO, 1)).thenReturn(prjDTO);
+		ResponseEntity<ProjectDTO> response = prjController.updateProject(1, prjDTO, 1);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(prjDTO, response.getBody());
+
 	}
 
 	@Test
-	void testDeleteProject() {
-		try {
-			when(prjService.deleteProject(1)).thenReturn(prjDTO);
-			ResponseEntity<ProjectDTO> response = prjController.deleteProject(1);
+	void testDeleteProject() throws NoSuchProjectFoundException, NotAdminException {
+			when(prjService.deleteProject(1, 0)).thenReturn(prjDTO);
+			ResponseEntity<ProjectDTO> response = prjController.deleteProject(1, 0);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchProjectFoundException e) {
-			fail("Unexpected exception");
-		}
+		
 	}
 
 }

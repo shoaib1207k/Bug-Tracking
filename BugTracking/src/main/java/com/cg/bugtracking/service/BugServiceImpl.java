@@ -11,15 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cg.bugtracking.dao.AdminRepository;
 import com.cg.bugtracking.dao.BugRepository;
-import com.cg.bugtracking.dto.AdminDTO;
 import com.cg.bugtracking.dto.BugDTO;
-import com.cg.bugtracking.dto.ProjectDTO;
 import com.cg.bugtracking.entity.Admin;
 import com.cg.bugtracking.entity.Bug;
-import com.cg.bugtracking.entity.Project;
-import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchBugFoundException;
-import com.cg.bugtracking.exception.NoSuchProjectFoundException;
 import com.cg.bugtracking.exception.NotAdminException;
 
 
@@ -46,11 +41,12 @@ public class BugServiceImpl implements BugService{
 	}
 
 	@Override
-	public BugDTO updateBug(BugDTO bugDTO ,long id) throws NoSuchBugFoundException {
+	public BugDTO updateBug(BugDTO bugDTO ,long id, long adminId) throws NoSuchBugFoundException , NotAdminException{
 		Optional<Bug> bugUpdate = bRepo.findById(id);
 		Bug bug = modelMapper.map(bugDTO, Bug.class);
-
-		if(bugUpdate.isPresent()) {
+		Optional<Admin> findAdmin = aRepo.findById(adminId);
+		if (findAdmin.isPresent()) {
+		   if(bugUpdate.isPresent()) {
 			
 			bugUpdate.get().setBugId(bug.getBugId());
 			bugUpdate.get().setType(bug.getType());
@@ -63,6 +59,9 @@ public class BugServiceImpl implements BugService{
 			throw new NoSuchBugFoundException("No Bug with this id");
 		}
 		
+		}else {
+			throw new NotAdminException(NOT_ADMIN);
+		}
 	}
 	@Override
 	public BugDTO getBug(long id,long adminId) throws NoSuchBugFoundException, NotAdminException {
@@ -79,10 +78,16 @@ public class BugServiceImpl implements BugService{
 	}
 
 	@Override
-	public List<BugDTO> getAllBug() {
+	public List<BugDTO> getAllBug(long adminId)throws NotAdminException {
+		Optional<Admin> findAdmin = aRepo.findById(adminId);
+		if (findAdmin.isPresent()) {
 		return  bRepo.findAll()
 				.stream().map(bug ->modelMapper.map(bug,BugDTO.class))
 				.collect(Collectors.toList());
+	}
+		else {
+			throw new NotAdminException(NOT_ADMIN);
+		}
 	}
 
 
@@ -95,14 +100,18 @@ public class BugServiceImpl implements BugService{
 	}
 
 	@Override
-	public BugDTO deleteBug(long id) throws NoSuchBugFoundException{
-			Optional<Bug> bugDel = bRepo.findById(id);
+	public BugDTO deleteBug(long id, long adminId) throws NoSuchBugFoundException,NotAdminException{
+		Optional<Admin> findAdmin = aRepo.findById(adminId);
+		if (findAdmin.isPresent()) {
+		Optional<Bug> bugDel = bRepo.findById(id);
 			if(bugDel.isPresent()) 
 				bRepo.delete(bugDel.get());	
 			else
 				throw new NoSuchBugFoundException("No Bug with this id");
 			return modelMapper.map(bugDel.get(), BugDTO.class);
-	
+		}else {
+			throw new NotAdminException(NOT_ADMIN);
+		}
 
 	}
 

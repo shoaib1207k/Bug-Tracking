@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bugtracking.dto.ProjectDTO;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchProjectFoundException;
+import com.cg.bugtracking.exception.NotAdminException;
 import com.cg.bugtracking.service.ProjectService;
 
 
@@ -32,22 +33,22 @@ public class ProjectController {
 	
 	
 	@GetMapping
-	public ResponseEntity<List<ProjectDTO>> getAllProjects(){
-		return new ResponseEntity<>(prjService.getAllProjects(), HttpStatus.OK);
+	public ResponseEntity<List<ProjectDTO>> getAllProjects(@PathVariable("adminId") long adminId)throws NotAdminException {
+		return new ResponseEntity<>(prjService.getAllProjects(adminId), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<ProjectDTO> getProjectById(@PathVariable("id") long id, @PathVariable("adminId") long adminId) throws NoSuchProjectFoundException, NoSuchAdminFoundException{
+	public ResponseEntity<ProjectDTO> getProjectById(@PathVariable("id") long id, @PathVariable("adminId") long adminId) throws NoSuchProjectFoundException, NotAdminException{
 		return new ResponseEntity<>(prjService.getProjectById(id,adminId), HttpStatus.FOUND);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<ProjectDTO> updateProject(@Valid @PathVariable("id")long id, @RequestBody ProjectDTO prjDTO) throws NoSuchProjectFoundException{
-		return new ResponseEntity<>(prjService.updateProject(id, prjDTO), HttpStatus.OK);
+	public ResponseEntity<ProjectDTO> updateProject(@Valid @PathVariable("id")long id, @RequestBody ProjectDTO prjDTO, @PathVariable("adminId") long adminId) throws NoSuchProjectFoundException, NotAdminException{
+		return new ResponseEntity<>(prjService.updateProject(id, prjDTO,adminId), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ProjectDTO> deleteProject(@PathVariable("id")long id) throws NoSuchProjectFoundException{
-		return new ResponseEntity<>(prjService.deleteProject(id), HttpStatus.OK);
+	public ResponseEntity<ProjectDTO> deleteProject(@PathVariable("id")long id, @PathVariable("adminId") long adminId) throws NoSuchProjectFoundException,NotAdminException{
+		return new ResponseEntity<>(prjService.deleteProject(id, adminId), HttpStatus.OK);
 	}
 }

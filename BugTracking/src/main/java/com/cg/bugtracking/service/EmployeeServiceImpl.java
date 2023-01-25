@@ -39,9 +39,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private ModelMapper modelMapper;
 
 	@Autowired
-	private ProjectService prjService;
-
-	@Autowired
 	private UserRepository uRepo;
 	
 	@Autowired
@@ -71,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public EmployeeDTO getEmployeeById(long empId, long adminId)
-			throws NoSuchEmployeeFoundException, NoAdminRoleFoundException {
+			throws NoSuchEmployeeFoundException, NotAdminException {
 		Optional<Admin> findAdmin = adminRepo.findById(adminId);
 		if (findAdmin.isPresent()) {
 			Optional<Employee> emp = empRepo.findById(empId);
@@ -79,25 +76,25 @@ public class EmployeeServiceImpl implements EmployeeService {
 				return modelMapper.map(emp.get(), EmployeeDTO.class);
 			throw new NoSuchEmployeeFoundException(NO_EMPLOYEE_FOUND);
 		} else
-			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+			throw new NotAdminException(NOT_ADMIN);
 
 	}
 
 	@Override
-	public List<EmployeeDTO> getAllEmployees(long adminId) throws NoAdminRoleFoundException {
+	public List<EmployeeDTO> getAllEmployees(long adminId) throws NotAdminException {
 		Optional<Admin> findAdmin = adminRepo.findById(adminId);
 		if (findAdmin.isPresent()) {
 			return empRepo.findAll().stream().map(emp -> modelMapper.map(emp, EmployeeDTO.class))
 					.collect(Collectors.toList());
 		} else {
-			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+			throw new NotAdminException(NOT_ADMIN);
 
 		}
 	}
 
 	@Override
 	public EmployeeDTO updateEmployee(long id, EmployeeDTO empDTO, long adminId)
-			throws NoSuchEmployeeFoundException,NoAdminRoleFoundException {
+			throws NoSuchEmployeeFoundException,NotAdminException {
 		
 		Optional<Admin> findAdmin = adminRepo.findById(adminId);
 		if(findAdmin.isPresent()) {
@@ -116,13 +113,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 				throw new NoSuchEmployeeFoundException(NO_EMPLOYEE_FOUND);
 			}
 		}else{
-			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+			throw new NotAdminException(NOT_ADMIN);
 		}
 	}
 
 	@Override
 	public EmployeeDTO deleteEmployee(long empId, long adminId)
-			throws NoSuchEmployeeFoundException, NoAdminRoleFoundException {
+			throws NoSuchEmployeeFoundException, NotAdminException {
 		Optional<Admin> findAdmin = adminRepo.findById(adminId);
 		if (findAdmin.isPresent()) {
 			Optional<Employee> empToDel = empRepo.findById(empId);
@@ -132,17 +129,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 				throw new NoSuchEmployeeFoundException(NO_EMPLOYEE_FOUND);
 			return modelMapper.map(empToDel.get(), EmployeeDTO.class);
 		} else
-			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+			throw new NotAdminException(NOT_ADMIN);
 	}
 
 	@Override
-	public List<EmployeeDTO> getEmployeeByProjectId(long adminId, long projId) throws NoAdminRoleFoundException {
+	public List<EmployeeDTO> getEmployeeByProjectId(long adminId, long projId) throws NotAdminException {
 		Optional<Admin> findAdmin = adminRepo.findById(adminId);
 		if (findAdmin.isPresent()) {
 			return empRepo.getEmployeeByProjectId(projId).stream().map(emp -> modelMapper.map(emp, EmployeeDTO.class))
 					.collect(Collectors.toList());
 		} else
-			throw new NoAdminRoleFoundException(ADMIN_ROLE_REQUIRED);
+			throw new NotAdminException(NOT_ADMIN);
 
 	}
 
