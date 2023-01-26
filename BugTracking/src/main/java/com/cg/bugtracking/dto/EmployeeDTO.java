@@ -8,12 +8,11 @@ import javax.validation.constraints.Size;
 
 public class EmployeeDTO {
 
-	@NotBlank(message = "must not be blank")
-	@Min(value = 1, message = "must be greater than zero")
+	@Min(value = 1, message = "empId must be greater than zero")
 	private long empId;
 	
 	@NotNull
-	@Size(min = 3, message = "atleast 3 charachters required")
+	@Size(min = 3, message = "atleast 3 charachters required for empName")
 	private String empName;
 	
 	@NotNull
@@ -21,7 +20,7 @@ public class EmployeeDTO {
 	private String email;
 	
 	@NotNull
-	@Size(min = 10, message = "must be greater than 10")
+	@Size(min = 10, message = "please enter valid contact number")
 	private String contact;
 
 	private ProjectDTO projectDTO;
