@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 
 public class EmployeeDTO {
 
-	@NotBlank(message = "must not be blank")
 	@Min(value = 1, message = "must be greater than zero")
 	private long empId;
 	

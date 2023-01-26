@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 
 public class BugDTO {
 
-	@NotBlank(message = "Id is required")
 	@Min(value = 1, message = "must be greater than zero")
 	private long bugId;
 

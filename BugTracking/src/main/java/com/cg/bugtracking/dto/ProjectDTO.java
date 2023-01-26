@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 
 public class ProjectDTO {
 
-	@NotBlank
 	@Min(value = 1, message="must be greater than zero")
 	private long projId;
 	
