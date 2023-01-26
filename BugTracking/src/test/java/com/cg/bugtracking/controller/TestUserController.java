@@ -17,9 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.cg.bugtracking.dto.BugDTO;
+import com.cg.bugtracking.dto.ProjectDTO;
 import com.cg.bugtracking.dto.UserDTO;
 import com.cg.bugtracking.entity.Employee;
-import com.cg.bugtracking.entity.Project;
 import com.cg.bugtracking.exception.IdAlreadyExistsException;
 import com.cg.bugtracking.exception.NoSuchAdminFoundException;
 import com.cg.bugtracking.exception.NoSuchUserFoundException;
@@ -50,7 +50,7 @@ class TestUserController {
 		// bug details
 		bugDto = new BugDTO();
 		Employee emp = new Employee();
-		Project pro = new Project();
+		ProjectDTO pro = new ProjectDTO();
 		LocalDate startDate = LocalDate.now();
 		LocalDate endDate = startDate.plusDays(2);
 		bugDto.setBugId(1);
