@@ -2,16 +2,17 @@ package com.cg.bugtracking.dto;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class BugDTO {
 
-	@Min(value = 1, message = "must be greater than zero")
+	@Min(value = 1, message = "bug id must be greater than zero")
 	private long bugId;
 
-	@Size(max = 20, min = 3, message = "atleast 3 characters are required ")
+	@Size(max = 20, min = 3, message = "atleast 3 characters are required for title")
 	@NotBlank(message = "Title is required")
 	private String title;
 
@@ -26,15 +27,15 @@ public class BugDTO {
 	@Size(max = 20, min = 3)
 	private String priority;
 
-	@Min(value = 1, message = "must be greater than zero")
-	@NotBlank(message = "Progress is required")
+	@Min(value = 0, message = "please enter valid progress %")
+	@Max(value = 100, message = "please enter valid progress %")
 	private int progress;
 
-	@Size(min = 3, message = "atleast 3 charachters required")
+	@Size(min = 3, message = "atleast 3 charachters required for empName")
 	@NotBlank(message = "Name is required")
 	private String empName;
 
-	@Size(min = 3, message = "atleast 3 charachters required")
+	@Size(min = 3, message = "atleast 3 charachters required for status")
 	@NotBlank(message = "Status is required")
 	private String status;
 
