@@ -54,49 +54,37 @@ class TestEmployeeController {
 
 
 	@Test
-	void testGetAllEmployees()  {
+	void testGetAllEmployees() throws NotAdminException  {
 		ResponseEntity<List<EmployeeDTO>> response;
-		try {
-			when(empService.getAllEmployees(11)).thenReturn(empDTOList);
-			response = empController.getAllEmployees(11);
-			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NotAdminException e) {
-			fail("Unexpected exception");
-		}		
+		when(empService.getAllEmployees(11)).thenReturn(empDTOList);
+		response = empController.getAllEmployees(11);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		
 	}
 
 	@Test
-	void testGetEmployeeById() {
-		try {
-			when(empService.getEmployeeById(1,11)).thenReturn(empDTO);
-			ResponseEntity<EmployeeDTO> response = empController.getEmployeeById(1,11);
-			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchEmployeeFoundException | NotAdminException e) {
-			fail("Unexpected exception");
-		}
+	void testGetEmployeeById() throws NoSuchEmployeeFoundException, NotAdminException {
+		when(empService.getEmployeeById(1,11)).thenReturn(empDTO);
+		ResponseEntity<EmployeeDTO> response = empController.getEmployeeById(1,11);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+	
 	}
 
 	@Test
-	void testUpdateEmployee() {
+	void testUpdateEmployee() throws NoSuchEmployeeFoundException, NotAdminException {
 		empDTO.setContact("987456321");
-		try {
-			when(empService.updateEmployee(1, empDTO, 11)).thenReturn(empDTO);
-			ResponseEntity<EmployeeDTO> response = empController.updateEmployee(1, empDTO,11);
-			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchEmployeeFoundException | NotAdminException e) {
-			fail("Unexpected exception");
-		}
+		when(empService.updateEmployee(1, empDTO, 11)).thenReturn(empDTO);
+		ResponseEntity<EmployeeDTO> response = empController.updateEmployee(1, empDTO,11);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		
 	}
 
 	@Test
-	void testDeleteEmployee() {
-		try {
-			when(empService.deleteEmployee(1,11)).thenReturn(empDTO);
-			ResponseEntity<EmployeeDTO> response = empController.deleteEmployee(1,11);
-			assertEquals(HttpStatus.OK, response.getStatusCode());
-		} catch (NoSuchEmployeeFoundException | NotAdminException e) {
-			fail("Unexpected exception");
-		}
+	void testDeleteEmployee() throws NoSuchEmployeeFoundException, NotAdminException {
+		when(empService.deleteEmployee(1,11)).thenReturn(empDTO);
+		ResponseEntity<EmployeeDTO> response = empController.deleteEmployee(1,11);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		
 	}
 
 }
