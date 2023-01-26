@@ -64,8 +64,9 @@ class TestBugController {
 			when(bugService.getBug(1, 1)).thenReturn(bugDTO);
 			ResponseEntity<BugDTO> response = bugController.getBug(1, 1);
 			assertEquals(HttpStatus.OK, response.getStatusCode());
-		
 	}
+
+	
 
 	@Test
 	void testUpdateBug() throws NoSuchBugFoundException, NotAdminException {
