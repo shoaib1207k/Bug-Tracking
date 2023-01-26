@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import com.cg.bugtracking.entity.Project;
 
 public class BugDTO {
 
@@ -43,7 +42,7 @@ public class BugDTO {
 	private LocalDate startDate;
 	private LocalDate endDate;
 
-	private Project project;
+	private ProjectDTO project;
 
 	public BugDTO() {
 		super();
@@ -129,11 +128,11 @@ public class BugDTO {
 		this.endDate = endDate;
 	}
 
-	public Project getProject() {
+	public ProjectDTO getProject() {
 		return project;
 	}
 
-	public void setProject(Project project) {
+	public void setProject(ProjectDTO project) {
 		this.project = project;
 	}
 
